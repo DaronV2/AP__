@@ -46,7 +46,7 @@ public class PrimaryController {
     void login(ActionEvent event) throws IOException, SQLException, NoSuchAlgorithmException {
         String log = loginEnter.getText();
         if(checklog()==true && comptableOuNon(log) == true){
-            App.setRoot("accueilComptable");
+            App.setRoot("secondary");
         }
         else if(checklog()==true && comptableOuNon(log) == false){
             App.setRoot("third");
@@ -58,6 +58,18 @@ public class PrimaryController {
         String log = loginEnter.getText();
         String pas = password.getText();
 
+        ResultSet resultats = null;
+        Sqldb sql2 = new Sqldb();
+        Connection c = sql2.connexionDb();
+        Statement stmnt = c.createStatement();
+        String sql = String.format("SELECT vi_matricule FROM gsb_etudiants.visiteur WHERE cr_identifiant = '%s';", log);
+        resultats = sql2.exeRequete(stmnt, sql);
+
+        if (resultats.next() == true){
+            String matricule = resultats.getNString("vi_matricule");
+            utilisateur.matricule = matricule;
+        }
+        
         System.out.println(verifierUtilisateur(log, pas));
 
         if(verifierUtilisateur(log,pas) == true){

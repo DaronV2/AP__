@@ -39,6 +39,10 @@ public class SecondaryController {
     @FXML
     private TextField matricule;
 
+    public void setMatricule(TextField matricule) {
+        this.matricule.setText(utilisateur.matricule);
+    }
+
     @FXML
     private TextField mois;
 
@@ -102,6 +106,6 @@ public class SecondaryController {
 
         String sql = "INSERT INTO fiche_frais (ff_qte_nuitees, ff_total_nuitees, ff_qte_repas, ff_total_repas, ff_qte_km) VALUES ( nuit, totalNuit, repasMidi, totalRepas, km1)";
         String sql1 = "INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant) VALUES ( afD1, afL1, afM1)";
-        resultats = sql2.exeRequete(stmnt, sql);
+        // resultats = sql2.exeRequete(stmnt, sql);
     }
 }
