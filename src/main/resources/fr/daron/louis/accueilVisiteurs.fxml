@@ -6,12 +6,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
-
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane prefHeight="200.0" prefWidth="1920.0" style="-fx-background-color: #AAAAAA;">
+      <Pane prefHeight="200.0" prefWidth="1920.0">
          <children>
             <Label layoutX="698.0" layoutY="74.0" text="Bienvenue dans l'espace visiteurs">
                <font>
@@ -30,16 +31,65 @@
             </ImageView>
          </children>
       </Pane>
-      <Button layoutX="55.0" layoutY="231.0" mnemonicParsing="false" text="Fiche de suivi">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Button>
-      <Button layoutX="294.0" layoutY="231.0" mnemonicParsing="false" text="Historique">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Button>
-      <Pane layoutY="880.0" prefHeight="200.0" prefWidth="1920.0" style="-fx-background-color: #AAAAAA;" />
+      <Pane layoutY="880.0" prefHeight="200.0" prefWidth="1920.0" />
+      <Line endX="1805.0" layoutX="115.0" layoutY="200.0" startX="-115.0" />
+      <Line endX="1642.0" layoutX="278.0" layoutY="880.0" startX="-278.0" />
+      <Pane layoutX="39.0" layoutY="260.0" prefHeight="560.0" prefWidth="560.0" style="-fx-background-color: #D3D3D3;">
+         <children>
+            <Text layoutX="42.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue sur notre plateforme dédiée à la gestion de suivi !">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="18.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ici, vous pouvez remplir et consulter vos fiches de suivi en toute simplicité. Que ce soit pour suivre vos fiches de suivi ou votre historique, notre outil intuitif vous permet de garder une trace claire et organisée de vos activités." wrappingWidth="524.126953125">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="18.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remplissez vos fiches de suivi , ajoutez-y les informations pertinentes, et suivez votre progression au fil du temps. Avec notre fonction d'historique, vous pouvez également revisiter vos anciennes fiches pour analyser votre évolution et tirer des enseignements précieux." wrappingWidth="524.126953125">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="13.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Commencez dès maintenant à remplir vos fiches de suivi et à tracer votre chemin vers le succès !" wrappingWidth="538.7294921875">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="148.0" layoutY="499.0" strokeType="OUTSIDE" strokeWidth="0.0" text="L'équipe de Galaxy Swiss Bourdin">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane layoutX="1200.0" layoutY="260.0" prefHeight="240.0" prefWidth="550.0" style="-fx-background-color: #D3D3D3;">
+         <children>
+            <Button layoutX="339.0" layoutY="95.0" mnemonicParsing="false" text="Fiche de suivi">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Text layoutX="30.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pour accéder au créateur de fiche de suivi cliquer sur le bouton !" wrappingWidth="263.55761718750006">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane layoutX="1200.0" layoutY="580.0" prefHeight="240.0" prefWidth="550.0" style="-fx-background-color: #D3D3D3;">
+         <children>
+            <Button layoutX="347.0" layoutY="95.0" mnemonicParsing="false" text="Historique">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            <Text layoutX="30.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pour accéder au créateur de fiche de suivi cliquer sur le bouton !" wrappingWidth="263.5576171875">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
