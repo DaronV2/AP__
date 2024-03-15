@@ -25,7 +25,7 @@
             <Pane layoutX="630.0" layoutY="244.0" prefHeight="606.0" prefWidth="635.0" style="-fx-background-color: #D3D3D3;">
                <children>
                   <Button fx:id="btn_deuxpage" layoutX="138.0" layoutY="528.0" mnemonicParsing="false" onAction="#switchToSecondary" text="2eme page" />
-                  <Button fx:id="btn_troispage" layoutX="363.0" layoutY="528.0" mnemonicParsing="false" onAction="#switchToThird" text="3eme page" />
+                  <Button fx:id="btn_troispage" layoutX="280.0" layoutY="528.0" mnemonicParsing="false" onAction="#switchToThird" text="3eme page" />
                   <Button fx:id="btnConnexion" layoutX="254.0" layoutY="407.0" mnemonicParsing="false" onAction="#login" prefHeight="31.0" prefWidth="109.0" text="Connexion" />
                   <PasswordField fx:id="password" layoutX="99.0" layoutY="324.0" prefHeight="40.0" prefWidth="437.0" promptText="**********" />
                   <TextField fx:id="loginEnter" layoutX="99.0" layoutY="224.0" prefHeight="40.0" prefWidth="437.0" promptText="exemple.exemple" />
@@ -44,6 +44,7 @@
                         <Font name="System Bold" size="27.0" />
                      </font>
                   </Text>
+                  <Button fx:id="btn_troispage1" layoutX="411.0" layoutY="528.0" mnemonicParsing="false" onAction="#switchToThird" text="Accueil Visiteur" />
                </children>
             </Pane>
          </children>
