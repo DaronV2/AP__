@@ -85,6 +85,7 @@ public class SecondaryController {
         });
     }
 
+    @SuppressWarnings("unused")
     @FXML
     void switchAccueil(ActionEvent event) throws IOException {
         App.setRoot("primary");
@@ -101,8 +102,8 @@ public class SecondaryController {
         String afM2 = afMontant2.getText();
 
         Sqldb sql2 = new Sqldb();
-        Connection c = sql2.connexionDb();
-        Statement stmnt = c.createStatement();
+        //Connection c = sql2.connexionDb();
+        //Statement stmnt = c.createStatement();
 
         String sql = "INSERT INTO fiche_frais (ff_qte_nuitees, ff_total_nuitees, ff_qte_repas, ff_total_repas, ff_qte_km) VALUES ( nuit, totalNuit, repasMidi, totalRepas, km1)";
         String sql1 = "INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant) VALUES ( afD1, afL1, afM1)";
