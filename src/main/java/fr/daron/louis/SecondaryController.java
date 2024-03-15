@@ -1,6 +1,9 @@
 package fr.daron.louis;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -81,6 +84,24 @@ public class SecondaryController {
     @FXML
     void switchAccueil(ActionEvent event) throws IOException {
         App.setRoot("primary");
-    }
+        String nuit = nuitee.getText();
+        String totalNuit = totalNuitee.getText();
+        String repasMid = repasMidi.getText();
+        String totalRepas = totalRepasMidi.getText();
+        String km1 = km.getText();
+        String afD1 = afDate1.getText();
+        String afL1 = afLibelle1.getText();
+        String afM1 = afMontant1.getText();
+        String afD2 = afDate2.getText();
+        String afL2 = afLibelle2.getText();
+        String afM2 = afMontant2.getText();
 
+        Sqldb sql2 = new Sqldb();
+        Connection c = sql2.connexionDb();
+        Statement stmnt = c.createStatement();
+
+        String sql = "INSERT INTO fiche_frais (ff_qte_nuitees, ff_total_nuitees, ff_qte_repas, ff_total_repas, ff_qte_km) VALUES ( nuit, totalNuit, repasMidi, totalRepas, km1)";
+        String sql1 = "INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant) VALUES ( afD1, afL1, afM1)";
+        resultats = sql2.exeRequete(stmnt, sql);
+    }
 }

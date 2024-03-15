@@ -128,16 +128,17 @@
       <TextField fx:id="afMontant1" layoutX="1055.0" layoutY="600.0" />
       <TextField fx:id="afDate2" layoutX="710.0" layoutY="650.0" />
       <TextField fx:id="afLibelle2" layoutX="882.0" layoutY="650.0" />
-      <Text layoutX="667.0" layoutY="744.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. Les frais forfaitaires doivent être justifiés par une facture acquittée faisant apparaître le montant de la TVA. Ces documents ne sont pas à joindre à l’état de frais mais doivent être conservés pendant trois années. Ilspeuvent être contrôlés par le délégué régional ou le service comptable. " textAlignment="CENTER" wrappingWidth="570.84375" />
-      <Text layoutX="862.0" layoutY="816.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. Tarifs en vigueur au 01/09/2020" />
-      <Text layoutX="719.0" layoutY="847.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3. Prix au kilomètre selon la puissance du véhicule déclaré auprès des services comptables" />
-      <Text layoutX="868.0" layoutY="870.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- (Véhicule 4CV Diesel) 0.52 € / Km" />
-      <Text layoutX="868.0" layoutY="885.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- (Véhicule 5/6CV Diesel) 0.58 € / Km" />
-      <Text layoutX="868.0" layoutY="900.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- (Véhicule 4CV Essence) 0.62 € / Km" />
-      <Text layoutX="868.0" layoutY="915.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- (Véhicule 5/6CV Essence) 0.67 € / Km" />
-      <Text layoutX="630.0" layoutY="952.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4. Tout frais « hors forfait » doit être dûment justifié par l’envoi d’une facture acquittée faisant apparaître lemontant de TVA" />
+      <Text layoutX="667.0" layoutY="767.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. Les frais forfaitaires doivent être justifiés par une facture acquittée faisant apparaître le montant de la TVA. Ces documents ne sont pas à joindre à l’état de frais mais doivent être conservés pendant trois années. Ilspeuvent être contrôlés par le délégué régional ou le service comptable. " textAlignment="CENTER" wrappingWidth="570.84375" />
+      <Text layoutX="862.0" layoutY="839.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. Tarifs en vigueur au 01/09/2020" />
+      <Text layoutX="719.0" layoutY="870.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3. Prix au kilomètre selon la puissance du véhicule déclaré auprès des services comptables" />
+      <Text layoutX="868.0" layoutY="893.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- (Véhicule 4CV Diesel) 0.52 € / Km" />
+      <Text layoutX="868.0" layoutY="908.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- (Véhicule 5/6CV Diesel) 0.58 € / Km" />
+      <Text layoutX="868.0" layoutY="923.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- (Véhicule 4CV Essence) 0.62 € / Km" />
+      <Text layoutX="868.0" layoutY="938.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- (Véhicule 5/6CV Essence) 0.67 € / Km" />
+      <Text layoutX="630.0" layoutY="975.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4. Tout frais « hors forfait » doit être dûment justifié par l’envoi d’une facture acquittée faisant apparaître lemontant de TVA" />
       <Line endX="102.0" endY="-54.94921875" layoutX="766.0" layoutY="912.0" startX="102.0" startY="6.01171875" />
       <TextField fx:id="afMontant2" layoutX="1055.0" layoutY="650.0" />
       <Button fx:id="accueilBtn" layoutX="342.0" layoutY="88.0" mnemonicParsing="false" onAction="#switchAccueil" text="Accueil" />
+      <Button layoutX="924.0" layoutY="689.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="61.0" text="Envoyer" />
    </children>
 </AnchorPane>
