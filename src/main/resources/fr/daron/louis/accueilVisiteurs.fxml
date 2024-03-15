@@ -65,7 +65,7 @@
       </Pane>
       <Pane layoutX="1200.0" layoutY="260.0" prefHeight="240.0" prefWidth="550.0" style="-fx-background-color: #D3D3D3;">
          <children>
-            <Button layoutX="339.0" layoutY="95.0" mnemonicParsing="false" text="Fiche de suivi">
+            <Button fx:id="btnSuivi" layoutX="339.0" layoutY="95.0" mnemonicParsing="false" text="Fiche de suivi">
                <font>
                   <Font size="24.0" />
                </font>
@@ -79,7 +79,7 @@
       </Pane>
       <Pane layoutX="1200.0" layoutY="580.0" prefHeight="240.0" prefWidth="550.0" style="-fx-background-color: #D3D3D3;">
          <children>
-            <Button layoutX="347.0" layoutY="95.0" mnemonicParsing="false" text="Historique">
+            <Button fx:id="btnHistorique" layoutX="347.0" layoutY="95.0" mnemonicParsing="false" text="Historique">
                <font>
                   <Font size="24.0" />
                </font>
