@@ -139,7 +139,7 @@
       <Line endX="102.0" endY="-54.94921875" layoutX="766.0" layoutY="912.0" startX="102.0" startY="6.01171875" />
       <TextField fx:id="afMontant2" layoutX="1055.0" layoutY="650.0" />
       <Button fx:id="accueilBtn" layoutX="342.0" layoutY="88.0" mnemonicParsing="false" onAction="#switchAccueil" text="Accueil" />
-      <Button layoutX="924.0" layoutY="689.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="61.0" text="Envoyer" />
+      <Button layoutX="924.0" layoutY="689.0" mnemonicParsing="false" onAction="#envoyer" prefHeight="32.0" prefWidth="61.0" text="Envoyer" />
       <Button fx:id="btntest" layoutX="416.0" layoutY="535.0" mnemonicParsing="false" onAction="#matric" prefHeight="32.0" prefWidth="61.0" text="Test" />
    </children>
 </AnchorPane>
