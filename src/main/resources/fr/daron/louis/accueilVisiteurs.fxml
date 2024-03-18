@@ -31,7 +31,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane layoutY="880.0" prefHeight="200.0" prefWidth="1920.0" />
+      <Pane layoutX="89.0" layoutY="880.0" prefHeight="200.0" prefWidth="1920.0" />
       <Line endX="1805.0" layoutX="115.0" layoutY="200.0" startX="-115.0" />
       <Line endX="1642.0" layoutX="278.0" layoutY="880.0" startX="-278.0" />
       <Pane layoutX="39.0" layoutY="260.0" prefHeight="560.0" prefWidth="560.0" style="-fx-background-color: #D3D3D3;">
