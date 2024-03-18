@@ -9,8 +9,8 @@ import java.sql.Statement;
 
 
 public class Sqldb {
-    
     private String url = "jdbc:mysql://localhost/gsb_etudiants";
+    //private String url = "jdbc:mariadb://88.127.124.40:12456/gsb_etudiants";
 
     private String user = "requeteur";
 

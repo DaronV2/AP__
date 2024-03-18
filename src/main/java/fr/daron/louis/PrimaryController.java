@@ -68,6 +68,7 @@ public class PrimaryController {
         if (resultats.next() == true){
             String matricule = resultats.getNString("vi_matricule");
             utilisateur.matricule = matricule;
+            System.out.println(utilisateur.matricule);
         }
         
         System.out.println(verifierUtilisateur(log, pas));

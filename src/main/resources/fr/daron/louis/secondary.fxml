@@ -38,7 +38,7 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <TextField fx:id="matricule" editable="false" layoutX="661.0" layoutY="246.0" prefHeight="25.0" prefWidth="362.0" />
+      <TextField fx:id="matricule" editable="false" layoutX="661.0" layoutY="246.0" prefHeight="25.0" prefWidth="362.0" text="0" />
       <TextField fx:id="nom" editable="false" layoutX="661.0" layoutY="277.0" prefHeight="25.0" prefWidth="362.0" />
       <Text layoutX="1072.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mois">
          <font>
@@ -140,5 +140,6 @@
       <TextField fx:id="afMontant2" layoutX="1055.0" layoutY="650.0" />
       <Button fx:id="accueilBtn" layoutX="342.0" layoutY="88.0" mnemonicParsing="false" onAction="#switchAccueil" text="Accueil" />
       <Button layoutX="924.0" layoutY="689.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="61.0" text="Envoyer" />
+      <Button fx:id="btntest" layoutX="416.0" layoutY="535.0" mnemonicParsing="false" onAction="#matric" prefHeight="32.0" prefWidth="61.0" text="Test" />
    </children>
 </AnchorPane>
