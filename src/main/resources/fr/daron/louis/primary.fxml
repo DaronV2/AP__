@@ -44,7 +44,7 @@
                         <Font name="System Bold" size="27.0" />
                      </font>
                   </Text>
-                  <Button fx:id="btn_troispage1" layoutX="411.0" layoutY="528.0" mnemonicParsing="false" onAction="#switchToThird" text="Accueil Visiteur" />
+                  <Button fx:id="btnV" layoutX="411.0" layoutY="528.0" mnemonicParsing="false" onAction="#switchToThird" text="Accueil Visiteur" />
                </children>
             </Pane>
          </children>

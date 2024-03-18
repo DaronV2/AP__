@@ -20,7 +20,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 
-
 public class PrimaryController {
 
     @FXML
@@ -30,7 +29,7 @@ public class PrimaryController {
     private Button btn_deuxpage;
 
     @FXML
-    private Button btn_troispage;
+    private Button btnV;;
 
     @FXML
     private TextField loginEnter;
@@ -41,19 +40,17 @@ public class PrimaryController {
     @FXML
     private Label wrongLabel;
 
-
     @FXML
     void login(ActionEvent event) throws IOException, SQLException, NoSuchAlgorithmException {
         String log = loginEnter.getText();
-        if(checklog()==true && comptableOuNon(log) == true){
+        if (checklog() == true && comptableOuNon(log) == true) {
             App.setRoot("secondary");
-        }
-        else if(checklog()==true && comptableOuNon(log) == false){
+        } else if (checklog() == true && comptableOuNon(log) == false) {
             App.setRoot("third");
         }
     }
 
-    Boolean checklog() throws IOException, SQLException, NoSuchAlgorithmException{
+    Boolean checklog() throws IOException, SQLException, NoSuchAlgorithmException {
 
         String log = loginEnter.getText();
         String pas = password.getText();
@@ -65,68 +62,73 @@ public class PrimaryController {
         String sql = String.format("SELECT vi_matricule FROM gsb_etudiants.visiteur WHERE cr_identifiant = '%s';", log);
         resultats = sql2.exeRequete(stmnt, sql);
 
-        if (resultats.next() == true){
+        if (resultats.next() == true) {
             String matricule = resultats.getNString("vi_matricule");
             utilisateur.matricule = matricule;
             System.out.println(utilisateur.matricule);
         }
-        
+
         System.out.println(verifierUtilisateur(log, pas));
 
-        if(verifierUtilisateur(log,pas) == true){
+        if (verifierUtilisateur(log, pas) == true) {
 
             return true;
-        }else{
+        } else {
             wrongLabel.setTextFill(Color.RED);
             wrongLabel.setText("Connexion non réussi, le mot de passe ou le nom d'utilisateur n'est pas bon !");
             return false;
         }
     }
 
-    private boolean verifierUtilisateur(String utilisateur, String mdp) throws IOException, SQLException{
+    private boolean verifierUtilisateur(String utilisateur, String mdp) throws IOException, SQLException {
         ResultSet resultats = null;
         Sqldb sql2 = new Sqldb();
 
         Connection c = sql2.connexionDb();
         Statement stmnt = c.createStatement();
 
-        String sql = String.format("SELECT cr_identifiant,cr_mot_de_passe FROM gsb_etudiants.credentials WHERE cr_identifiant = '%s'  AND cr_mot_de_passe = '%s' ;", utilisateur,mdp);
+        String sql = String.format(
+                "SELECT cr_identifiant,cr_mot_de_passe FROM gsb_etudiants.credentials WHERE cr_identifiant = '%s'  AND cr_mot_de_passe = '%s' ;",
+                utilisateur, mdp);
         resultats = sql2.exeRequete(stmnt, sql);
 
-        if (resultats.next() == true){
-            return true; 
-        }else{
+        if (resultats.next() == true) {
+            return true;
+        } else {
             return false;
         }
     }
 
-    /*private String chiffrerSha256(String password) throws NoSuchAlgorithmException{
-        MessageDigest m = MessageDigest.getInstance("SHA-256");
-        m.update(password.getBytes());
-        byte byteData[] = m.digest();
+    /*
+     * private String chiffrerSha256(String password) throws
+     * NoSuchAlgorithmException{
+     * MessageDigest m = MessageDigest.getInstance("SHA-256");
+     * m.update(password.getBytes());
+     * byte byteData[] = m.digest();
+     * 
+     * // convertir le tableau de bits en une format hexadécimal - méthode 1
+     * StringBuffer sb = new StringBuffer();
+     * for (int i = 0; i < byteData.length; i++) {
+     * sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+     * }
+     * return sb.toString();
+     * }
+     */
 
-        // convertir le tableau de bits en une format hexadécimal - méthode 1
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < byteData.length; i++) {
-            sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
-        }
-        return sb.toString();
-    }*/
-
-
-    private boolean comptableOuNon(String utilisateur) throws SQLException{
+    private boolean comptableOuNon(String utilisateur) throws SQLException {
         ResultSet resultats = null;
         Sqldb sql = new Sqldb();
         Connection c = sql.connexionDb();
         Statement stmnt = c.createStatement();
 
-        String req = String.format("SELECT cr_identifiant FROM gsb_etudiants.credentials WHERE cr_identifiant = '%s'", utilisateur);
+        String req = String.format("SELECT cr_identifiant FROM gsb_etudiants.credentials WHERE cr_identifiant = '%s'",
+                utilisateur);
 
         resultats = sql.exeRequete(stmnt, req);
 
-        if (resultats.next() == true){
+        if (resultats.next() == true) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -137,8 +139,13 @@ public class PrimaryController {
     }
 
     @FXML
-    private void switchToThird(ActionEvent event) throws IOException{
+    private void switchToThird(ActionEvent event) throws IOException {
         App.setRoot("third");
+    }
+
+    @FXML
+    private void btnV(ActionEvent event) throws IOException {
+        App.setRoot("accueilVisiteurs");
     }
 
 }
