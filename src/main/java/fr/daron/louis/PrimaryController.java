@@ -144,8 +144,8 @@ public class PrimaryController {
     }
 
     @FXML
-    private void btnV(ActionEvent event) throws IOException {
-        App.setRoot("accueilVisiteurs");
+    private void AccueilVisiteurs(ActionEvent event) throws IOException {
+        App.setRoot("btnV");
     }
 
 }

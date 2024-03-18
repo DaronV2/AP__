@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class ThirdController extends Application{
+public class ThirdController extends Application {
 
     @FXML
     private ImageView doc1;
@@ -35,7 +35,7 @@ public class ThirdController extends Application{
     public void start(Stage arg0) throws Exception {
 
         throw new UnsupportedOperationException("Unimplemented method 'start'");
-        
+
     }
-    
+
 }
