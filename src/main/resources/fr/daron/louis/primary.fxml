@@ -21,7 +21,7 @@
                   <Image url="@../../../images/blue.png" />
                </image>
             </ImageView>
-            <Pane layoutX="1.0" layoutY="127.0" opacity="0.25" prefHeight="819.0" prefWidth="1920.0" style="-fx-background-color: #7c8499;" />
+            <Pane layoutY="163.0" opacity="0.25" prefHeight="819.0" prefWidth="1920.0" style="-fx-background-color: #7c8499;" />
             <Pane layoutX="630.0" layoutY="244.0" prefHeight="606.0" prefWidth="635.0" style="-fx-background-color: #D3D3D3;">
                <children>
                   <Button fx:id="btn_deuxpage" layoutX="138.0" layoutY="528.0" mnemonicParsing="false" onAction="#switchToSecondary" text="2eme page" />
@@ -44,7 +44,7 @@
                         <Font name="System Bold" size="27.0" />
                      </font>
                   </Text>
-                  <Button fx:id="btnV" layoutX="411.0" layoutY="528.0" mnemonicParsing="false" onAction="#switchToThird" text="Accueil Visiteur" />
+                  <Button fx:id="btnV" layoutX="411.0" layoutY="528.0" mnemonicParsing="false" onAction="#btnV" text="Accueil Visiteur" />
                </children>
             </Pane>
          </children>
