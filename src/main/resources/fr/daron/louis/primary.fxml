@@ -25,6 +25,9 @@
             <Pane layoutX="630.0" layoutY="244.0" prefHeight="606.0" prefWidth="635.0" style="-fx-background-color: #D3D3D3;">
                <children>
                   <Button fx:id="btn_deuxpage" layoutX="138.0" layoutY="528.0" mnemonicParsing="false" onAction="#switchToSecondary" text="2eme page" />
+                  <Pane layoutX="183.0" layoutY="36.0" prefHeight="69.0" prefWidth="269.0" style="-fx-background-color: #FFFF;" />
+                  <Pane layoutX="98.0" layoutY="181.0" prefHeight="32.0" prefWidth="63.0" style="-fx-background-color: #FFFF;" />
+                  <Pane layoutX="98.0" layoutY="286.0" prefHeight="34.0" prefWidth="106.0" style="-fx-background-color: #FFFF;" />
                   <Button fx:id="btn_troispage" layoutX="280.0" layoutY="528.0" mnemonicParsing="false" onAction="#switchToThird" text="3eme page" />
                   <Button fx:id="btnConnexion" layoutX="254.0" layoutY="407.0" mnemonicParsing="false" onAction="#login" prefHeight="31.0" prefWidth="109.0" text="Connexion" />
                   <PasswordField fx:id="password" layoutX="99.0" layoutY="324.0" prefHeight="40.0" prefWidth="437.0" promptText="**********" />
@@ -39,12 +42,12 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Text layoutX="165.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connectez-vous" textAlignment="CENTER" wrappingWidth="246.08984375">
+                  <Text layoutX="194.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connectez-vous" textAlignment="CENTER" wrappingWidth="246.08984375">
                      <font>
                         <Font name="System Bold" size="27.0" />
                      </font>
                   </Text>
-                  <Button fx:id="btnV" layoutX="411.0" layoutY="528.0" mnemonicParsing="false" onAction="#switchToThird" text="Accueil Visiteur" />
+                  <Button fx:id="btnV" layoutX="411.0" layoutY="528.0" mnemonicParsing="false" onAction="#AccueilVisiteurs" text="Accueil Visiteur" />
                </children>
             </Pane>
          </children>
@@ -53,7 +56,7 @@
    <top>
       <Pane prefHeight="131.0" prefWidth="1920.0" style="-fx-background-color: #8D93A3;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="90.0" fitWidth="143.0" layoutX="888.0" layoutY="13.0">
+            <ImageView fitHeight="90.0" fitWidth="143.0" layoutX="889.0" layoutY="14.0">
                <image>
                   <Image url="@../../../images/logo1.png" />
                </image>
