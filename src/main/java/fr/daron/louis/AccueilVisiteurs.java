@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 
 public class AccueilVisiteurs {
 
-    //fffff
+    //fff
 
     @FXML
     private Button btnHistorique;
