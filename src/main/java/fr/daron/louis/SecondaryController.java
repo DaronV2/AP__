@@ -34,9 +34,9 @@ public class SecondaryController {
     private TextField km;
 
     @FXML
-    private static TextField matricule;
+    private TextField matricule;
 
-    static void setMatricule() {
+    private void setMatricule() {
         matricule.setText(utilisateur.matricule);
     }
 
@@ -48,6 +48,10 @@ public class SecondaryController {
 
     @FXML
     private TextField nom;
+
+    private void setNom() {
+        nom.setText(utilisateur.nom);
+    }
 
     @FXML
     private TextField nuitee;
@@ -111,7 +115,8 @@ public class SecondaryController {
     }
 
     @FXML
-    void matric(ActionEvent event) {
+    public void matric() {
         setMatricule();
+        setNom();
     }
 }

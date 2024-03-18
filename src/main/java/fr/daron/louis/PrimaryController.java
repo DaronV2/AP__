@@ -40,33 +40,23 @@ public class PrimaryController {
     @FXML
     private Label wrongLabel;
 
+    public String log;
+
     @FXML
     void login(ActionEvent event) throws IOException, SQLException, NoSuchAlgorithmException {
         String log = loginEnter.getText();
-        if (checklog() == true && comptableOuNon(log) == true) {
+        if (checklog() == true && comptableOuNon(log) == false) {
             App.setRoot("secondary");
-        } else if (checklog() == true && comptableOuNon(log) == false) {
-            App.setRoot("third");
+        } else if (checklog() == true && comptableOuNon(log) == true) {
+            App.setRoot("accueilComptable");
         }
     }
 
     Boolean checklog() throws IOException, SQLException, NoSuchAlgorithmException {
 
         String log = loginEnter.getText();
+        this.log = log;
         String pas = password.getText();
-
-        ResultSet resultats = null;
-        Sqldb sql2 = new Sqldb();
-        Connection c = sql2.connexionDb();
-        Statement stmnt = c.createStatement();
-        String sql = String.format("SELECT vi_matricule FROM gsb_etudiants.visiteur WHERE cr_identifiant = '%s';", log);
-        resultats = sql2.exeRequete(stmnt, sql);
-
-        if (resultats.next() == true) {
-            String matricule = resultats.getNString("vi_matricule");
-            utilisateur.matricule = matricule;
-            System.out.println(utilisateur.matricule);
-        }
 
         System.out.println(verifierUtilisateur(log, pas));
 
@@ -79,6 +69,28 @@ public class PrimaryController {
             return false;
         }
     }
+
+    private ResultSet reqMatricule(String log) throws SQLException{
+        ResultSet resultats = null;
+        Sqldb sql = new Sqldb();
+        Connection c = sql.connexionDb();
+        Statement stmnt = c.createStatement();
+        String reqsql = String.format("SELECT vi_matricule FROM gsb_etudiants.visiteur WHERE cr_identifiant = '%s';", log);
+        resultats = sql.exeRequete(stmnt, reqsql);
+        return resultats;
+    }
+
+    private ResultSet reqNom(String log) throws SQLException{
+        ResultSet resultats = null;
+        Sqldb sql = new Sqldb();
+        Connection c = sql.connexionDb();
+        Statement stmnt = c.createStatement();
+        String reqsql = String.format("SELECT vi_nom FROM gsb_etudiants.visiteur WHERE cr_identifiant = '%s';", log);
+        resultats = sql.exeRequete(stmnt, reqsql);
+        return resultats;
+    }
+
+
 
     private boolean verifierUtilisateur(String utilisateur, String mdp) throws IOException, SQLException {
         ResultSet resultats = null;
@@ -115,20 +127,28 @@ public class PrimaryController {
      * }
      */
 
-    private boolean comptableOuNon(String utilisateur) throws SQLException {
+    private boolean comptableOuNon(String user) throws SQLException {
         ResultSet resultats = null;
         Sqldb sql = new Sqldb();
         Connection c = sql.connexionDb();
         Statement stmnt = c.createStatement();
 
-        String req = String.format("SELECT cr_identifiant FROM gsb_etudiants.credentials WHERE cr_identifiant = '%s'",
-                utilisateur);
-
+        String req = String.format("SELECT cr_identifiant FROM gsb_etudiants.comptable WHERE cr_identifiant = '%s'",user);
         resultats = sql.exeRequete(stmnt, req);
 
         if (resultats.next() == true) {
             return true;
         } else {
+            ResultSet resultats2 = reqMatricule(this.log);
+            if (resultats2.next() == true) {
+                String matricule = resultats2.getNString("vi_matricule");
+                utilisateur.matricule = matricule;
+            }
+            ResultSet resultats3 = reqNom(this.log);
+            if (resultats3.next() == true){
+                String nom = resultats3.getNString("vi_nom");
+                utilisateur.nom = nom;
+            }
             return false;
         }
     }

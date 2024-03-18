@@ -4,5 +4,8 @@ public class utilisateur {
     
     static String matricule;
 
-    utilisateur(){}
+    static String nom;
+
+    utilisateur(){
+    }
 }
