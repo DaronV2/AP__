@@ -155,6 +155,8 @@ public class SecondaryController {
         ffid = resultatId.getNString("ff_id");
         System.out.println(ffid);
 
+        String getId ="SELECT ff_id from fiche_frais WHERE ff_mois = %s AND";
+
 
 
         //Faire d'abord les requetes d'hors forfait et ensuite la fiche frais afin dr'avoir l'id
@@ -167,6 +169,7 @@ public class SecondaryController {
         }
 
         if(afD2== null & afL2 == null & afM2 == null){
+            String ffid="";
             String sql1 = String.format("INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant,ff_id) VALUES (%s,%s,%s,%s)",afD1, afL1, afM1,ffid);
             stmnt.executeUpdate(sql1);
         }else{
