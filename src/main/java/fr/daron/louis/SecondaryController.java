@@ -149,13 +149,18 @@ public class SecondaryController {
         stmnt.executeUpdate(sql);
 
         String ffid ;
-        String getId ="SELECT ff_id from fiche_frais WHERE ff_mois = %s AND";
+        String getId =String.format("SELECT ff_id from fiche_frais WHERE ff_mois = %s AND vi_matricule = '%s'",moisString,matriculeString);
+        ResultSet resultatId = stmnt.executeQuery(getId);
+        resultatId.next();
+        ffid = resultatId.getNString("ff_id");
+        System.out.println(ffid);
 
 
 
+        //Faire d'abord les requetes d'hors forfait et ensuite la fiche frais afin dr'avoir l'id
         if(afD1== null & afL1 == null & afM1 == null){
             
-            String sql1 = String.format("INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant) VALUES (%s,%s,%s)",afD1, afL1, afM1);
+            String sql1 = String.format("INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant,ff_id) VALUES (%s,%s,%s)",afD1, afL1, afM1,ffid);
             stmnt.executeUpdate(sql1);
         }else{
             System.out.println("yes");
