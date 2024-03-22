@@ -30,6 +30,7 @@
                </image>
             </ImageView>
             <Line endX="1819.0" layoutX="101.0" layoutY="200.0" startX="-100.0" />
+            <Button fx:id="btnAccueilC" layoutX="222.0" layoutY="88.0" mnemonicParsing="false" text="Accueil" />
          </children>
       </Pane>
       <Pane layoutX="685.0" layoutY="265.0" prefHeight="550.0" prefWidth="550.0" style="-fx-background-color: #D3D3D3;">
@@ -39,7 +40,7 @@
                   <Font size="24.0" />
                </font>
             </Text>
-            <Button layoutX="213.0" layoutY="458.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="110.0" text="Historique" />
+            <Button fx:id="btnHistComp" layoutX="213.0" layoutY="458.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="110.0" text="Historique" />
             <Text layoutX="59.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Accédez facilement à l'historique des fiches et modifiez-les en toute simplicité.  " wrappingWidth="464.396484375">
                <font>
                   <Font size="24.0" />
