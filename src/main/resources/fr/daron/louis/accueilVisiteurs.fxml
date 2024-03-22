@@ -29,6 +29,7 @@
                   <Image url="@../../../images/logo1.png" />
                </image>
             </ImageView>
+            <Button fx:id="btnAccueil" layoutX="214.0" layoutY="86.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="91.0" text="Accueil" />
          </children>
       </Pane>
       <Pane layoutX="89.0" layoutY="880.0" prefHeight="200.0" prefWidth="1920.0" />
@@ -63,9 +64,9 @@
             </Text>
          </children>
       </Pane>
-      <Pane layoutX="1200.0" layoutY="260.0" prefHeight="240.0" prefWidth="550.0" style="-fx-background-color: #D3D3D3;">
+      <Pane layoutX="1200.0" layoutY="260.0" prefHeight="240.0" prefWidth="580.0" style="-fx-background-color: #D3D3D3;">
          <children>
-            <Button fx:id="btnSuivi" layoutX="339.0" layoutY="95.0" mnemonicParsing="false" text="Fiche de suivi">
+            <Button fx:id="btnSuivi" layoutX="270.0" layoutY="92.0" mnemonicParsing="false" text="Fiche de remboursement">
                <font>
                   <Font size="24.0" />
                </font>
@@ -77,9 +78,9 @@
             </Text>
          </children>
       </Pane>
-      <Pane layoutX="1200.0" layoutY="580.0" prefHeight="240.0" prefWidth="550.0" style="-fx-background-color: #D3D3D3;">
+      <Pane layoutX="1200.0" layoutY="580.0" prefHeight="240.0" prefWidth="580.0" style="-fx-background-color: #D3D3D3;">
          <children>
-            <Button fx:id="btnHistorique" layoutX="347.0" layoutY="95.0" mnemonicParsing="false" text="Historique">
+            <Button fx:id="btnHistorique" layoutX="387.0" layoutY="95.0" mnemonicParsing="false" text="Historique">
                <font>
                   <Font size="24.0" />
                </font>
