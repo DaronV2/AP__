@@ -62,6 +62,7 @@ public class PrimaryController {
 
         String log = loginEnter.getText();
         this.log = log;
+        utilisateur.identfiant = log;
         String pas = password.getText();
 
         System.out.println(verifierUtilisateur(log, pas));
