@@ -77,17 +77,18 @@ public class PrimaryController {
         }
     }
 
-    private ResultSet reqMatricule(String log) throws SQLException{
+    private ResultSet reqMatricule(String log) throws SQLException {
         ResultSet resultats = null;
         Sqldb sql = new Sqldb();
         Connection c = sql.connexionDb();
         Statement stmnt = c.createStatement();
-        String reqsql = String.format("SELECT vi_matricule FROM gsb_etudiants.visiteur WHERE cr_identifiant = '%s';", log);
+        String reqsql = String.format("SELECT vi_matricule FROM gsb_etudiants.visiteur WHERE cr_identifiant = '%s';",
+                log);
         resultats = sql.exeRequete(stmnt, reqsql);
         return resultats;
     }
 
-    private ResultSet reqNom(String log) throws SQLException{
+    private ResultSet reqNom(String log) throws SQLException {
         ResultSet resultats = null;
         Sqldb sql = new Sqldb();
         Connection c = sql.connexionDb();
@@ -96,8 +97,6 @@ public class PrimaryController {
         resultats = sql.exeRequete(stmnt, reqsql);
         return resultats;
     }
-
-
 
     private boolean verifierUtilisateur(String utilisateur, String mdp) throws IOException, SQLException {
         ResultSet resultats = null;
@@ -140,7 +139,8 @@ public class PrimaryController {
         Connection c = sql.connexionDb();
         Statement stmnt = c.createStatement();
 
-        String req = String.format("SELECT cr_identifiant FROM gsb_etudiants.comptable WHERE cr_identifiant = '%s'",user);
+        String req = String.format("SELECT cr_identifiant FROM gsb_etudiants.comptable WHERE cr_identifiant = '%s'",
+                user);
         resultats = sql.exeRequete(stmnt, req);
 
         if (resultats.next() == true) {
@@ -152,7 +152,7 @@ public class PrimaryController {
                 utilisateur.matricule = matricule;
             }
             ResultSet resultats3 = reqNom(this.log);
-            if (resultats3.next() == true){
+            if (resultats3.next() == true) {
                 String nom = resultats3.getNString("vi_nom");
                 utilisateur.nom = nom;
             }

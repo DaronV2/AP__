@@ -32,24 +32,34 @@
             <Line endX="1819.0" layoutX="101.0" layoutY="200.0" startX="-100.0" />
          </children>
       </Pane>
-      <Pane layoutX="130.0" layoutY="260.0" prefHeight="550.0" prefWidth="550.0" style="-fx-background-color: #D3D3D3;">
+      <Pane layoutX="685.0" layoutY="265.0" prefHeight="550.0" prefWidth="550.0" style="-fx-background-color: #D3D3D3;">
          <children>
             <Text layoutX="220.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Historique">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <Button layoutX="249.0" layoutY="487.0" mnemonicParsing="false" text="Button" />
-         </children>
-      </Pane>
-      <Pane layoutX="1270.0" layoutY="260.0" prefHeight="550.0" prefWidth="550.0" style="-fx-background-color: #D3D3D3;">
-         <children>
-            <Text layoutX="248.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fiche">
+            <Button layoutX="213.0" layoutY="458.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="110.0" text="Historique" />
+            <Text layoutX="59.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Accédez facilement à l'historique des fiches et modifiez-les en toute simplicité.  " wrappingWidth="464.396484375">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <Button layoutX="249.0" layoutY="476.0" mnemonicParsing="false" text="Button" />
+            <Text layoutX="143.0" layoutY="401.0" strokeType="OUTSIDE" strokeWidth="0.0" text="L'équipe de Galaxy Swiss Bourdin">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="59.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Simplifiez votre travail dès aujourd'hui !">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text layoutX="59.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gérez vos données financières efficacement, sans tracas." wrappingWidth="456.8125">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
       <Line endX="1819.0" endY="10.0" layoutX="101.0" layoutY="898.0" startX="-100.0" />
