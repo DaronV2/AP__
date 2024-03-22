@@ -5,12 +5,18 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Array;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Calendar;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -155,6 +161,8 @@ public class PrimaryController {
 
     @FXML
     private void switchToSecondary(ActionEvent event) throws IOException {
+        LocalDateTime datetime = LocalDateTime.now();
+        System.out.println(datetime);
         App.setRoot("secondary");
     }
 

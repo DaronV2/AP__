@@ -1,6 +1,14 @@
 package fr.daron.louis;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,6 +50,11 @@ public class SecondaryController {
 
     @FXML
     private TextField mois;
+
+    public void setMois() {
+        String dateTime = DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now());
+        mois.setText(dateTime.toString());
+    }
 
     @FXML
     private TextField montantUnitaireKm;
@@ -89,10 +102,9 @@ public class SecondaryController {
         });
     }
 
-    @SuppressWarnings("unused")
+
     @FXML
-    void switchAccueil(ActionEvent event) throws IOException {
-        App.setRoot("primary");
+    void envoyer(ActionEvent event) throws SQLException{
         String nuit = nuitee.getText();
         String totalNuit = totalNuitee.getText();
         String repasMid = repasMidi.getText();
@@ -104,19 +116,29 @@ public class SecondaryController {
         String afD2 = afDate2.getText();
         String afL2 = afLibelle2.getText();
         String afM2 = afMontant2.getText();
+        String moisString = mois.getText();
 
         Sqldb sql2 = new Sqldb();
         // Connection c = sql2.connexionDb();
         // Statement stmnt = c.createStatement();
+        Connection c = sql2.connexionDb();
+        Statement stmnt = c.createStatement();
 
-        String sql = "INSERT INTO fiche_frais (ff_qte_nuitees, ff_total_nuitees, ff_qte_repas, ff_total_repas, ff_qte_km) VALUES ( nuit, totalNuit, repasMidi, totalRepas, km1)";
-        String sql1 = "INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant) VALUES ( afD1, afL1, afM1)";
-        // resultats = sql2.exeRequete(stmnt, sql);
+        String sql = String.format("INSERT INTO fiche_frais (ff_qte_nuitees, ff_total_nuitees, ff_qte_repas, ff_total_repas, ff_qte_km,ff_mois) VALUES ( %s, %s, %s, %s, %s)",nuit,totalNuit,repasMid,totalRepas,km1);
+        String sql1 = String.format("INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant) VALUES (%s,%s,%s)", afD1, afL1, afM1);
+        stmnt.executeUpdate(sql);
+        stmnt.executeUpdate(sql1);
+    }
+
+    @FXML
+    void switchAccueil(ActionEvent event) throws IOException, SQLException {
+        App.setRoot("primary");
     }
 
     @FXML
     public void matric() {
         setMatricule();
         setNom();
+        setMois();
     }
 }
