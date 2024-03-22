@@ -155,7 +155,6 @@ public class SecondaryController {
         ffid = resultatId.getNString("ff_id");
         System.out.println(ffid);
 
-        String getId ="SELECT ff_id from fiche_frais WHERE ff_mois = %s AND";
 
 
 
