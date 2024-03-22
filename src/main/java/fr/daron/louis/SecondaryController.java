@@ -119,6 +119,8 @@ public class SecondaryController {
         String moisString = mois.getText();
 
         Sqldb sql2 = new Sqldb();
+        // Connection c = sql2.connexionDb();
+        // Statement stmnt = c.createStatement();
         Connection c = sql2.connexionDb();
         Statement stmnt = c.createStatement();
 
