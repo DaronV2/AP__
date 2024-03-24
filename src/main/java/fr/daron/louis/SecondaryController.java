@@ -2,14 +2,11 @@ package fr.daron.louis;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 //import com.mysql.cj.protocol.Resultset;
 
@@ -125,6 +122,7 @@ public class SecondaryController {
         String afL2 = afLibelle2.getText();
         String afM2 = afMontant2.getText();
         LocalDate moisHf1 = barreMois1.getValue();
+        String moisHf1String = moisHf1.toString();
         LocalDate moisHf2 = barreMois11.getValue();
         LocalDate moisString = barreMois.getValue();
         String matriculeString = matricule.getText();
@@ -136,17 +134,24 @@ public class SecondaryController {
         Connection c = sql2.connexionDb();
         Statement stmnt = c.createStatement();
 
+        java.util.UUID uuid = UUID.randomUUID();
+        String uuidString = uuid.toString();
 
-        if(moisHf1== null & afL1 == null & afM1 == null){
-            
-            String sql1 = String.format("INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant,ff_id) VALUES (%s,%s,%s)",afD1, afL1, afM1);
+        moisHf1String = moisHf1String.replace("-", ",");
+        moisHf1String = moisHf1String.replace("03", "3");
+
+        if(moisHf1!= null & afL1 != null & afM1 != null){
+            moisHf1String = "STR_TO_DATE(\""+moisHf1String+", 10,10,10\", \"%Y,%m,%d %h,%i,%s\")";
+            System.out.println(moisHf1String);
+            String sql1 = "INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant,ff_id) VALUES ("+moisHf1String+",'"+afL1+"',"+afM1+",'"+uuidString+"')";
             stmnt.executeUpdate(sql1);
+
         }else{
             System.out.println("yes");
         }
 
-        if(moisHf2== null & afL2 == null & afM2 == null){
-            String sql1 = String.format("INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant,ff_id) VALUES (%s,%s,%s)",afD1, afL1, afM1);
+        if(moisHf2!= null & afL2 != null & afM2 != null){
+            String sql1 = String.format("INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant,ff_id) VALUES (%s,'%s',%s,'%s')",moisHf2, afL1, afM2,uuidString);
             stmnt.executeUpdate(sql1);
         }else{
             System.out.println("yes");
@@ -164,7 +169,6 @@ public class SecondaryController {
         System.out.println(sql);
         stmnt.executeUpdate(sql);
 
-        String ffid ;
         String getId =String.format("SELECT ff_id from fiche_frais WHERE ff_mois = %s AND vi_matricule = '%s'",moisString,matriculeString);
         ResultSet resultatId = stmnt.executeQuery(getId);
         resultatId.next();
@@ -174,6 +178,11 @@ public class SecondaryController {
 
         //Faire d'abord les requetes d'hors forfait et ensuite la fiche frais afin dr'avoir l'id
 
+    }
+
+    private String UUID() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'UUID'");
     }
 
     @FXML
