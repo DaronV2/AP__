@@ -27,7 +27,7 @@
                   <Image url="@../../../images/logo1.png" />
                </image>
             </ImageView>
-            <Label layoutX="850.0" layoutY="36.0" text="Historique">
+            <Label layoutX="721.0" layoutY="36.0" text="Historique comptables">
                <font>
                   <Font size="48.0" />
                </font>
@@ -38,7 +38,7 @@
       <Line endX="1805.0" layoutX="115.0" layoutY="152.0" startX="-115.0" />
       <Pane layoutX="61.0" layoutY="200.0" prefHeight="610.0" prefWidth="460.0" style="-fx-background-color: #D3D3D3;">
          <children>
-            <MenuButton layoutX="178.0" layoutY="14.0" mnemonicParsing="false" text="Historique">
+            <MenuButton layoutX="187.0" layoutY="22.0" mnemonicParsing="false" text="Historique">
                <items>
                   <MenuItem mnemonicParsing="false" text="JANVIER" />
                   <MenuItem mnemonicParsing="false" text="FEVRIER" />
