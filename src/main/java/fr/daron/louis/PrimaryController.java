@@ -35,7 +35,10 @@ public class PrimaryController {
     private Button btn_deuxpage;
 
     @FXML
-    private Button btnV;;
+    private Button btnV;
+
+    @FXML
+    private Button btnV2;
 
     @FXML
     private TextField loginEnter;
@@ -175,6 +178,12 @@ public class PrimaryController {
     @FXML
     private void btnV(ActionEvent event) throws IOException {
         App.setRoot("accueilVisiteurs");
+    }
+
+    @FXML
+    void btnV2(ActionEvent event) throws IOException  {
+        App.setRoot("accueilComptable");
+
     }
 
 }

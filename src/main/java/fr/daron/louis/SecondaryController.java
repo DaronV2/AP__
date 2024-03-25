@@ -47,11 +47,14 @@ public class SecondaryController {
     @FXML
     private DatePicker barreMois;
 
-    /*public void setMois(DatePicker mois) {
-        String dateTime = DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now());
-        mois.setText("00-00-0000");
-        mois.setText(dateTime.toString());
-    }*/
+    /*
+     * public void setMois(DatePicker mois) {
+     * String dateTime =
+     * DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now());
+     * mois.setText("00-00-0000");
+     * mois.setText(dateTime.toString());
+     * }
+     */
 
     @FXML
     private TextField montantUnitaireKm;
@@ -81,12 +84,12 @@ public class SecondaryController {
 
     @FXML
     private DatePicker barreMois11;
-    
+
     @FXML
     void initialize() {
         setMatricule(matricule);
         setNom(nom);
-        //setMois(mois);
+        // setMois(mois);
 
         matricule.setEditable(false);
         nom.setEditable(false);
@@ -140,24 +143,28 @@ public class SecondaryController {
         moisHf1String = moisHf1String.replace("-", ",");
         moisHf1String = moisHf1String.replace("03", "3");
 
-        if(moisHf1!= null & afL1 != null & afM1 != null){
-            moisHf1String = "STR_TO_DATE(\""+moisHf1String+", 10,10,10\", \"%Y,%m,%d %h,%i,%s\")";
+        if (moisHf1 != null & afL1 != null & afM1 != null) {
+            moisHf1String = "STR_TO_DATE(\"" + moisHf1String + ", 10,10,10\", \"%Y,%m,%d %h,%i,%s\")";
             System.out.println(moisHf1String);
-            String sql1 = "INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant,ff_id) VALUES ("+moisHf1String+",'"+afL1+"',"+afM1+",'"+uuidString+"')";
+            String sql1 = "INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant,ff_id) VALUES (" + moisHf1String
+                    + ",'" + afL1 + "'," + afM1 + ",'" + uuidString + "')";
             stmnt.executeUpdate(sql1);
 
-        }else{
+        } else {
             System.out.println("yes");
         }
 
-        if(moisHf2!= null & afL2 != null & afM2 != null){
-            String sql1 = String.format("INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant,ff_id) VALUES (%s,'%s',%s,'%s')",moisHf2, afL1, afM2,uuidString);
+        if (moisHf2 != null & afL2 != null & afM2 != null) {
+            String sql1 = String.format(
+                    "INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant,ff_id) VALUES (%s,'%s',%s,'%s')",
+                    moisHf2, afL1, afM2, uuidString);
             stmnt.executeUpdate(sql1);
-        }else{
+        } else {
             System.out.println("yes");
         }
 
-        String jointure = String.format("SELECT vi_matricule FROM visiteur WHERE cr_identifiant = '%s'",utilisateur.identfiant);
+        String jointure = String.format("SELECT vi_matricule FROM visiteur WHERE cr_identifiant = '%s'",
+                utilisateur.identfiant);
         ResultSet resultats43 = stmnt.executeQuery(jointure);
         resultats43.next();
         matriculeString = resultats43.getNString("vi_matricule");
@@ -165,18 +172,39 @@ public class SecondaryController {
 
         String date = "STR_TO_DATE(\"2017,8,14 10,40,10\", \"%Y,%m,%d %h,%i,%s\")";
 
-        String sql = "INSERT INTO fiche_frais (ff_mois,ff_qte_nuitees, ff_total_nuitees, ff_qte_repas, ff_total_repas, ff_qte_km,vi_matricule,prix_km) VALUES ("+date+", "+nuit+","+totalNuit+","+repasMid+","+totalRepas+","+km1+", '"+matriculeString+"',"+px_km+")";
+        String sql = "INSERT INTO fiche_frais (ff_mois,ff_qte_nuitees, ff_total_nuitees, ff_qte_repas, ff_total_repas, ff_qte_km,vi_matricule,prix_km) VALUES ("
+                + date + ", " + nuit + "," + totalNuit + "," + repasMid + "," + totalRepas + "," + km1 + ", '"
+                + matriculeString + "'," + px_km + ")";
         System.out.println(sql);
         stmnt.executeUpdate(sql);
 
-        String getId =String.format("SELECT ff_id from fiche_frais WHERE ff_mois = %s AND vi_matricule = '%s'",moisString,matriculeString);
+        String getId = "SELECT ff_id from fiche_frais WHERE ff_mois = %s AND";
         ResultSet resultatId = stmnt.executeQuery(getId);
         resultatId.next();
 
+        String afD1 = "";
+        if (afD1 == null & afL1 == null & afM1 == null) {
 
+            String sql1 = String.format("INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant) VALUES (%s,%s,%s)",
+                    afD1, afL1, afM1);
+            stmnt.executeUpdate(sql1);
+        } else {
+            System.out.println("yes");
+        }
 
+        String afD2 = "";
+        if (afD2 == null & afL2 == null & afM2 == null) {
+            String ffid = "";
+            String sql1 = String.format(
+                    "INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant,ff_id) VALUES (%s,%s,%s,%s)", afD1,
+                    afL1, afM1, ffid);
+            stmnt.executeUpdate(sql1);
+        } else {
+            System.out.println("yes");
+        }
 
-        //Faire d'abord les requetes d'hors forfait et ensuite la fiche frais afin dr'avoir l'id
+        // Faire d'abord les requetes d'hors forfait et ensuite la fiche frais afin
+        // dr'avoir l'id
 
     }
 
