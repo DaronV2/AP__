@@ -55,7 +55,7 @@ public class PrimaryController {
     void login(ActionEvent event) throws IOException, SQLException, NoSuchAlgorithmException {
         String log = loginEnter.getText();
         if (checklog() == true && comptableOuNon(log) == false) {
-            App.setRoot("secondary");
+            App.setRoot("accueilVisiteurs");
         } else if (checklog() == true && comptableOuNon(log) == true) {
             App.setRoot("accueilComptable");
         }
