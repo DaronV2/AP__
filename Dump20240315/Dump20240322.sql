@@ -19,6 +19,7 @@
 -- Table structure for table `comptable`
 --
 
+DROP TABLE IF EXISTS `comptable`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `comptable` (
@@ -127,7 +128,7 @@ CREATE TABLE `fiche_frais` (
   `ff_qte_nuitees` int NOT NULL DEFAULT '0',
   `ff_qte_repas` int NOT NULL DEFAULT '0',
   `ff_qte_km` int NOT NULL DEFAULT '0',
-  `ff_date_creation` date DEFAULT NULL,
+  `ff_date_creation` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `ff_date_cloture` date DEFAULT NULL,
   `ff_date_validation` date DEFAULT NULL,
   `ff_date_mise_en_remboursement` date DEFAULT NULL,
@@ -135,6 +136,9 @@ CREATE TABLE `fiche_frais` (
   `vi_matricule` varchar(20) NOT NULL,
   `co_id` int DEFAULT NULL,
   `ef_id` int NOT NULL DEFAULT '1',
+  `ff_total_nuitees` int NOT NULL,
+  `ff_total_repas` int NOT NULL,
+  `prix_km` int NOT NULL,
   PRIMARY KEY (`ff_id`),
   KEY `fk_ff_comptable_idx` (`co_id`),
   KEY `fk_ff_visiteur_idx` (`vi_matricule`),
@@ -142,7 +146,7 @@ CREATE TABLE `fiche_frais` (
   CONSTRAINT `fk_ff_comptable` FOREIGN KEY (`co_id`) REFERENCES `comptable` (`co_id`),
   CONSTRAINT `fk_ff_etat_fiche` FOREIGN KEY (`ef_id`) REFERENCES `etat_fiche` (`ef_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_ff_visiteur` FOREIGN KEY (`vi_matricule`) REFERENCES `visiteur` (`vi_matricule`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,7 +155,7 @@ CREATE TABLE `fiche_frais` (
 
 LOCK TABLES `fiche_frais` WRITE;
 /*!40000 ALTER TABLE `fiche_frais` DISABLE KEYS */;
-INSERT INTO `fiche_frais` VALUES (1,'2024-02-03',9,12,750,'2024-02-03',NULL,NULL,NULL,NULL,'NRD/125-01',NULL,1),(2,'2024-01-08',15,15,927,'2024-01-08','2024-02-10','2024-02-15',NULL,NULL,'NRD/125-01',2,3),(3,'2024-01-02',2,3,189,'2024-01-02','2024-02-07','2024-02-14','2024-02-20','2024-02-27','NRD/125-02',1,5),(4,'2024-02-07',1,1,76,'2024-02-07',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1),(8,'2023-12-01',16,18,838,'2023-12-01','2024-01-08','2024-01-18','2024-01-20','2024-01-20','NRD/125-01',1,5);
+INSERT INTO `fiche_frais` VALUES (1,'2024-02-03',9,12,750,'2024-02-02 23:00:00',NULL,NULL,NULL,NULL,'NRD/125-01',NULL,1,0,0,0),(2,'2024-01-08',15,15,927,'2024-01-07 23:00:00','2024-02-10','2024-02-15',NULL,NULL,'NRD/125-01',2,3,0,0,0),(3,'2024-01-02',2,3,189,'2024-01-01 23:00:00','2024-02-07','2024-02-14','2024-02-20','2024-02-27','NRD/125-02',1,5,0,0,0),(4,'2024-02-07',1,1,76,'2024-02-06 23:00:00',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,0,0,0),(8,'2023-12-01',16,18,838,'2023-11-30 23:00:00','2024-01-08','2024-01-18','2024-01-20','2024-01-20','NRD/125-01',1,5,0,0,0),(18,'2017-08-14',12,12,21,'2024-03-22 15:30:53',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,960,348,2),(19,'2017-08-14',12,12,12,'2024-03-22 15:43:18',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,960,348,12),(20,'2017-08-14',12,12,12,'2024-03-22 15:44:11',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,960,348,2);
 /*!40000 ALTER TABLE `fiche_frais` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -224,4 +228,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-15 15:19:42
+-- Dump completed on 2024-03-22 19:48:36

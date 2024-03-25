@@ -46,7 +46,6 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <TextField fx:id="mois" editable="false" layoutX="1188.0" layoutY="259.0" prefHeight="25.0" prefWidth="238.0" />
       <Text layoutX="602.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Frais forfaitaires">
          <font>
             <Font size="16.0" />
@@ -109,7 +108,6 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <TextField fx:id="afDate1" layoutX="710.0" layoutY="600.0" />
       <Text layoutX="768.0" layoutY="580.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
          <font>
             <Font size="16.0" />
@@ -127,7 +125,6 @@
       </Text>
       <TextField fx:id="afLibelle1" layoutX="882.0" layoutY="600.0" />
       <TextField fx:id="afMontant1" layoutX="1055.0" layoutY="600.0" />
-      <TextField fx:id="afDate2" layoutX="710.0" layoutY="650.0" />
       <TextField fx:id="afLibelle2" layoutX="882.0" layoutY="650.0" />
       <Text layoutX="667.0" layoutY="767.0" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. Les frais forfaitaires doivent être justifiés par une facture acquittée faisant apparaître le montant de la TVA. Ces documents ne sont pas à joindre à l’état de frais mais doivent être conservés pendant trois années. Ilspeuvent être contrôlés par le délégué régional ou le service comptable. " textAlignment="CENTER" wrappingWidth="570.84375" />
       <Text layoutX="862.0" layoutY="839.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. Tarifs en vigueur au 01/09/2020" />
@@ -141,6 +138,8 @@
       <TextField fx:id="afMontant2" layoutX="1055.0" layoutY="650.0" />
       <Button fx:id="accueilBtn" layoutX="342.0" layoutY="88.0" mnemonicParsing="false" onAction="#switchAccueil" text="Accueil" />
       <Button layoutX="924.0" layoutY="689.0" mnemonicParsing="false" onAction="#envoyer" prefHeight="32.0" prefWidth="61.0" text="Envoyer" />
-      <DatePicker fx:id="barreMois" layoutX="1187.0" layoutY="259.0" prefHeight="25.0" prefWidth="238.0" />
+      <DatePicker fx:id="barreMois" layoutX="1191.0" layoutY="265.0" prefHeight="25.0" prefWidth="238.0" />
+      <DatePicker fx:id="barreMois1" layoutX="710.0" layoutY="600.0" prefHeight="25.0" prefWidth="149.0" />
+      <DatePicker fx:id="barreMois11" layoutX="710.0" layoutY="650.0" prefHeight="25.0" prefWidth="149.0" />
    </children>
 </AnchorPane>
