@@ -141,5 +141,7 @@
       <DatePicker fx:id="barreMois" layoutX="1191.0" layoutY="265.0" prefHeight="25.0" prefWidth="238.0" />
       <DatePicker fx:id="barreMois1" layoutX="710.0" layoutY="600.0" prefHeight="25.0" prefWidth="149.0" />
       <DatePicker fx:id="barreMois11" layoutX="710.0" layoutY="650.0" prefHeight="25.0" prefWidth="149.0" />
+      <Text fx:id="resultatRequete" layoutX="880.0" layoutY="741.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="159.13671875" />
+      <Text fx:id="resultatRequete1" layoutX="890.0" layoutY="751.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="159.13671875" />
    </children>
 </AnchorPane>
