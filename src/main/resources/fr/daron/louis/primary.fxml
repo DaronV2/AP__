@@ -49,7 +49,7 @@
                   </Text>
                   <Button fx:id="btnV" layoutX="411.0" layoutY="528.0" mnemonicParsing="false" onAction="#btnV" text="Accueil Visiteur" />
                   <Button fx:id="btnV2" layoutX="411.0" layoutY="490.0" mnemonicParsing="false" onAction="#btnV2" text="Accueil Comptable" />
-                  <Button layoutX="277.0" layoutY="490.0" mnemonicParsing="false" text="Hist compta" />
+                  <Button fx:id="histCompta1" layoutX="277.0" layoutY="490.0" mnemonicParsing="false" onAction="#histCompta2" text="Hist compta" />
                </children>
             </Pane>
          </children>
