@@ -133,15 +133,17 @@ public class SecondaryController {
         String uuidString = uuid.toString();
 
 
+
         if(moisHf1!= null & afL1 != null & afM1 != null){
             String moisHf1String = moisHf1.toString();
             moisHf1String = moisHf1String.replace("-", ",");
             moisHf1String = "STR_TO_DATE(\""+moisHf1String+"\", \"%Y,%m,%d\")";
             System.out.println(moisHf1String);
-            String sql1 = "INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant,ff_id) VALUES ("+moisHf1String+",'"+afL1+"',"+afM1+",'"+uuidString+"')";
+            String sql1 = "INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant,ff_id) VALUES (" + moisHf1String
+                    + ",'" + afL1 + "'," + afM1 + ",'" + uuidString + "')";
             stmnt.executeUpdate(sql1);
 
-        }else{
+        } else {
             System.out.println("yes");
         }
 
@@ -151,20 +153,40 @@ public class SecondaryController {
             moisHf2String = "STR_TO_DATE(\""+moisHf2String+"\", \"%Y,%m,%d\")";
             System.out.println(moisHf2String);
             String sql1 = "INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant,ff_id) VALUES ("+moisHf2String+",'"+afL2+"',"+afM2+",'"+uuidString+"')";
+
             stmnt.executeUpdate(sql1);
-        }else{
+        } else {
             System.out.println("yes");
         }
        
         String moisFfString = moisff.toString().replace("-", ",");
         String date = "STR_TO_DATE(\""+moisFfString+"\", \"%Y,%m,%d %h,%i,%s\")";
 
+
         String sql = "INSERT INTO fiche_frais (ff_mois,ff_qte_nuitees, ff_total_nuitees, ff_qte_repas, ff_total_repas, ff_qte_km,vi_matricule,prix_km,ff_id) VALUES ("+date+", "+nuit+","+totalNuit+","+repasMid+","+totalRepas+","+km1+", '"+matriculeString+"',"+px_km+",'"+uuidString+"')";
         stmnt.executeUpdate(sql);
 
 
+        String afD1 = "";
+        if (afD1 == null & afL1 == null & afM1 == null) {
 
+            String sql1 = String.format("INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant) VALUES (%s,%s,%s)",
+                    afD1, afL1, afM1);
+            stmnt.executeUpdate(sql1);
+        } else {
+            System.out.println("yes");
+        }
 
+        String afD2 = "";
+        if (afD2 == null & afL2 == null & afM2 == null) {
+            String ffid = "";
+            String sql1 = String.format(
+                    "INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant,ff_id) VALUES (%s,%s,%s,%s)", afD1,
+                    afL1, afM1, ffid);
+            stmnt.executeUpdate(sql1);
+        } else {
+            System.out.println("yes");
+        }
 
     }
 
