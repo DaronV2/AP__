@@ -32,6 +32,9 @@ public class PrimaryController {
     private Button btnConnexion;
 
     @FXML
+    private Button histCompta1;
+
+    @FXML
     private Button btn_deuxpage;
 
     @FXML
@@ -181,8 +184,14 @@ public class PrimaryController {
     }
 
     @FXML
-    void btnV2(ActionEvent event) throws IOException  {
+    void btnV2(ActionEvent event) throws IOException {
         App.setRoot("accueilComptable");
+
+    }
+
+    @FXML
+    void histCompta2(ActionEvent event) throws IOException {
+        App.setRoot("HistoriqueComptable");
 
     }
 
