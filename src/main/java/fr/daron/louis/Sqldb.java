@@ -11,12 +11,12 @@ import java.sql.Statement;
 
 
 public class Sqldb {
-    static String url = "jdbc:mysql://localhost/gsb_etudiants";
+    static String url = credentialsBdd.getIpBdd();
     //private String url = "jdbc:mariadb://88.127.124.40:12456/gsb_etudiants";
 
-    static String user = "requeteur";
+    static String user = credentialsBdd.getLogBdd();
 
-    static String mdp = "J'adorelesrequetes.";
+    static String mdp = credentialsBdd.getPwdBdd();
 
     Sqldb(){
     }
