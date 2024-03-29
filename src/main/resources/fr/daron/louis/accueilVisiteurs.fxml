@@ -12,30 +12,25 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.daron.louis.AccueilVisiteurs">
    <children>
-      <Pane prefHeight="200.0" prefWidth="1920.0">
+      <Pane prefHeight="200.0" prefWidth="1920.0" style="-fx-background-color: #D3D3D3;">
          <children>
-            <Label layoutX="698.0" layoutY="74.0" text="Bienvenue dans l'espace visiteurs">
+            <Label layoutX="691.0" layoutY="75.0" prefHeight="53.0" prefWidth="539.0" text="Bienvenue dans l'espace visiteurs" textAlignment="CENTER">
                <font>
                   <Font size="36.0" />
                </font>
             </Label>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1706.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="151.0" fitWidth="219.0" layoutX="77.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/logo1.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/logo1.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="btnAccueil" layoutX="214.0" layoutY="86.0" mnemonicParsing="false" onAction="#changePage" prefHeight="30.0" prefWidth="91.0" text="Accueil" />
+            <Button fx:id="btnAccueil" layoutX="400.0" layoutY="86.0" mnemonicParsing="false" onAction="#changePage" prefHeight="30.0" prefWidth="91.0" text="Accueil" />
          </children>
       </Pane>
-      <Pane layoutX="89.0" layoutY="880.0" prefHeight="200.0" prefWidth="1920.0" />
-      <Line endX="1805.0" layoutX="115.0" layoutY="200.0" startX="-115.0" />
-      <Line endX="1642.0" layoutX="278.0" layoutY="880.0" startX="-278.0" />
-      <Pane layoutX="39.0" layoutY="260.0" prefHeight="560.0" prefWidth="560.0" style="-fx-background-color: #D3D3D3;">
+      <Pane layoutX="1.0" layoutY="880.0" prefHeight="200.0" prefWidth="1920.0" style="-fx-background-color: #D3D3D3;" />
+      <Line endX="1805.0" layoutX="115.0" layoutY="200.0" startX="-115.0" stroke="#868686" />
+      <Line endX="1642.0" layoutX="278.0" layoutY="880.0" startX="-278.0" stroke="#868686" />
+      <Pane layoutX="168.0" layoutY="260.0" prefHeight="560.0" prefWidth="560.0" style="-fx-background-color: #D3D3D3;">
          <children>
             <Text layoutX="42.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue sur notre plateforme dédiée à la gestion de suivi !">
                <font>
