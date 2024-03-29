@@ -5,87 +5,115 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Line?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.daron.louis.AccueilVisiteurs">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #FFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.daron.louis.AccueilVisiteurs">
    <children>
-      <Pane prefHeight="200.0" prefWidth="1920.0" style="-fx-background-color: #8D93A3;">
+      <Pane prefHeight="200.0" prefWidth="1920.0" style="-fx-background-color: #a0a7ba;">
          <children>
-            <ImageView fitHeight="151.0" fitWidth="219.0" layoutX="77.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="151.0" fitWidth="219.0" layoutX="113.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/logo1.png" />
                </image>
             </ImageView>
-            <Text layoutX="1580.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pseudo">
+            <Circle fill="#ebebeb" layoutX="1737.0" layoutY="101.0" radius="77.0" stroke="#e4e4e4" strokeType="INSIDE" strokeWidth="0.0" />
+            <Circle fill="WHITE" layoutX="736.0" layoutY="101.0" radius="64.0" stroke="#e4e4e4" strokeType="INSIDE" strokeWidth="0.0" />
+            <Circle fill="WHITE" layoutX="1183.0" layoutY="101.0" radius="64.0" stroke="#e4e4e4" strokeType="INSIDE" strokeWidth="0.0" />
+            <Pane layoutX="736.0" layoutY="37.0" prefHeight="128.0" prefWidth="450.0" style="-fx-background-color: #FFFF;">
+               <children>
+                  <Text layoutX="-32.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue dans l'espace visiteurs" textAlignment="CENTER" underline="true" wrappingWidth="514.7294921875">
+                     <font>
+                        <Font name="Liberation Serif Bold Italic" size="37.0" />
+                     </font>
+                     <stroke>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </stroke>
+                  </Text>
+               </children>
+            </Pane>
+            <Button fx:id="btnAccueil" layoutX="373.0" layoutY="86.0" mnemonicParsing="false" onAction="#changePage" prefHeight="30.0" prefWidth="91.0" text="Accueil" />
+            <Text layoutX="1676.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pseudo" textAlignment="CENTER" wrappingWidth="122.99999999999977">
                <font>
-                  <Font size="21.0" />
+                  <Font name="System Italic" size="21.0" />
                </font>
             </Text>
-            <Button fx:id="btnAccueil" layoutX="400.0" layoutY="86.0" mnemonicParsing="false" onAction="#changePage" prefHeight="30.0" prefWidth="91.0" text="Accueil" />
-            <Text layoutX="653.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue dans l'espace visiteurs" textAlignment="CENTER" wrappingWidth="614.568359375">
+            <Text layoutX="1676.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Visiteur/compta" textAlignment="CENTER" wrappingWidth="123.0">
                <font>
-                  <Font name="Liberation Serif Bold Italic" size="37.0" />
-               </font>
-            </Text>
-            <Text layoutX="1572.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Visiteur/compta" />
-         </children>
-      </Pane>
-      <Pane layoutX="1.0" layoutY="880.0" prefHeight="200.0" prefWidth="1920.0" style="-fx-background-color: #8D93A3;" />
-      <Line endX="1805.0" layoutX="115.0" layoutY="200.0" startX="-115.0" stroke="#868686" />
-      <Line endX="1642.0" layoutX="278.0" layoutY="880.0" startX="-278.0" stroke="#868686" />
-      <Pane layoutX="168.0" layoutY="260.0" prefHeight="560.0" prefWidth="560.0" style="-fx-background-color: #D3D3D3;">
-         <children>
-            <Text layoutX="42.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue sur notre plateforme dédiée à la gestion de suivi !">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Text>
-            <Text layoutX="18.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ici, vous pouvez remplir et consulter vos fiches de suivi en toute simplicité. Que ce soit pour suivre vos fiches de suivi ou votre historique, notre outil intuitif vous permet de garder une trace claire et organisée de vos activités." wrappingWidth="524.126953125">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Text>
-            <Text layoutX="18.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remplissez vos fiches de suivi , ajoutez-y les informations pertinentes, et suivez votre progression au fil du temps. Avec notre fonction d'historique, vous pouvez également revisiter vos anciennes fiches pour analyser votre évolution et tirer des enseignements précieux." wrappingWidth="524.126953125">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Text>
-            <Text layoutX="13.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Commencez dès maintenant à remplir vos fiches de suivi et à tracer votre chemin vers le succès !" wrappingWidth="538.7294921875">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Text>
-            <Text layoutX="148.0" layoutY="499.0" strokeType="OUTSIDE" strokeWidth="0.0" text="L'équipe de Galaxy Swiss Bourdin">
-               <font>
-                  <Font size="18.0" />
+                  <Font size="15.0" />
                </font>
             </Text>
          </children>
       </Pane>
-      <Pane layoutX="1200.0" layoutY="260.0" prefHeight="240.0" prefWidth="580.0" style="-fx-background-color: #D3D3D3;">
+      <Pane layoutX="1.0" layoutY="880.0" prefHeight="200.0" prefWidth="1920.0" style="-fx-background-color: #a0a7ba;" />
+      <Pane layoutX="168.0" layoutY="260.0" prefHeight="583.0" prefWidth="580.0" style="-fx-background-color: #ededed;">
          <children>
-            <Button fx:id="btnSuivi" layoutX="270.0" layoutY="92.0" mnemonicParsing="false" onAction="#btnSecondary" text="Fiche de remboursement">
+            <Text layoutX="23.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue sur notre plateforme dédiée à la gestion de suivi !" textAlignment="CENTER">
+               <font>
+                  <Font name="Liberation Serif Bold Italic" size="22.0" />
+               </font>
+            </Text>
+            <Text layoutX="27.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ici, vous pouvez remplir et consulter vos fiches de suivi en toute simplicité. Que ce soit pour suivre vos fiches de suivi ou votre historique, notre outil intuitif vous permet de garder une trace claire et organisée de vos activités." textAlignment="CENTER" wrappingWidth="524.126953125">
+               <font>
+                  <Font name="Liberation Serif" size="20.0" />
+               </font>
+            </Text>
+            <Text layoutX="28.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remplissez vos fiches de suivi , ajoutez-y les informations pertinentes, et suivez votre progression au fil du temps. Avec notre fonction d'historique, vous pouvez également revisiter vos anciennes fiches pour analyser votre évolution et tirer des enseignements précieux." textAlignment="CENTER" wrappingWidth="524.126953125">
+               <font>
+                  <Font name="Liberation Serif" size="20.0" />
+               </font>
+            </Text>
+            <Text layoutX="21.0" layoutY="413.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Commencez dès maintenant à remplir vos fiches de suivi et à tracer votre chemin vers le succès !" textAlignment="CENTER" wrappingWidth="538.7294921875">
+               <font>
+                  <Font name="Liberation Serif" size="20.0" />
+               </font>
+            </Text>
+            <Text layoutX="131.0" layoutY="518.0" strokeType="OUTSIDE" strokeWidth="0.0" text="L'équipe de Galaxy Swiss Bourdin" textAlignment="CENTER" underline="true" wrappingWidth="317.5576171875">
+               <font>
+                  <Font name="System Italic" size="20.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane layoutX="1165.0" layoutY="260.0" prefHeight="240.0" prefWidth="615.0" style="-fx-background-color: e3e3e3;">
+         <children>
+            <Button fx:id="btnSuivi" layoutX="294.0" layoutY="95.0" mnemonicParsing="false" onAction="#btnSecondary" text="Fiche de remboursement">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Text layoutX="30.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pour accéder au créateur de fiche de suivi cliquer sur le bouton !" wrappingWidth="263.55761718750006">
+            <Text layoutX="30.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pour accéder au créateur de fiche de suivi cliquer sur le bouton !" textAlignment="CENTER" wrappingWidth="263.55761718750006">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
          </children>
       </Pane>
-      <Pane layoutX="1200.0" layoutY="580.0" prefHeight="240.0" prefWidth="580.0" style="-fx-background-color: #D3D3D3;">
+      <Pane layoutX="1165.0" layoutY="580.0" prefHeight="240.0" prefWidth="615.0" style="-fx-background-color: e3e3e3;">
          <children>
             <Button fx:id="btnHistorique" layoutX="387.0" layoutY="95.0" mnemonicParsing="false" onAction="#boutonHistorique" text="Historique">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
-            <Text layoutX="30.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pour accéder au créateur de fiche de suivi cliquer sur le bouton !" wrappingWidth="263.5576171875">
+            <Text layoutX="30.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pour accéder au créateur de fiche de suivi cliquer sur le bouton !" textAlignment="CENTER" wrappingWidth="263.5576171875">
                <font>
                   <Font size="24.0" />
                </font>
