@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -21,11 +22,21 @@
                   <Image url="@../../../images/blue.png" />
                </image>
             </ImageView>
-            <Pane layoutY="163.0" opacity="0.25" prefHeight="819.0" prefWidth="1920.0" style="-fx-background-color: #7c8499;" />
+            <Pane layoutY="129.0" opacity="0.41" prefHeight="819.0" prefWidth="1920.0" style="-fx-background-color: #7c8499;" />
             <Pane layoutX="630.0" layoutY="244.0" prefHeight="606.0" prefWidth="635.0" style="-fx-background-color: #D3D3D3;">
                <children>
                   <Button fx:id="btn_deuxpage" layoutX="138.0" layoutY="528.0" mnemonicParsing="false" onAction="#switchToSecondary" text="2eme page" />
-                  <Pane layoutX="183.0" layoutY="36.0" prefHeight="69.0" prefWidth="269.0" style="-fx-background-color: #FFFF;" />
+                  <Circle fill="WHITE" layoutX="201.0" layoutY="70.0" radius="34.4" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Circle fill="WHITE" layoutX="428.0" layoutY="70.0" radius="34.4" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <Pane layoutX="202.0" layoutY="36.0" prefHeight="69.0" prefWidth="227.0" style="-fx-background-color: #FFFF;">
+                     <children>
+                        <Text layoutX="7.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connectez-vous" textAlignment="CENTER" wrappingWidth="213.08984375">
+                           <font>
+                              <Font name="System Bold" size="27.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
                   <Pane layoutX="98.0" layoutY="181.0" prefHeight="32.0" prefWidth="63.0" style="-fx-background-color: #FFFF;" />
                   <Pane layoutX="98.0" layoutY="286.0" prefHeight="34.0" prefWidth="106.0" style="-fx-background-color: #FFFF;" />
                   <Button fx:id="btn_troispage" layoutX="280.0" layoutY="528.0" mnemonicParsing="false" onAction="#switchToThird" text="3eme page" />
@@ -42,11 +53,6 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Text layoutX="194.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connectez-vous" textAlignment="CENTER" wrappingWidth="246.08984375">
-                     <font>
-                        <Font name="System Bold" size="27.0" />
-                     </font>
-                  </Text>
                   <Button fx:id="btnV" layoutX="411.0" layoutY="528.0" mnemonicParsing="false" onAction="#btnV" text="Accueil Visiteur" />
                   <Button fx:id="btnV2" layoutX="411.0" layoutY="490.0" mnemonicParsing="false" onAction="#btnV2" text="Accueil Comptable" />
                   <Button fx:id="histCompta1" layoutX="277.0" layoutY="490.0" mnemonicParsing="false" onAction="#histCompta2" text="Hist compta" />
@@ -58,7 +64,7 @@
    <top>
       <Pane prefHeight="131.0" prefWidth="1920.0" style="-fx-background-color: #8D93A3;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="90.0" fitWidth="143.0" layoutX="889.0" layoutY="14.0">
+            <ImageView fitHeight="112.0" fitWidth="160.0" layoutX="880.0" layoutY="10.0">
                <image>
                   <Image url="@../../../images/logo1.png" />
                </image>
