@@ -72,6 +72,8 @@ public class historiqueComptable extends Application {
 
     public String moisFin;
 
+    public String matricule;
+
     @FXML
     void accueil(ActionEvent event) throws IOException {
         App.setRoot("primary");
@@ -132,6 +134,7 @@ public class historiqueComptable extends Application {
         test();
         handleAfficherVisiteurs();
         ObservableList<MenuItem> item = menuHist.getItems();
+        ObservableList<MenuItem> user = menuUser.getItems();
         item.forEach(menuItem -> {
             selectMois(menuItem);
         });
@@ -183,7 +186,7 @@ public class historiqueComptable extends Application {
                     + utilisateur.matricule + "'; ";
             String reqEtat = "SELECT ef.ef_libelle FROM fiche_frais AS ff \n" + //
                     "JOIN etat_fiche AS ef ON ff.ef_id = ef.ef_id \n" + //
-                    "WHERE ff.vi_matricule = \"" + utilisateur.matricule + "\" AND ff.ff_mois <= '" + finMois
+                    "WHERE ff.vi_matricule = \"" + matricule + "\" AND ff.ff_mois <= '" + finMois
                     + "' AND ff.ff_mois >= '" + debutMois + "';";
             try {
                 ResultSet res = Sqldb.executionRequete(selectFevr);
@@ -201,16 +204,17 @@ public class historiqueComptable extends Application {
     @FXML
     void handleAfficherVisiteurs() throws SQLException {
         // Création de la requête SQL
-        String query = "SELECT vi_nom, vi_prenom FROM visiteur";
+        String query = "SELECT vi_nom, vi_prenom, vi_matricule FROM visiteur";
         ResultSet resultSet = Sqldb.executionRequete(query);
 
         while (resultSet.next()) {
             String nom = resultSet.getString("vi_nom");
             String prenom = resultSet.getString("vi_prenom");
+            matricule = resultSet.getString("vi_matricule");
             System.out.println("Nom: " + nom + ", Prénom: " + prenom);
+            System.out.println("matricule : " + matricule);
             MenuItem user = new MenuItem(nom + " " + prenom);
             menuUser.getItems().add(user);
         }
-
     }
 }
