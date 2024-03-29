@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: gsb_etudiants
+-- Host: mysql.sio.local    Database: gsb_etudiants
 -- ------------------------------------------------------
 -- Server version	8.1.0
 
@@ -19,7 +19,7 @@
 -- Table structure for table `comptable`
 --
 
-
+DROP TABLE IF EXISTS `comptable`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `comptable` (
@@ -190,6 +190,32 @@ INSERT INTO `hors_forfait` VALUES (1,'2020-12-18','Repas Représentation',156.00
 UNLOCK TABLES;
 
 --
+-- Table structure for table `prix`
+--
+
+DROP TABLE IF EXISTS `prix`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `prix` (
+  `prix_id` int NOT NULL AUTO_INCREMENT,
+  `prix_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `prix_nuit` decimal(10,0) NOT NULL,
+  `prix_repas` decimal(10,0) NOT NULL,
+  PRIMARY KEY (`prix_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `prix`
+--
+
+LOCK TABLES `prix` WRITE;
+/*!40000 ALTER TABLE `prix` DISABLE KEYS */;
+INSERT INTO `prix` VALUES (1,'2024-03-29 13:17:09',81,30);
+/*!40000 ALTER TABLE `prix` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `visiteur`
 --
 
@@ -226,4 +252,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-29 13:38:33
+-- Dump completed on 2024-03-29 16:51:02

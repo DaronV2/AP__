@@ -123,6 +123,7 @@
             <DatePicker editable="false" layoutX="168.0" layoutY="466.0" />
             <Button fx:id="btnClot" layoutX="683.0" layoutY="544.0" mnemonicParsing="false" onAction="#cloturer" prefHeight="32.0" prefWidth="98.0" text="Cloturer" />
             <Button fx:id="btnSave" layoutX="503.0" layoutY="544.0" mnemonicParsing="false" onAction="#sauvegarder" prefHeight="32.0" prefWidth="98.0" text="Sauvegarder" />
+            <Button fx:id="btnModif" layoutX="333.0" layoutY="544.0" mnemonicParsing="false" onAction="#modif" prefHeight="32.0" prefWidth="98.0" text="Modifier" />
          </children>
       </Pane>
       <Line endX="1805.0" layoutX="153.0" layoutY="937.0" startX="-115.0" />

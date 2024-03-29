@@ -8,8 +8,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -27,6 +29,9 @@ public class ThirdController extends Application {
     @FXML
     private Text etatFiche;
 
+    @FXML
+    private Button btnModif;
+    
     @FXML
     private Button btnClot;
 
@@ -93,6 +98,15 @@ public class ThirdController extends Application {
         Integer kmNb = Integer.valueOf(qteKm.getText());
         Integer pxKm = Integer.valueOf(montantKm.getText());
         totalKm.setText(String.valueOf(kmNb*pxKm));
+        Map<TextField, Integer> elementsInitiaux = new HashMap<>(){{
+            put(montantKm,Integer.valueOf(res.getString("prix_km")));
+            put(nuitee,Integer.valueOf(res.getString("ff_qte_nuitees")));
+            put(qteKm,Integer.valueOf(res.getString("ff_qte_km")));
+            put(repasMid,Integer.valueOf(res.getString("ff_qte_repas")));
+            put(totalKm,(kmNb*pxKm));
+            put(totalNuitee,(nuiteeNb*80));
+            put(totalRepasMid,(repasNb*29));
+        }}; 
     }
     
     private void selectMois(MenuItem item){
@@ -163,7 +177,7 @@ public class ThirdController extends Application {
         Collections.reverse(items);
         menuMois.getItems().addAll(items);
     }
-
+    
     @FXML
     void cloturer(ActionEvent event) {
 
@@ -171,7 +185,17 @@ public class ThirdController extends Application {
 
     @FXML
     void sauvegarder(ActionEvent event) {
+        String update = "";
 
+
+    }
+
+    @FXML
+    void modif(ActionEvent event) {
+        List<TextField> liste = new ArrayList<>(List.of(montantKm,nuitee,qteKm,repasMid,totalKm,totalNuitee,totalRepasMid));
+        for (TextField element : liste){
+            element.setEditable(true);
+        }
     }
 
     @Override
