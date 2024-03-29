@@ -4,7 +4,6 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -39,22 +38,7 @@
       <Line endX="1805.0" layoutX="115.0" layoutY="152.0" startX="-115.0" />
       <Pane layoutX="61.0" layoutY="200.0" prefHeight="610.0" prefWidth="460.0" style="-fx-background-color: #D3D3D3;">
          <children>
-            <MenuButton fx:id="menuMois" layoutX="178.0" layoutY="14.0" mnemonicParsing="false" text="Historique">
-               <items>
-                  <MenuItem fx:id="janvItem" mnemonicParsing="false" text="JANVIER" />
-                  <MenuItem fx:id="fevItem" mnemonicParsing="false" text="FEVRIER" />
-                  <MenuItem fx:id="marsItem" mnemonicParsing="false" text="MARS" />
-                  <MenuItem fx:id="avrItem" mnemonicParsing="false" text="AVRIL" />
-                  <MenuItem fx:id="maiItem" mnemonicParsing="false" text="MAI" />
-                  <MenuItem fx:id="juinItem" mnemonicParsing="false" text="JUIN" />
-                  <MenuItem fx:id="juilItem" mnemonicParsing="false" text="JUILLET" />
-                  <MenuItem fx:id="aouItem" mnemonicParsing="false" text="AOUT" />
-                  <MenuItem fx:id="septItem" mnemonicParsing="false" text="SEPTEMBRE" />
-                  <MenuItem fx:id="octItem" mnemonicParsing="false" text="OCTOBRE" />
-                  <MenuItem fx:id="novItem" mnemonicParsing="false" text="NOVEMBRE" />
-                  <MenuItem fx:id="decItem" mnemonicParsing="false" text="DECEMBRE" />
-               </items>
-            </MenuButton>
+            <MenuButton fx:id="menuMois" layoutX="178.0" layoutY="14.0" mnemonicParsing="false" text="Historique" />
          </children>
       </Pane>
       <Pane layoutX="661.0" layoutY="200.0" prefHeight="610.0" prefWidth="820.0" style="-fx-background-color: #D3D3D3;">
@@ -129,7 +113,7 @@
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text layoutX="136.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Frais ftaires">
+            <Text layoutX="136.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Frais forfaitaires">
                <font>
                   <Font size="16.0" />
                </font>
@@ -137,9 +121,16 @@
             <TextField fx:id="totalKm" editable="false" layoutX="588.0" layoutY="270.0" prefHeight="25.0" prefWidth="140.0" />
             <DatePicker editable="false" layoutX="168.0" layoutY="420.0" />
             <DatePicker editable="false" layoutX="168.0" layoutY="466.0" />
+            <Button fx:id="btnClot" layoutX="683.0" layoutY="544.0" mnemonicParsing="false" onAction="#cloturer" prefHeight="32.0" prefWidth="98.0" text="Cloturer" />
+            <Button fx:id="btnSave" layoutX="503.0" layoutY="544.0" mnemonicParsing="false" onAction="#sauvegarder" prefHeight="32.0" prefWidth="98.0" text="Sauvegarder" />
          </children>
       </Pane>
       <Line endX="1805.0" layoutX="153.0" layoutY="937.0" startX="-115.0" />
+      <Text fx:id="etatFiche" layoutX="661.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="État de la fiche :">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
 
    </children>
 </AnchorPane>

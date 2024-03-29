@@ -2,51 +2,37 @@ package fr.daron.louis;
 
 import java.io.IOException;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-
-import org.checkerframework.checker.units.qual.m;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class ThirdController extends Application {
 
     @FXML
-    private MenuItem aouItem;
+    private Text etatFiche;
 
     @FXML
-    private MenuItem avrItem;
+    private Button btnClot;
 
     @FXML
-    private MenuItem decItem;
-
-    @FXML
-    private MenuItem fevItem;
-
-    @FXML
-    private MenuItem janvItem;
-
-    @FXML
-    private MenuItem juilItem;
-
-    @FXML
-    private MenuItem juinItem;
-
-    @FXML
-    private MenuItem maiItem;
-
-    @FXML
-    private MenuItem marsItem;
-
+    private Button btnSave;
+    
     @FXML
     private MenuButton menuMois;
 
@@ -54,22 +40,13 @@ public class ThirdController extends Application {
     private TextField montantKm;
 
     @FXML
-    private MenuItem novItem;
-
-    @FXML
     private TextField nuitee;
-
-    @FXML
-    private MenuItem octItem;
 
     @FXML
     private TextField qteKm;
 
     @FXML
     private TextField repasMid;
-
-    @FXML
-    private MenuItem septItem;
 
     @FXML
     private TextField totalKm;
@@ -80,6 +57,9 @@ public class ThirdController extends Application {
     @FXML
     private TextField totalRepasMid;
 
+    public String moisDebut;
+
+    public String moisFin;
 
     String mdp;
 
@@ -88,19 +68,12 @@ public class ThirdController extends Application {
     
     @FXML
     public void initialize() throws SQLException{
-        selectMois(janvItem);
-        selectMois(fevItem);
-        selectMois(marsItem);
-        selectMois(avrItem);
-        selectMois(maiItem);
-        selectMois(juinItem);
-        selectMois(juilItem);
-        selectMois(aouItem);
-        selectMois(septItem);
-        selectMois(octItem);
-        selectMois(novItem);
-        selectMois(decItem);
-    }
+        test();
+        ObservableList<MenuItem> item = menuMois.getItems();
+        item.forEach(menuItem ->{
+            selectMois(menuItem);
+        });
+        }
 
     @FXML
     void accueil(ActionEvent event) throws IOException {
@@ -124,8 +97,16 @@ public class ThirdController extends Application {
     
     private void selectMois(MenuItem item){
         item.setOnAction(event -> {
+            String dateString = item.getText();
+            String debutMois = dateString(dateString,01);
+            this.moisDebut = debutMois;
+            String finMois = dateString(dateString, 31);
+            this.moisFin = finMois;
             System.out.println("Option "+item.getText()+" sélectionnée");
             String selectFevr = "SELECT ff_qte_nuitees, ff_qte_repas, ff_qte_km, prix_km FROM fiche_frais WHERE ff_mois <= '2024-03-31' AND ff_mois >= '2024-03-01' AND vi_matricule = '"+utilisateur.matricule+"'; ";
+            String reqEtat = "SELECT ef.ef_libelle FROM fiche_frais AS ff \n" + //
+                                "JOIN etat_fiche AS ef ON ff.ef_id = ef.ef_id \n" + //
+                                "WHERE ff.vi_matricule = \""+utilisateur.matricule+"\" AND ff.ff_mois <= '"+finMois+"' AND ff.ff_mois >= '"+debutMois+"';";
             try {
                 ResultSet res = Sqldb.executionRequete(selectFevr);
                 if (res.next()){
@@ -137,11 +118,60 @@ public class ThirdController extends Application {
                 e.printStackTrace();
             }
 
+            try{
+                ResultSet resEtat = Sqldb.executionRequete(reqEtat);
+                if(resEtat.next()){
+                    etatFiche.setText("Etat de la fiche : "+resEtat.getString("ef_libelle"));
+                }else{
+                    System.out.println("Bug");
+                }
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
         });
     }
 
-    void remplirDeroulant(){
-        
+    String dateString(String date,Integer jour){
+        String zero = "";
+        if (jour<10){
+            zero ="0";
+        }else{
+            zero = "";
+        }
+        LocalDate date1 = LocalDate.parse( zero +jour.toString()+ " " + date, DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.FRENCH));
+        // Formater la date en chaîne au format "AAAA-MM-JJ"
+        String resultat = date1.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        System.out.println(resultat);
+        return resultat;
+    }
+
+
+    void test(){
+        LocalDate dateActuelle = LocalDate.now();
+
+        // Formatteur pour afficher les noms des mois
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
+        List<MenuItem> items = new ArrayList<>();
+
+        // Ajout des 12 derniers mois sous forme de MenuItem
+        for (int i = 0; i < 12; i++) {
+            LocalDate moisPrecedent = dateActuelle.minusMonths(i);
+            String nomMois = moisPrecedent.format(formatter);
+            MenuItem menuItem = new MenuItem(nomMois);
+            items.add(menuItem);
+        }
+        Collections.reverse(items);
+        menuMois.getItems().addAll(items);
+    }
+
+    @FXML
+    void cloturer(ActionEvent event) {
+
+    }
+
+    @FXML
+    void sauvegarder(ActionEvent event) {
+
     }
 
     @Override
