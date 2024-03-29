@@ -4,7 +4,6 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -39,22 +38,8 @@
       <Line endX="1805.0" layoutX="115.0" layoutY="152.0" startX="-115.0" />
       <Pane layoutX="61.0" layoutY="200.0" prefHeight="610.0" prefWidth="460.0" style="-fx-background-color: #D3D3D3;">
          <children>
-            <MenuButton layoutX="187.0" layoutY="22.0" mnemonicParsing="false" text="Historique">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="JANVIER" />
-                  <MenuItem mnemonicParsing="false" text="FEVRIER" />
-                  <MenuItem mnemonicParsing="false" text="MARS" />
-                  <MenuItem mnemonicParsing="false" text="AVRIL" />
-                  <MenuItem mnemonicParsing="false" text="MAI" />
-                  <MenuItem mnemonicParsing="false" text="JUIN" />
-                  <MenuItem mnemonicParsing="false" text="JUILLET" />
-                  <MenuItem mnemonicParsing="false" text="AOUT" />
-                  <MenuItem mnemonicParsing="false" text="SEPTEMBRE" />
-                  <MenuItem mnemonicParsing="false" text="OCTOBRE" />
-                  <MenuItem mnemonicParsing="false" text="NOVEMBRE" />
-                  <MenuItem mnemonicParsing="false" text="DECEMBRE" />
-               </items>
-            </MenuButton>
+            <MenuButton fx:id="menuHist" layoutX="288.0" layoutY="25.0" mnemonicParsing="false" text="Historique" />
+            <MenuButton fx:id="menuUser" layoutX="68.0" layoutY="25.0" mnemonicParsing="false" text="Utilisateur" />
          </children>
       </Pane>
       <Pane layoutX="661.0" layoutY="200.0" prefHeight="610.0" prefWidth="820.0" style="-fx-background-color: #D3D3D3;">
@@ -91,7 +76,7 @@
                </font>
             </Text>
             <TextField editable="false" layoutX="336.0" layoutY="420.0" />
-            <TextField fx:id="nuitee" editable="false" layoutX="255.0" layoutY="149.0" text="10" />
+            <TextField fx:id="nuitee" editable="false" layoutX="255.0" layoutY="149.0" />
             <Text layoutX="476.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="29.00">
                <font>
                   <Font size="16.0" />
@@ -136,6 +121,7 @@
             </Text>
             <DatePicker editable="false" layoutX="103.0" layoutY="420.0" />
             <DatePicker editable="false" layoutX="103.0" layoutY="466.0" />
+            <TextField fx:id="totalKm" editable="false" layoutX="594.0" layoutY="271.0" prefHeight="25.0" prefWidth="140.0" />
          </children>
       </Pane>
       <Line endX="1805.0" layoutX="153.0" layoutY="937.0" startX="-115.0" />
