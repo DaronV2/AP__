@@ -21,10 +21,10 @@
 
 CREATE SCHEMA gsb_etudiants;
 
-DROP TABLE IF EXISTS `comptable`;
+DROP TABLE IF EXISTS `gsb_etudiants.comptable`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `comptable` (
+CREATE TABLE `gsb_etudiants.comptable` (
   `co_id` int NOT NULL AUTO_INCREMENT,
   `co_nom` varchar(45) NOT NULL,
   `co_prenom` varchar(45) NOT NULL,
@@ -39,9 +39,9 @@ CREATE TABLE `comptable` (
 -- Dumping data for table `comptable`
 --
 
-LOCK TABLES `comptable` WRITE;
+LOCK TABLES `gsb_etudiants.comptable` WRITE;
 /*!40000 ALTER TABLE `comptable` DISABLE KEYS */;
-INSERT INTO `comptable` VALUES (1,'Étroikien','Jessica','jetroikien'),(2,'Glarot','Cédric','cglarot');
+INSERT INTO `gsb_etudiants.comptable` VALUES (1,'Étroikien','Jessica','jetroikien'),(2,'Glarot','Cédric','cglarot');
 /*!40000 ALTER TABLE `comptable` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -49,10 +49,10 @@ UNLOCK TABLES;
 -- Table structure for table `credentials`
 --
 
-DROP TABLE IF EXISTS `credentials`;
+DROP TABLE IF EXISTS `gsb_etudiants.credentials`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `credentials` (
+CREATE TABLE `gsb_etudiants.credentials` (
   `cr_identifiant` varchar(30) NOT NULL,
   `cr_mot_de_passe` varchar(60) NOT NULL,
   PRIMARY KEY (`cr_identifiant`)
@@ -63,9 +63,9 @@ CREATE TABLE `credentials` (
 -- Dumping data for table `credentials`
 --
 
-LOCK TABLES `credentials` WRITE;
+LOCK TABLES `gsb_etudiants.credentials` WRITE;
 /*!40000 ALTER TABLE `credentials` DISABLE KEYS */;
-INSERT INTO `credentials` VALUES ('cglarot','cg'),('jetroikien','je'),('jleplataufray','jla'),('jnemar','jn');
+INSERT INTO `gsb_etudiants.credentials` VALUES ('cglarot','cg'),('jetroikien','je'),('jleplataufray','jla'),('jnemar','jn');
 /*!40000 ALTER TABLE `credentials` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -73,10 +73,10 @@ UNLOCK TABLES;
 -- Table structure for table `etat_fiche`
 --
 
-DROP TABLE IF EXISTS `etat_fiche`;
+DROP TABLE IF EXISTS `gsb_etudiants.etat_fiche`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `etat_fiche` (
+CREATE TABLE `gsb_etudiants.etat_fiche` (
   `ef_id` int NOT NULL AUTO_INCREMENT,
   `ef_libelle` varchar(30) NOT NULL,
   PRIMARY KEY (`ef_id`)
@@ -87,9 +87,9 @@ CREATE TABLE `etat_fiche` (
 -- Dumping data for table `etat_fiche`
 --
 
-LOCK TABLES `etat_fiche` WRITE;
+LOCK TABLES `gsb_etudiants.etat_fiche` WRITE;
 /*!40000 ALTER TABLE `etat_fiche` DISABLE KEYS */;
-INSERT INTO `etat_fiche` VALUES (1,'créée'),(2,'clôturée'),(3,'validée'),(4,'mise_en_remboursement'),(5,'remboursée');
+INSERT INTO `gsb_etudiants.etat_fiche` VALUES (1,'créée'),(2,'clôturée'),(3,'validée'),(4,'mise_en_remboursement'),(5,'remboursée');
 /*!40000 ALTER TABLE `etat_fiche` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -97,10 +97,10 @@ UNLOCK TABLES;
 -- Table structure for table `etat_hors_forfait`
 --
 
-DROP TABLE IF EXISTS `etat_hors_forfait`;
+DROP TABLE IF EXISTS `gsb_etudiants.etat_hors_forfait`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `etat_hors_forfait` (
+CREATE TABLE `gsb_etudiants.etat_hors_forfait` (
   `ehf_id` int NOT NULL AUTO_INCREMENT,
   `libelle` varchar(30) NOT NULL,
   PRIMARY KEY (`ehf_id`)
@@ -111,9 +111,9 @@ CREATE TABLE `etat_hors_forfait` (
 -- Dumping data for table `etat_hors_forfait`
 --
 
-LOCK TABLES `etat_hors_forfait` WRITE;
+LOCK TABLES `gsb_etudiants.etat_hors_forfait` WRITE;
 /*!40000 ALTER TABLE `etat_hors_forfait` DISABLE KEYS */;
-INSERT INTO `etat_hors_forfait` VALUES (1,'en_attente'),(2,'validé'),(3,'refusé');
+INSERT INTO `gsb_etudiants.etat_hors_forfait` VALUES (1,'en_attente'),(2,'validé'),(3,'refusé');
 /*!40000 ALTER TABLE `etat_hors_forfait` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -121,10 +121,10 @@ UNLOCK TABLES;
 -- Table structure for table `fiche_frais`
 --
 
-DROP TABLE IF EXISTS `fiche_frais`;
+DROP TABLE IF EXISTS `gsb_etudiants.fiche_frais`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fiche_frais` (
+CREATE TABLE `gsb_etudiants.fiche_frais` (
   `ff_id` varchar(128) NOT NULL,
   `ff_mois` date NOT NULL,
   `ff_qte_nuitees` int NOT NULL DEFAULT '0',
@@ -155,9 +155,9 @@ CREATE TABLE `fiche_frais` (
 -- Dumping data for table `fiche_frais`
 --
 
-LOCK TABLES `fiche_frais` WRITE;
+LOCK TABLES `gsb_etudiants.fiche_frais` WRITE;
 /*!40000 ALTER TABLE `fiche_frais` DISABLE KEYS */;
-INSERT INTO `fiche_frais` VALUES ('1','2024-02-03',9,12,750,'2024-02-02 23:00:00',NULL,NULL,NULL,NULL,'NRD/125-01',NULL,1,0,0,0),('18','2017-08-14',12,12,21,'2024-03-22 15:30:53',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,960,348,2),('19','2017-08-14',12,12,12,'2024-03-22 15:43:18',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,960,348,12),('2','2024-01-08',15,15,927,'2024-01-07 23:00:00','2024-02-10','2024-02-15',NULL,NULL,'NRD/125-01',2,3,0,0,0),('20','2017-08-14',12,12,12,'2024-03-22 15:44:11',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,960,348,2),('3','2024-01-02',2,3,189,'2024-01-01 23:00:00','2024-02-07','2024-02-14','2024-02-20','2024-02-27','NRD/125-02',1,5,0,0,0),('4','2024-02-07',1,1,76,'2024-02-06 23:00:00',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,0,0,0),('8','2023-12-01',16,18,838,'2023-11-30 23:00:00','2024-01-08','2024-01-18','2024-01-20','2024-01-20','NRD/125-01',1,5,0,0,0),('89795416-6371-4f16-900d-7fab313c7c6c','2024-03-28',12,12,12,'2024-03-28 13:09:04',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,960,348,45),('ac81b822-4f45-4bec-8e48-a1de1c443468','2024-03-25',1,1,1,'2024-03-25 14:48:29',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,80,29,12);
+INSERT INTO `gsb_etudiants.fiche_frais` VALUES ('1','2024-02-03',9,12,750,'2024-02-02 23:00:00',NULL,NULL,NULL,NULL,'NRD/125-01',NULL,1,0,0,0),('18','2017-08-14',12,12,21,'2024-03-22 15:30:53',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,960,348,2),('19','2017-08-14',12,12,12,'2024-03-22 15:43:18',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,960,348,12),('2','2024-01-08',15,15,927,'2024-01-07 23:00:00','2024-02-10','2024-02-15',NULL,NULL,'NRD/125-01',2,3,0,0,0),('20','2017-08-14',12,12,12,'2024-03-22 15:44:11',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,960,348,2),('3','2024-01-02',2,3,189,'2024-01-01 23:00:00','2024-02-07','2024-02-14','2024-02-20','2024-02-27','NRD/125-02',1,5,0,0,0),('4','2024-02-07',1,1,76,'2024-02-06 23:00:00',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,0,0,0),('8','2023-12-01',16,18,838,'2023-11-30 23:00:00','2024-01-08','2024-01-18','2024-01-20','2024-01-20','NRD/125-01',1,5,0,0,0),('89795416-6371-4f16-900d-7fab313c7c6c','2024-03-28',12,12,12,'2024-03-28 13:09:04',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,960,348,45),('ac81b822-4f45-4bec-8e48-a1de1c443468','2024-03-25',1,1,1,'2024-03-25 14:48:29',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,80,29,12);
 /*!40000 ALTER TABLE `fiche_frais` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,10 +165,10 @@ UNLOCK TABLES;
 -- Table structure for table `hors_forfait`
 --
 
-DROP TABLE IF EXISTS `hors_forfait`;
+DROP TABLE IF EXISTS `gsb_etudiants.hors_forfait`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `hors_forfait` (
+CREATE TABLE `gsb_etudiants.hors_forfait` (
   `hf_id` int NOT NULL AUTO_INCREMENT,
   `hf_date` date NOT NULL,
   `hf_libelle` varchar(128) NOT NULL,
@@ -185,9 +185,9 @@ CREATE TABLE `hors_forfait` (
 -- Dumping data for table `hors_forfait`
 --
 
-LOCK TABLES `hors_forfait` WRITE;
+LOCK TABLES `gsb_etudiants.hors_forfait` WRITE;
 /*!40000 ALTER TABLE `hors_forfait` DISABLE KEYS */;
-INSERT INTO `hors_forfait` VALUES (1,'2020-12-18','Repas Représentation',156.00,'2',1),(2,'2020-12-22','Achat Fleuriste Soirée \"MediLog\"',120.30,'2',1),(3,'2024-03-08','1',1.00,'8a7464ff-3159-40f7-906d-a4355d7cf2c6',1),(4,'2024-03-11','1',1.00,'bbfdc39b-6e35-4537-8f61-6b09028984c3',1),(5,'2024-03-01','1',1.00,'bbfdc39b-6e35-4537-8f61-6b09028984c3',1),(6,'2024-02-29','1',1.00,'249db3e0-4a8d-4dbe-9a2f-da69d9149dc7',1),(7,'2024-03-08','1',1.00,'249db3e0-4a8d-4dbe-9a2f-da69d9149dc7',1),(10,'2024-03-09','1',1.00,'0b2a5154-8371-408f-815f-e46b106fdaf9',1),(11,'2024-03-23','2',2.00,'0b2a5154-8371-408f-815f-e46b106fdaf9',1),(12,'2024-03-22','1',1.00,'836ca419-5adf-4df3-bdf9-3be384166cf1',1),(13,'2024-03-03','2',2.00,'836ca419-5adf-4df3-bdf9-3be384166cf1',1),(14,'2024-03-08','1',1.00,'eb513f02-9ef9-4892-bbf0-956569490e2e',1),(15,'2024-03-08','2',2.00,'eb513f02-9ef9-4892-bbf0-956569490e2e',1),(16,'2024-03-21','libelle',12.00,'ac81b822-4f45-4bec-8e48-a1de1c443468',1),(17,'2024-03-03','libelle2',20.00,'ac81b822-4f45-4bec-8e48-a1de1c443468',1),(18,'2024-03-29','lib1',12.00,'89795416-6371-4f16-900d-7fab313c7c6c',1),(19,'2024-03-16','lib2',15.00,'89795416-6371-4f16-900d-7fab313c7c6c',1);
+INSERT INTO `gsb_etudiants.hors_forfait` VALUES (1,'2020-12-18','Repas Représentation',156.00,'2',1),(2,'2020-12-22','Achat Fleuriste Soirée \"MediLog\"',120.30,'2',1),(3,'2024-03-08','1',1.00,'8a7464ff-3159-40f7-906d-a4355d7cf2c6',1),(4,'2024-03-11','1',1.00,'bbfdc39b-6e35-4537-8f61-6b09028984c3',1),(5,'2024-03-01','1',1.00,'bbfdc39b-6e35-4537-8f61-6b09028984c3',1),(6,'2024-02-29','1',1.00,'249db3e0-4a8d-4dbe-9a2f-da69d9149dc7',1),(7,'2024-03-08','1',1.00,'249db3e0-4a8d-4dbe-9a2f-da69d9149dc7',1),(10,'2024-03-09','1',1.00,'0b2a5154-8371-408f-815f-e46b106fdaf9',1),(11,'2024-03-23','2',2.00,'0b2a5154-8371-408f-815f-e46b106fdaf9',1),(12,'2024-03-22','1',1.00,'836ca419-5adf-4df3-bdf9-3be384166cf1',1),(13,'2024-03-03','2',2.00,'836ca419-5adf-4df3-bdf9-3be384166cf1',1),(14,'2024-03-08','1',1.00,'eb513f02-9ef9-4892-bbf0-956569490e2e',1),(15,'2024-03-08','2',2.00,'eb513f02-9ef9-4892-bbf0-956569490e2e',1),(16,'2024-03-21','libelle',12.00,'ac81b822-4f45-4bec-8e48-a1de1c443468',1),(17,'2024-03-03','libelle2',20.00,'ac81b822-4f45-4bec-8e48-a1de1c443468',1),(18,'2024-03-29','lib1',12.00,'89795416-6371-4f16-900d-7fab313c7c6c',1),(19,'2024-03-16','lib2',15.00,'89795416-6371-4f16-900d-7fab313c7c6c',1);
 /*!40000 ALTER TABLE `hors_forfait` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -195,10 +195,10 @@ UNLOCK TABLES;
 -- Table structure for table `visiteur`
 --
 
-DROP TABLE IF EXISTS `visiteur`;
+DROP TABLE IF EXISTS `gsb_etudiants.visiteur`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `visiteur` (
+CREATE TABLE `gsb_etudiants.visiteur` (
   `vi_matricule` varchar(20) NOT NULL,
   `vi_nom` varchar(45) NOT NULL,
   `vi_prenom` varchar(45) NOT NULL,
@@ -213,9 +213,9 @@ CREATE TABLE `visiteur` (
 -- Dumping data for table `visiteur`
 --
 
-LOCK TABLES `visiteur` WRITE;
+LOCK TABLES `gsb_etudiants.visiteur` WRITE;
 /*!40000 ALTER TABLE `visiteur` DISABLE KEYS */;
-INSERT INTO `visiteur` VALUES ('NRD/125-01','Leplat Aufray','Jamy','jleplataufray'),('NRD/125-02','Némar','Jean','jnemar');
+INSERT INTO `gsb_etudiants.visiteur` VALUES ('NRD/125-01','Leplat Aufray','Jamy','jleplataufray'),('NRD/125-02','Némar','Jean','jnemar');
 /*!40000 ALTER TABLE `visiteur` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
