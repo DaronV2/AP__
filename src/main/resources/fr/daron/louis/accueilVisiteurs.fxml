@@ -21,9 +21,24 @@
                   <Image url="@../../../images/logo1.png" />
                </image>
             </ImageView>
-            <Circle fill="#ebebeb" layoutX="1737.0" layoutY="101.0" radius="77.0" stroke="#e4e4e4" strokeType="INSIDE" strokeWidth="0.0" />
+            <Circle fill="#ebebeb" layoutX="1710.0" layoutY="99.0" radius="70.0" stroke="#e4e4e4" strokeType="INSIDE" strokeWidth="0.0" />
             <Circle fill="WHITE" layoutX="736.0" layoutY="101.0" radius="64.0" stroke="#e4e4e4" strokeType="INSIDE" strokeWidth="0.0" />
             <Circle fill="WHITE" layoutX="1183.0" layoutY="101.0" radius="64.0" stroke="#e4e4e4" strokeType="INSIDE" strokeWidth="0.0" />
+            <Circle fill="#ebebeb" layoutX="1756.0" layoutY="99.0" radius="70.0" stroke="#e4e4e4" strokeType="INSIDE" strokeWidth="0.0" />
+            <Pane layoutX="1708.0" layoutY="29.0" prefHeight="140.0" prefWidth="53.0" style="-fx-background-color: #ebebeb;">
+               <children>
+                  <Text layoutX="-35.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pseudo" textAlignment="CENTER" wrappingWidth="122.99999999999977">
+                     <font>
+                        <Font name="System Italic" size="21.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="-35.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Visiteur/compta" textAlignment="CENTER" wrappingWidth="123.0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
             <Pane layoutX="736.0" layoutY="37.0" prefHeight="128.0" prefWidth="450.0" style="-fx-background-color: #FFFF;">
                <children>
                   <Text layoutX="-32.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue dans l'espace visiteurs" textAlignment="CENTER" underline="true" wrappingWidth="514.7294921875">
@@ -50,16 +65,6 @@
                </children>
             </Pane>
             <Button fx:id="btnAccueil" layoutX="373.0" layoutY="86.0" mnemonicParsing="false" onAction="#changePage" prefHeight="30.0" prefWidth="91.0" text="Accueil" />
-            <Text layoutX="1676.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pseudo" textAlignment="CENTER" wrappingWidth="122.99999999999977">
-               <font>
-                  <Font name="System Italic" size="21.0" />
-               </font>
-            </Text>
-            <Text layoutX="1676.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Visiteur/compta" textAlignment="CENTER" wrappingWidth="123.0">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Text>
          </children>
       </Pane>
       <Pane layoutX="1.0" layoutY="880.0" prefHeight="200.0" prefWidth="1920.0" style="-fx-background-color: #a0a7ba;" />
