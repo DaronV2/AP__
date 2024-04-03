@@ -54,8 +54,8 @@
                </font>
             </Text>
             <TextField fx:id="totalRepasMid" editable="false" layoutX="583.0" layoutY="208.0" />
-            <TextField editable="false" layoutX="620.0" layoutY="420.0" />
-            <TextField editable="false" layoutX="620.0" layoutY="466.0" />
+            <TextField fx:id="montHf1" editable="false" layoutX="620.0" layoutY="420.0" />
+            <TextField fx:id="montHf2" editable="false" layoutX="620.0" layoutY="466.0" />
             <TextField fx:id="repasMid" editable="false" layoutX="255.0" layoutY="211.0" />
             <TextField fx:id="qteKm" editable="false" layoutX="255.0" layoutY="271.0" />
             <TextField fx:id="totalNuitee" editable="false" layoutX="583.0" layoutY="149.0" />
@@ -74,7 +74,7 @@
                   <Font size="24.0" />
                </font>
             </Text>
-            <TextField editable="false" layoutX="403.0" layoutY="420.0" />
+            <TextField fx:id="libHf1" editable="false" layoutX="403.0" layoutY="420.0" />
             <TextField fx:id="nuitee" editable="false" layoutX="255.0" layoutY="149.0" />
             <Text layoutX="476.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="29.00">
                <font>
@@ -97,7 +97,7 @@
                   <Font size="16.0" />
                </font>
             </Text>
-            <TextField editable="false" layoutX="403.0" layoutY="466.0" />
+            <TextField fx:id="libHf2" editable="false" layoutX="403.0" layoutY="466.0" />
             <Text layoutX="152.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Repas Midi">
                <font>
                   <Font size="16.0" />
@@ -119,8 +119,8 @@
                </font>
             </Text>
             <TextField fx:id="totalKm" editable="false" layoutX="588.0" layoutY="270.0" prefHeight="25.0" prefWidth="140.0" />
-            <DatePicker editable="false" layoutX="168.0" layoutY="420.0" />
-            <DatePicker editable="false" layoutX="168.0" layoutY="466.0" />
+            <DatePicker fx:id="dateHf1" editable="false" layoutX="168.0" layoutY="420.0" />
+            <DatePicker fx:id="dateHf2" editable="false" layoutX="168.0" layoutY="466.0" />
             <Button fx:id="btnClot" layoutX="683.0" layoutY="544.0" mnemonicParsing="false" onAction="#cloturer" prefHeight="32.0" prefWidth="98.0" text="Cloturer" />
             <Button fx:id="btnSave" layoutX="503.0" layoutY="544.0" mnemonicParsing="false" onAction="#sauvegarder" prefHeight="32.0" prefWidth="98.0" text="Sauvegarder" />
             <Button fx:id="btnModif" layoutX="333.0" layoutY="544.0" mnemonicParsing="false" onAction="#modif" prefHeight="32.0" prefWidth="98.0" text="Modifier" />
