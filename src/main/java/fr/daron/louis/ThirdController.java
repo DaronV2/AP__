@@ -12,12 +12,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
@@ -27,19 +29,37 @@ import javafx.stage.Stage;
 public class ThirdController extends Application {
 
     @FXML
-    private Text etatFiche;
-
-    @FXML
-    private Button btnModif;
-    
-    @FXML
     private Button btnClot;
 
     @FXML
+    private Button btnModif;
+
+    @FXML
     private Button btnSave;
-    
+
+    @FXML
+    private DatePicker dateHf1;
+
+    @FXML
+    private DatePicker dateHf2;
+
+    @FXML
+    private Text etatFiche;
+
+    @FXML
+    private TextField libHf1;
+
+    @FXML
+    private TextField libHf2;
+
     @FXML
     private MenuButton menuMois;
+
+    @FXML
+    private TextField montHf1;
+
+    @FXML
+    private TextField montHf2;
 
     @FXML
     private TextField montantKm;
@@ -67,6 +87,10 @@ public class ThirdController extends Application {
     public String moisFin;
 
     String mdp;
+
+    Map<TextField, Integer> elements;
+
+    String idFiche;
 
 
     MenuItem[] tabItems = {};
@@ -98,6 +122,19 @@ public class ThirdController extends Application {
         Integer kmNb = Integer.valueOf(qteKm.getText());
         Integer pxKm = Integer.valueOf(montantKm.getText());
         totalKm.setText(String.valueOf(kmNb*pxKm));
+        idFiche = res.getString("ff_id");
+        String reqHf = "SELECT hf_date,hf_libelle,hf_montant FROM gsb_etudiants.hors_forfait WHERE ff_id = '"+idFiche+"';";
+        ResultSet resHf = Sqldb.executionRequete(reqHf);
+        if (resHf.next()){
+            dateHf1.setValue(LocalDate.parse(resHf.getString("hf_date").toString(),DateTimeFormatter.ISO_DATE));
+            libHf1.setText(resHf.getString("hf_libelle"));
+            montHf1.setText(resHf.getString("hf_montant"));
+            if(resHf.next()){
+                dateHf2.setValue(LocalDate.parse(resHf.getString("hf_date").toString(),DateTimeFormatter.ISO_DATE));
+                libHf2.setText(resHf.getString("hf_libelle"));
+                montHf2.setText(resHf.getString("hf_montant"));
+            }
+        }
         Map<TextField, Integer> elementsInitiaux = new HashMap<>(){{
             put(montantKm,Integer.valueOf(res.getString("prix_km")));
             put(nuitee,Integer.valueOf(res.getString("ff_qte_nuitees")));
@@ -107,6 +144,9 @@ public class ThirdController extends Application {
             put(totalNuitee,(nuiteeNb*80));
             put(totalRepasMid,(repasNb*29));
         }}; 
+        System.out.println();
+        System.out.println("Je suis l'id de la fiche : "+idFiche);
+        elements = elementsInitiaux;
     }
     
     private void selectMois(MenuItem item){
@@ -117,7 +157,7 @@ public class ThirdController extends Application {
             String finMois = dateString(dateString, 31);
             this.moisFin = finMois;
             System.out.println("Option "+item.getText()+" sélectionnée");
-            String selectFevr = "SELECT ff_qte_nuitees, ff_qte_repas, ff_qte_km, prix_km FROM fiche_frais WHERE ff_mois <= '2024-03-31' AND ff_mois >= '2024-03-01' AND vi_matricule = '"+utilisateur.matricule+"'; ";
+            String selectFevr = "SELECT ff_qte_nuitees, ff_qte_repas, ff_qte_km, prix_km,ff_id FROM fiche_frais WHERE ff_mois <= '2024-03-31' AND ff_mois >= '2024-03-01' AND vi_matricule = '"+utilisateur.matricule+"'; ";
             String reqEtat = "SELECT ef.ef_libelle FROM fiche_frais AS ff \n" + //
                                 "JOIN etat_fiche AS ef ON ff.ef_id = ef.ef_id \n" + //
                                 "WHERE ff.vi_matricule = \""+utilisateur.matricule+"\" AND ff.ff_mois <= '"+finMois+"' AND ff.ff_mois >= '"+debutMois+"';";
@@ -186,6 +226,17 @@ public class ThirdController extends Application {
     @FXML
     void sauvegarder(ActionEvent event) {
         String update = "";
+        List<Map> elementsinit = new ArrayList<>();
+        for (Map.Entry<TextField, Integer> entry : elements.entrySet()){
+            String id = entry.getKey().getId();
+            Integer val = entry.getValue().intValue();
+            Map<String, Integer> map = new HashMap<>(){{
+                put(id,val);
+            }};
+            elementsinit.add(map);
+        }
+        System.out.println(elementsinit);
+
 
 
     }
