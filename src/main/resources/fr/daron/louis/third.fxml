@@ -22,17 +22,26 @@
                   <Image url="@../../../images/logo1.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1720.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/logo1.png" />
-               </image>
-            </ImageView>
             <Label layoutX="768.0" layoutY="36.0" text="Historique visiteurs">
                <font>
                   <Font size="48.0" />
                </font>
             </Label>
             <Button layoutX="212.0" layoutY="59.0" mnemonicParsing="false" onAction="#accueil" text="Accueil" />
+            <Pane layoutX="1623.0" layoutY="7.0" prefHeight="128.0" prefWidth="165.0" style="-fx-background-color: #fff;">
+               <children>
+                  <Text layoutX="50.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pseudo">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="28.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Visiteur/Compta">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
          </children>
       </Pane>
       <Line endX="1805.0" layoutX="115.0" layoutY="152.0" startX="-115.0" />
