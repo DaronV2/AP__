@@ -6,7 +6,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -14,17 +13,17 @@
    <children>
       <Pane prefHeight="200.0" prefWidth="1920.0" style="-fx-background-color: #e3e3e3;">
          <children>
-            <Label layoutX="698.0" layoutY="74.0" text="Bienvenue dans l'espace comptables">
+            <Label layoutX="670.0" layoutY="74.0" text="Bienvenue dans l'espace comptables">
                <font>
                   <Font size="36.0" />
                </font>
             </Label>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="122.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/logo1.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnAccueilC" layoutX="222.0" layoutY="88.0" mnemonicParsing="false" onAction="#btnAccueil_2" text="Accueil" />
+            <Button fx:id="btnAccueilC" layoutX="459.0" layoutY="88.0" mnemonicParsing="false" onAction="#btnAccueil_2" text="Accueil" />
             <Pane layoutX="1642.0" layoutY="37.0" prefHeight="128.0" prefWidth="150.0" style="-fx-background-color: #FFF;">
                <children>
                   <Text layoutX="43.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pseudo" textAlignment="CENTER" wrappingWidth="63.9765625">
@@ -41,7 +40,7 @@
             </Pane>
          </children>
       </Pane>
-      <Pane layoutX="685.0" layoutY="265.0" prefHeight="550.0" prefWidth="550.0" style="-fx-background-color: #D3D3D3;">
+      <Pane layoutX="686.0" layoutY="265.0" prefHeight="550.0" prefWidth="550.0" style="-fx-background-color: #D3D3D3;">
          <children>
             <Text layoutX="220.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Historique">
                <font>
@@ -71,6 +70,6 @@
             </Text>
          </children>
       </Pane>
-      <Line endX="1819.0" endY="10.0" layoutX="101.0" layoutY="898.0" startX="-100.0" />
+      <Pane layoutX="1.0" layoutY="880.0" prefHeight="200.0" prefWidth="1920.0" style="-fx-background-color: #e3e3e3;" />
    </children>
 </AnchorPane>
