@@ -79,9 +79,9 @@ public class SecondaryController {
 
     @FXML
     private Text resultatRequete1;
-    
+
     @FXML
-    void initialize() {
+    void initialize() throws SQLException {
         setMatricule(matricule);
         setNom(nom);
 
@@ -90,19 +90,36 @@ public class SecondaryController {
         barreMois.setEditable(false);
         nuitee.textProperty().addListener((observable, oldValue, newValue) -> {
             try {
-                double value = Double.parseDouble(newValue);
-                totalNuitee.setText(String.valueOf(value * 80));
+                String sql = "SELECT `prix_nuit` FROM `prix`";
+                ResultSet res = Sqldb.executionRequete(sql);
+                if (res.next()) {
+                    String prixnuit = res.getString("prix_nuit");
+                    int pxNuit = Integer.valueOf(prixnuit);
+                    double value = Double.parseDouble(newValue);
+                    double calcul = value * pxNuit;
+                    totalNuitee.setText(String.valueOf(value * pxNuit));
+                }
             } catch (NumberFormatException e) {
+                totalNuitee.setText("");
+            } catch (SQLException e) {
                 totalNuitee.setText("");
             }
         });
 
         repasMidi.textProperty().addListener((observable, oldValue, newValue) -> {
             try {
-                double value = Double.parseDouble(newValue);
-                totalRepasMidi.setText(String.valueOf(value * 29));
+                String sql = "SELECT `prix_repas` FROM `prix`";
+                ResultSet res = Sqldb.executionRequete(sql);
+                if (res.next()) {
+                    String prixrepas = res.getString("prix_repas");
+                    int pxRepas = Integer.valueOf(prixrepas);
+                    double value = Double.parseDouble(newValue);
+                    totalRepasMidi.setText(String.valueOf(value * pxRepas));
+                }
             } catch (NumberFormatException e) {
                 totalRepasMidi.setText("");
+            } catch (SQLException e) {
+                totalNuitee.setText("");
             }
         });
     }
@@ -133,12 +150,10 @@ public class SecondaryController {
         java.util.UUID uuid = UUID.randomUUID();
         String uuidString = uuid.toString();
 
-
-
-        if(moisHf1!= null & afL1 != null & afM1 != null){
+        if (moisHf1 != null & afL1 != null & afM1 != null) {
             String moisHf1String = moisHf1.toString();
             moisHf1String = moisHf1String.replace("-", ",");
-            moisHf1String = "STR_TO_DATE(\""+moisHf1String+"\", \"%Y,%m,%d\")";
+            moisHf1String = "STR_TO_DATE(\"" + moisHf1String + "\", \"%Y,%m,%d\")";
             System.out.println(moisHf1String);
             String sql1 = "INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant,ff_id) VALUES (" + moisHf1String
                     + ",'" + afL1 + "'," + afM1 + ",'" + uuidString + "')";
@@ -148,20 +163,22 @@ public class SecondaryController {
             System.out.println("yes");
         }
 
-        if(moisHf2!= null & afL2 != null & afM2 != null){
+        if (moisHf2 != null & afL2 != null & afM2 != null) {
             String moisHf2String = moisHf2.toString();
             moisHf2String = moisHf2String.replace("-", ",");
-            moisHf2String = "STR_TO_DATE(\""+moisHf2String+"\", \"%Y,%m,%d\")";
+            moisHf2String = "STR_TO_DATE(\"" + moisHf2String + "\", \"%Y,%m,%d\")";
             System.out.println(moisHf2String);
-            String sql1 = "INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant,ff_id) VALUES ("+moisHf2String+",'"+afL2+"',"+afM2+",'"+uuidString+"')";
+            String sql1 = "INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant,ff_id) VALUES (" + moisHf2String
+                    + ",'" + afL2 + "'," + afM2 + ",'" + uuidString + "')";
 
             stmnt.executeUpdate(sql1);
         } else {
             System.out.println("yes");
         }
-       
+
         String moisFfString = moisff.toString().replace("-", ",");
-        String date = "STR_TO_DATE(\""+moisFfString+"\", \"%Y,%m,%d %h,%i,%s\")";
+        String date = "STR_TO_DATE(\"" + moisFfString + "\", \"%Y,%m,%d %h,%i,%s\")";
+
 
         Integer pxId = 0 ;
         String reqPrixId = "SELECT prix_id FROM prix WHERE prix_date >= '2024-01-01 00:00:00'";
@@ -173,8 +190,8 @@ public class SecondaryController {
         System.out.println(pxId);
 
         String sql = "INSERT INTO fiche_frais (ff_mois,ff_qte_nuitees, ff_total_nuitees, ff_qte_repas, ff_total_repas, ff_qte_km,vi_matricule,prix_km,ff_id,prix_id) VALUES ("+date+", "+nuit+","+totalNuit+","+repasMid+","+totalRepas+","+km1+", '"+matriculeString+"',"+px_km+",'"+uuidString+","+pxId+"')";
-        stmnt.executeUpdate(sql);
 
+        stmnt.executeUpdate(sql);
 
         String afD1 = "";
         if (afD1 == null & afL1 == null & afM1 == null) {
