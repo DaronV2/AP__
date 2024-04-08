@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -88,9 +89,10 @@ public class ThirdController extends Application {
 
     String mdp;
 
-    Map<TextField, Integer> elements;
 
     String idFiche;
+
+
 
 
     MenuItem[] tabItems = {};
@@ -111,6 +113,8 @@ public class ThirdController extends Application {
     }
 
     void remplirFiche(ResultSet res) throws SQLException{
+        List<Object> elementsInitiaux = new ArrayList<>();
+
         nuitee.setText(res.getString("ff_qte_nuitees"));
         repasMid.setText(res.getString("ff_qte_repas"));
         qteKm.setText(res.getString("ff_qte_km"));
@@ -135,18 +139,10 @@ public class ThirdController extends Application {
                 montHf2.setText(resHf.getString("hf_montant"));
             }
         }
-        Map<TextField, Integer> elementsInitiaux = new HashMap<>(){{
-            put(montantKm,Integer.valueOf(res.getString("prix_km")));
-            put(nuitee,Integer.valueOf(res.getString("ff_qte_nuitees")));
-            put(qteKm,Integer.valueOf(res.getString("ff_qte_km")));
-            put(repasMid,Integer.valueOf(res.getString("ff_qte_repas")));
-            put(totalKm,(kmNb*pxKm));
-            put(totalNuitee,(nuiteeNb*80));
-            put(totalRepasMid,(repasNb*29));
-        }}; 
+        
+        
         System.out.println();
         System.out.println("Je suis l'id de la fiche : "+idFiche);
-        elements = elementsInitiaux;
     }
     
     private void selectMois(MenuItem item){
@@ -184,6 +180,7 @@ public class ThirdController extends Application {
             }
         });
     }
+
 
     String dateString(String date,Integer jour){
         String zero = "";
@@ -225,20 +222,18 @@ public class ThirdController extends Application {
 
     @FXML
     void sauvegarder(ActionEvent event) {
-        String update = "";
-        List<Map> elementsinit = new ArrayList<>();
-        for (Map.Entry<TextField, Integer> entry : elements.entrySet()){
-            String id = entry.getKey().getId();
-            Integer val = entry.getValue().intValue();
-            Map<String, Integer> map = new HashMap<>(){{
-                put(id,val);
-            }};
-            elementsinit.add(map);
-        }
-        System.out.println(elementsinit);
-
-
-
+        Integer nbNuitee = Integer.valueOf(nuitee.getText());
+        double pxNuitee = 80;
+        double totalNuitee = (pxNuitee * nbNuitee);
+        Integer nbRepas = Integer.valueOf(repasMid.getText());
+        double pxRepas = 29;    
+        double totalRepas = (pxRepas * nbRepas);
+        Integer quanteKm = Integer.valueOf(qteKm.getText());
+        double pxKm = Double.valueOf(montantKm.getText());
+        double totalKm = pxKm * quanteKm;
+        String update = "UPDATE fiche_frais SET ff_qte_nuitees = "+nbNuitee+" ,ff_qte_repas = "+nbRepas+" ,ff_qte_km = "+quanteKm+" ,prix_km = "+pxKm+"\n" + //
+                        "WHERE ff_id = '"+idFiche+"'; ";
+        System.out.println(update);
     }
 
     @FXML

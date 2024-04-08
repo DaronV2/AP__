@@ -2,6 +2,7 @@ package fr.daron.louis;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
@@ -162,8 +163,16 @@ public class SecondaryController {
         String moisFfString = moisff.toString().replace("-", ",");
         String date = "STR_TO_DATE(\""+moisFfString+"\", \"%Y,%m,%d %h,%i,%s\")";
 
+        Integer pxId = 0 ;
+        String reqPrixId = "SELECT prix_id FROM prix WHERE prix_date >= '2024-01-01 00:00:00'";
+        System.out.println(reqPrixId);
+        ResultSet resPrixId = Sqldb.executionRequete(reqPrixId);
+        while(resPrixId.next()){
+            pxId = Integer.valueOf(resPrixId.getNString("prix_id"));
+        }
+        System.out.println(pxId);
 
-        String sql = "INSERT INTO fiche_frais (ff_mois,ff_qte_nuitees, ff_total_nuitees, ff_qte_repas, ff_total_repas, ff_qte_km,vi_matricule,prix_km,ff_id) VALUES ("+date+", "+nuit+","+totalNuit+","+repasMid+","+totalRepas+","+km1+", '"+matriculeString+"',"+px_km+",'"+uuidString+"')";
+        String sql = "INSERT INTO fiche_frais (ff_mois,ff_qte_nuitees, ff_total_nuitees, ff_qte_repas, ff_total_repas, ff_qte_km,vi_matricule,prix_km,ff_id,prix_id) VALUES ("+date+", "+nuit+","+totalNuit+","+repasMid+","+totalRepas+","+km1+", '"+matriculeString+"',"+px_km+",'"+uuidString+","+pxId+"')";
         stmnt.executeUpdate(sql);
 
 
