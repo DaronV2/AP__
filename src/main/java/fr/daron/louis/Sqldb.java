@@ -37,4 +37,11 @@ public class Sqldb {
         ResultSet res = statement.executeQuery();
         return res;
     }
+
+    static String executionUpdate(String sql) throws SQLException {
+        Connection c = DriverManager.getConnection(url, user, mdp);
+        PreparedStatement statement = c.prepareStatement(sql);
+        statement.executeUpdate();
+        return "Requete effectué avec succès !";
+    }
 }

@@ -185,11 +185,21 @@ public class SecondaryController {
         System.out.println(reqPrixId);
         ResultSet resPrixId = Sqldb.executionRequete(reqPrixId);
         while(resPrixId.next()){
-            pxId = Integer.valueOf(resPrixId.getNString("prix_id"));
+            pxId = Integer.valueOf(resPrixId.getString("prix_id"));
         }
         System.out.println(pxId);
 
-        String sql = "INSERT INTO fiche_frais (ff_mois,ff_qte_nuitees, ff_total_nuitees, ff_qte_repas, ff_total_repas, ff_qte_km,vi_matricule,prix_km,ff_id,prix_id) VALUES ("+date+", "+nuit+","+totalNuit+","+repasMid+","+totalRepas+","+km1+", '"+matriculeString+"',"+px_km+",'"+uuidString+","+pxId+"')";
+        System.out.println(date);
+        System.out.println(nuit);
+        System.out.println(repasMid);
+        System.out.println(km1);
+        System.out.println(matriculeString);
+        System.out.println(px_km);
+        System.out.println(uuidString);
+        System.out.println(pxId);
+
+        String sql = "INSERT INTO fiche_frais (ff_mois,ff_qte_nuitees,  ff_qte_repas, ff_qte_km,vi_matricule,prix_km,ff_id,id_prix) VALUES "+
+        "("+date+", "+nuit+","+repasMid+","+km1+", '"+matriculeString+"',"+px_km+",'"+uuidString+"',"+pxId+")";
 
         stmnt.executeUpdate(sql);
 

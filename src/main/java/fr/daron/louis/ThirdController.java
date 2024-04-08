@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -124,10 +125,9 @@ public class ThirdController extends Application {
         Integer repasNb = Integer.valueOf(repasMid.getText());
         totalRepasMid.setText(String.valueOf(repasNb*29));
         Integer kmNb = Integer.valueOf(qteKm.getText());
-        Integer pxKm = Integer.valueOf(montantKm.getText());
+        double pxKm = Double.valueOf(montantKm.getText());
         totalKm.setText(String.valueOf(kmNb*pxKm));
-        idFiche = res.getString("ff_id");
-        String reqHf = "SELECT hf_date,hf_libelle,hf_montant FROM gsb_etudiants.hors_forfait WHERE ff_id = '"+idFiche+"';";
+        String reqHf = "SELECT hf_date,hf_libelle,hf_montant FROM gsb_etudiants.hors_forfait WHERE ff_id = '"+this.idFiche+"';";
         ResultSet resHf = Sqldb.executionRequete(reqHf);
         if (resHf.next()){
             dateHf1.setValue(LocalDate.parse(resHf.getString("hf_date").toString(),DateTimeFormatter.ISO_DATE));
@@ -141,8 +141,7 @@ public class ThirdController extends Application {
         }
         
         
-        System.out.println();
-        System.out.println("Je suis l'id de la fiche : "+idFiche);
+    
     }
     
     private void selectMois(MenuItem item){
@@ -153,14 +152,17 @@ public class ThirdController extends Application {
             String finMois = dateString(dateString, 31);
             this.moisFin = finMois;
             System.out.println("Option "+item.getText()+" sélectionnée");
-            String selectFevr = "SELECT ff_qte_nuitees, ff_qte_repas, ff_qte_km, prix_km,ff_id FROM fiche_frais WHERE ff_mois <= '2024-03-31' AND ff_mois >= '2024-03-01' AND vi_matricule = '"+utilisateur.matricule+"'; ";
-            String reqEtat = "SELECT ef.ef_libelle FROM fiche_frais AS ff \n" + //
-                                "JOIN etat_fiche AS ef ON ff.ef_id = ef.ef_id \n" + //
-                                "WHERE ff.vi_matricule = \""+utilisateur.matricule+"\" AND ff.ff_mois <= '"+finMois+"' AND ff.ff_mois >= '"+debutMois+"';";
+            String selectFevr = "SELECT ff_qte_nuitees, ff_qte_repas, ff_qte_km, prix_km,ff_id,ef_id FROM fiche_frais WHERE ff_mois <= '2024-03-31' AND ff_mois >= '2024-03-01' AND vi_matricule = '"+utilisateur.matricule+"'; ";
             try {
                 ResultSet res = Sqldb.executionRequete(selectFevr);
                 if (res.next()){
                     remplirFiche(res);
+                    System.out.println( res.getString("ff_id"));
+                    this.idFiche =  res.getString("ff_id");
+                    System.out.println(this.idFiche);
+                    if(res.getString("ef_id") != "1"){
+                        modifNon();
+                    }
                 }else{
                     System.out.println("Pas de fiche pour ce mois");
                 }
@@ -169,7 +171,11 @@ public class ThirdController extends Application {
             }
 
             try{
+                String reqEtat = "SELECT ef.ef_libelle FROM fiche_frais AS ff \n" + //
+                                "JOIN etat_fiche AS ef ON ff.ef_id = ef.ef_id \n" + //
+                                "WHERE ff.ff_id = '"+this.idFiche+"';";
                 ResultSet resEtat = Sqldb.executionRequete(reqEtat);
+                System.out.println(reqEtat);
                 if(resEtat.next()){
                     etatFiche.setText("Etat de la fiche : "+resEtat.getString("ef_libelle"));
                 }else{
@@ -216,12 +222,20 @@ public class ThirdController extends Application {
     }
     
     @FXML
-    void cloturer(ActionEvent event) {
+    void cloturer(ActionEvent event) throws SQLException {  
+        LocalDate dateajd =  LocalDate.now();
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String dateformat = dateajd.format(format);
 
+        String clot = "UPDATE fiche_frais SET ff_date_cloture = '"+ dateformat +"' AND ef_id = 2 WHERE ff_id = '"+idFiche+"'; ";
+        System.out.println(clot);
+        Sqldb.executionUpdate(clot);
+        System.out.println("Cloturée ");
+        modifNon();
     }
 
     @FXML
-    void sauvegarder(ActionEvent event) {
+    void sauvegarder(ActionEvent event) throws SQLException {
         Integer nbNuitee = Integer.valueOf(nuitee.getText());
         double pxNuitee = 80;
         double totalNuitee = (pxNuitee * nbNuitee);
@@ -232,8 +246,9 @@ public class ThirdController extends Application {
         double pxKm = Double.valueOf(montantKm.getText());
         double totalKm = pxKm * quanteKm;
         String update = "UPDATE fiche_frais SET ff_qte_nuitees = "+nbNuitee+" ,ff_qte_repas = "+nbRepas+" ,ff_qte_km = "+quanteKm+" ,prix_km = "+pxKm+"\n" + //
-                        "WHERE ff_id = '"+idFiche+"'; ";
+                        "WHERE ff_id = '"+this.idFiche+"'; ";
         System.out.println(update);
+        System.out.println(Sqldb.executionUpdate(update));
     }
 
     @FXML
@@ -242,6 +257,16 @@ public class ThirdController extends Application {
         for (TextField element : liste){
             element.setEditable(true);
         }
+    }
+
+    void modifNon() {
+        List<TextField> liste = new ArrayList<>(List.of(montantKm,nuitee,qteKm,repasMid,totalKm,totalNuitee,totalRepasMid));
+        for (TextField element : liste){
+            element.setEditable(false);
+        }
+        btnModif.setDisable(true);
+        btnClot.setDisable(true);
+        btnSave.setDisable(true);
     }
 
     @Override
