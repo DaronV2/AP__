@@ -136,15 +136,17 @@ CREATE TABLE `fiche_frais` (
   `vi_matricule` varchar(20) NOT NULL,
   `co_id` int DEFAULT NULL,
   `ef_id` int NOT NULL DEFAULT '1',
-  `ff_total_nuitees` int NOT NULL,
-  `ff_total_repas` int NOT NULL,
-  `prix_km` int NOT NULL,
+  `id_prix` int NOT NULL,
+  `prix_km` double NOT NULL DEFAULT '1',
   PRIMARY KEY (`ff_id`),
   KEY `fk_ff_comptable_idx` (`co_id`),
   KEY `fk_ff_visiteur_idx` (`vi_matricule`),
-  KEY `fk_ff_etat_fiche_idx` (`ef_id`),
+  KEY `fk_ff_etat_fiche_idx` (`ef_id`) /*!80000 INVISIBLE */,
+  KEY `fk_ff_prix_idx` (`id_prix`),
+  KEY `fk_ff_px_idx` (`id_prix`),
   CONSTRAINT `fk_ff_comptable` FOREIGN KEY (`co_id`) REFERENCES `comptable` (`co_id`),
   CONSTRAINT `fk_ff_etat_fiche` FOREIGN KEY (`ef_id`) REFERENCES `etat_fiche` (`ef_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_ff_px` FOREIGN KEY (`id_prix`) REFERENCES `prix` (`prix_id`),
   CONSTRAINT `fk_ff_visiteur` FOREIGN KEY (`vi_matricule`) REFERENCES `visiteur` (`vi_matricule`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -155,7 +157,7 @@ CREATE TABLE `fiche_frais` (
 
 LOCK TABLES `fiche_frais` WRITE;
 /*!40000 ALTER TABLE `fiche_frais` DISABLE KEYS */;
-INSERT INTO `fiche_frais` VALUES ('1','2024-02-03',9,12,750,'2024-02-02 23:00:00',NULL,NULL,NULL,NULL,'NRD/125-01',NULL,1,0,0,0),('18','2017-08-14',12,12,21,'2024-03-22 15:30:53',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,960,348,2),('19','2017-08-14',12,12,12,'2024-03-22 15:43:18',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,960,348,12),('2','2024-01-08',15,15,927,'2024-01-07 23:00:00','2024-02-10','2024-02-15',NULL,NULL,'NRD/125-01',2,3,0,0,0),('20','2017-08-14',12,12,12,'2024-03-22 15:44:11',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,960,348,2),('3','2024-01-02',2,3,189,'2024-01-01 23:00:00','2024-02-07','2024-02-14','2024-02-20','2024-02-27','NRD/125-02',1,5,0,0,0),('4','2024-02-07',1,1,76,'2024-02-06 23:00:00',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,0,0,0),('8','2023-12-01',16,18,838,'2023-11-30 23:00:00','2024-01-08','2024-01-18','2024-01-20','2024-01-20','NRD/125-01',1,5,0,0,0),('89795416-6371-4f16-900d-7fab313c7c6c','2024-03-28',12,12,12,'2024-03-28 13:09:04',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,960,348,45),('ac81b822-4f45-4bec-8e48-a1de1c443468','2024-03-25',1,1,1,'2024-03-25 14:48:29',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,80,29,12);
+INSERT INTO `fiche_frais` VALUES ('0cc79ecc-35f9-4117-a1b2-75d4faaa6b03','2024-04-01',45,451,4545,'2024-04-08 14:55:21',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,1,4541),('1','2024-02-03',9,12,750,'2024-02-02 23:00:00',NULL,NULL,NULL,NULL,'NRD/125-01',NULL,1,1,0),('18','2017-08-14',12,12,21,'2024-03-22 15:30:53',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,1,0),('19','2017-08-14',12,12,12,'2024-03-22 15:43:18',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,1,0),('2','2024-01-08',15,15,927,'2024-01-07 23:00:00','2024-02-10','2024-02-15',NULL,NULL,'NRD/125-01',2,3,1,0),('20','2017-08-14',12,12,12,'2024-03-22 15:44:11',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,1,0),('25ca261e-9ac3-4dba-9757-112d56c3b268','2024-04-08',1,1,1,'2024-04-08 13:49:58',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,1,1),('3','2024-01-02',2,3,189,'2024-01-01 23:00:00','2024-02-07','2024-02-14','2024-02-20','2024-02-27','NRD/125-02',1,5,1,0),('4','2024-02-07',1,1,76,'2024-02-06 23:00:00',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,1,0),('8','2023-12-01',16,18,838,'2023-11-30 23:00:00','2024-01-08','2024-01-18','2024-01-20','2024-01-20','NRD/125-01',1,5,1,0),('89795416-6371-4f16-900d-7fab313c7c6c','2024-03-28',1,1,12,'2024-03-28 13:09:04','2024-04-08',NULL,NULL,NULL,'NRD/125-02',NULL,2,1,0),('ac81b822-4f45-4bec-8e48-a1de1c443468','2024-03-25',1,1,1,'2024-03-25 14:48:29',NULL,NULL,NULL,NULL,'NRD/125-02',NULL,1,1,0);
 /*!40000 ALTER TABLE `fiche_frais` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,7 +178,7 @@ CREATE TABLE `hors_forfait` (
   PRIMARY KEY (`hf_id`),
   KEY `fk_hf_etat_hors_forfait_idx` (`ehf_id`),
   CONSTRAINT `fk_hf_etat_hors_forfait` FOREIGN KEY (`ehf_id`) REFERENCES `etat_hors_forfait` (`ehf_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -185,7 +187,7 @@ CREATE TABLE `hors_forfait` (
 
 LOCK TABLES `hors_forfait` WRITE;
 /*!40000 ALTER TABLE `hors_forfait` DISABLE KEYS */;
-INSERT INTO `hors_forfait` VALUES (1,'2020-12-18','Repas Représentation',156.00,'2',1),(2,'2020-12-22','Achat Fleuriste Soirée \"MediLog\"',120.30,'2',1),(3,'2024-03-08','1',1.00,'8a7464ff-3159-40f7-906d-a4355d7cf2c6',1),(4,'2024-03-11','1',1.00,'bbfdc39b-6e35-4537-8f61-6b09028984c3',1),(5,'2024-03-01','1',1.00,'bbfdc39b-6e35-4537-8f61-6b09028984c3',1),(6,'2024-02-29','1',1.00,'249db3e0-4a8d-4dbe-9a2f-da69d9149dc7',1),(7,'2024-03-08','1',1.00,'249db3e0-4a8d-4dbe-9a2f-da69d9149dc7',1),(10,'2024-03-09','1',1.00,'0b2a5154-8371-408f-815f-e46b106fdaf9',1),(11,'2024-03-23','2',2.00,'0b2a5154-8371-408f-815f-e46b106fdaf9',1),(12,'2024-03-22','1',1.00,'836ca419-5adf-4df3-bdf9-3be384166cf1',1),(13,'2024-03-03','2',2.00,'836ca419-5adf-4df3-bdf9-3be384166cf1',1),(14,'2024-03-08','1',1.00,'eb513f02-9ef9-4892-bbf0-956569490e2e',1),(15,'2024-03-08','2',2.00,'eb513f02-9ef9-4892-bbf0-956569490e2e',1),(16,'2024-03-21','libelle',12.00,'ac81b822-4f45-4bec-8e48-a1de1c443468',1),(17,'2024-03-03','libelle2',20.00,'ac81b822-4f45-4bec-8e48-a1de1c443468',1),(18,'2024-03-29','lib1',12.00,'89795416-6371-4f16-900d-7fab313c7c6c',1),(19,'2024-03-16','lib2',15.00,'89795416-6371-4f16-900d-7fab313c7c6c',1);
+INSERT INTO `hors_forfait` VALUES (1,'2020-12-18','Repas Représentation',156.00,'2',1),(2,'2020-12-22','Achat Fleuriste Soirée \"MediLog\"',120.30,'2',1),(3,'2024-03-08','1',1.00,'8a7464ff-3159-40f7-906d-a4355d7cf2c6',1),(4,'2024-03-11','1',1.00,'bbfdc39b-6e35-4537-8f61-6b09028984c3',1),(5,'2024-03-01','1',1.00,'bbfdc39b-6e35-4537-8f61-6b09028984c3',1),(6,'2024-02-29','1',1.00,'249db3e0-4a8d-4dbe-9a2f-da69d9149dc7',1),(7,'2024-03-08','1',1.00,'249db3e0-4a8d-4dbe-9a2f-da69d9149dc7',1),(10,'2024-03-09','1',1.00,'0b2a5154-8371-408f-815f-e46b106fdaf9',1),(11,'2024-03-23','2',2.00,'0b2a5154-8371-408f-815f-e46b106fdaf9',1),(12,'2024-03-22','1',1.00,'836ca419-5adf-4df3-bdf9-3be384166cf1',1),(13,'2024-03-03','2',2.00,'836ca419-5adf-4df3-bdf9-3be384166cf1',1),(14,'2024-03-08','1',1.00,'eb513f02-9ef9-4892-bbf0-956569490e2e',1),(15,'2024-03-08','2',2.00,'eb513f02-9ef9-4892-bbf0-956569490e2e',1),(16,'2024-03-21','libelle',12.00,'ac81b822-4f45-4bec-8e48-a1de1c443468',1),(17,'2024-03-03','libelle2',20.00,'ac81b822-4f45-4bec-8e48-a1de1c443468',1),(18,'2024-03-29','lib1',12.00,'89795416-6371-4f16-900d-7fab313c7c6c',1),(19,'2024-03-16','lib2',15.00,'89795416-6371-4f16-900d-7fab313c7c6c',1),(20,'2024-04-01','jveins dle mettre gros',4541.00,'0cc79ecc-35f9-4117-a1b2-75d4faaa6b03',1);
 /*!40000 ALTER TABLE `hors_forfait` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -252,4 +254,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-29 16:51:02
+-- Dump completed on 2024-04-09  9:45:19
