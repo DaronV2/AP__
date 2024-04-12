@@ -84,6 +84,8 @@ public class ThirdController extends Application {
 
     public String moisFin;
 
+    public String matricule;
+
     String mdp;
 
 
@@ -96,6 +98,8 @@ public class ThirdController extends Application {
     
     @FXML
     public void initialize() throws SQLException{
+        utilisateur ut = new utilisateur();
+        matricule = utilisateur.matricule;
         modifRien();
         test();
         ObservableList<MenuItem> item = menuMois.getItems();
@@ -205,7 +209,7 @@ public class ThirdController extends Application {
     }
 
 
-    void test(){
+    void test() throws SQLException{
         LocalDate dateActuelle = LocalDate.now();
 
         // Formatteur pour afficher les noms des mois
@@ -218,6 +222,7 @@ public class ThirdController extends Application {
             String nomMois = moisPrecedent.format(formatter);
             MenuItem menuItem = new MenuItem(nomMois);
             items.add(menuItem);
+             
         }
         Collections.reverse(items);
         menuMois.getItems().addAll(items);
@@ -239,15 +244,10 @@ public class ThirdController extends Application {
     @FXML
     void sauvegarder(ActionEvent event) throws SQLException {
         Integer nbNuitee = Integer.valueOf(nuitee.getText());
-        double pxNuitee = 80;
-        double totalNuitee = (pxNuitee * nbNuitee);
         Integer nbRepas = Integer.valueOf(repasMid.getText());
-        double pxRepas = 29;    
-        double totalRepas = (pxRepas * nbRepas);
         Integer quanteKm = Integer.valueOf(qteKm.getText());
-        double pxKm = Double.valueOf(montantKm.getText());
-        double totalKm = pxKm * quanteKm;
-        String update = "UPDATE fiche_frais SET ff_qte_nuitees = "+nbNuitee+" ,ff_qte_repas = "+nbRepas+" ,ff_qte_km = "+quanteKm+" ,prix_km = "+pxKm+"\n" + //
+        Integer cleEtrangPx = 1;
+        String update = "UPDATE fiche_frais SET ff_qte_nuitees = "+nbNuitee+" ,ff_qte_repas = "+nbRepas+" ,ff_qte_km = "+quanteKm+" ,prix_km = "+cleEtrangPx+"\n" + //
                         "WHERE ff_id = '"+this.idFiche+"'; ";
         System.out.println(update);
         System.out.println(Sqldb.executionUpdate(update));
