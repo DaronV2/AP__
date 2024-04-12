@@ -3,11 +3,35 @@ package fr.daron.louis;
 
 public class utilisateur {
     
-    static String matricule;
+    private static String matricule;
 
-    static String nom;
+    public static void setMatricule(String matricule) {
+        utilisateur.matricule = matricule;
+    }
 
-    static String identfiant;
+    public static String getMatricule() {
+        return matricule;
+    }
+
+    private static String nom;
+
+    public static String getNom() {
+        return nom;
+    }
+
+    public static void setNom(String nom) {
+        utilisateur.nom = nom;
+    }
+
+    private static String identfiant;
+
+    public static void setIdentfiant(String identfiant) {
+        utilisateur.identfiant = identfiant;
+    }
+
+    public static String getIdentfiant() {
+        return identfiant;
+    }
 
     utilisateur(){
     }

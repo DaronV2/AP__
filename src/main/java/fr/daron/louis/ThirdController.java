@@ -80,11 +80,11 @@ public class ThirdController extends Application {
     @FXML
     private TextField totalRepasMid;
 
-    public String moisDebut;
+    private String moisDebut;
 
-    public String moisFin;
+    private String moisFin;
 
-    public String matricule;
+    private String matricule;
 
     String mdp;
 
@@ -98,8 +98,7 @@ public class ThirdController extends Application {
     
     @FXML
     public void initialize() throws SQLException{
-        utilisateur ut = new utilisateur();
-        matricule = utilisateur.matricule;
+        matricule = utilisateur.getMatricule();
         modifRien();
         test();
         ObservableList<MenuItem> item = menuMois.getItems();
@@ -151,7 +150,7 @@ public class ThirdController extends Application {
             String finMois = dateString(dateString, 31);
             this.moisFin = finMois;
             System.out.println("Option "+item.getText()+" sélectionnée");
-            String selectFevr = "SELECT ff_qte_nuitees, ff_qte_repas, ff_qte_km, prix_km,ff_id,ef_id FROM fiche_frais WHERE ff_mois BETWEEN '"+moisDebut+"' AND '"+moisFin+"' AND vi_matricule = '"+utilisateur.matricule+"'; ";
+            String selectFevr = "SELECT ff_qte_nuitees, ff_qte_repas, ff_qte_km, prix_km,ff_id,ef_id FROM fiche_frais WHERE ff_mois BETWEEN '"+moisDebut+"' AND '"+moisFin+"' AND vi_matricule = '"+matricule+"'; ";
             System.out.println(selectFevr);
             try {
                 ResultSet res = Sqldb.executionRequete(selectFevr);

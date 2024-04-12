@@ -68,11 +68,11 @@ public class historiqueComptable extends Application {
     @FXML
     private TextField totalKm;
 
-    public String moisDebut;
+    private String moisDebut;
 
-    public String moisFin;
+    private String moisFin;
 
-    public String matricule;
+    private String matricule;
 
     @FXML
     void accueil(ActionEvent event) throws IOException {
@@ -184,7 +184,7 @@ public class historiqueComptable extends Application {
             this.moisFin = finMois;
             System.out.println("Option " + item.getText() + " sélectionnée");
             String selectFevr = "SELECT ff_qte_nuitees, ff_qte_repas, ff_qte_km, prix_km FROM fiche_frais WHERE ff_mois <= '2024-03-31' AND ff_mois >= '2024-03-01' AND vi_matricule = '"
-                    + utilisateur.matricule + "'; ";
+                    + utilisateur.getMatricule() + "'; ";
             String reqEtat = "SELECT ef.ef_libelle FROM fiche_frais AS ff \n" + //
                     "JOIN etat_fiche AS ef ON ff.ef_id = ef.ef_id \n" + //
                     "WHERE ff.vi_matricule = \"" + matricule + "\" AND ff.ff_mois <= '" + finMois

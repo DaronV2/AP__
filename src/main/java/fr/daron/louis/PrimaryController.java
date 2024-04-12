@@ -68,7 +68,7 @@ public class PrimaryController {
 
         String log = loginEnter.getText();
         this.log = log;
-        utilisateur.identfiant = log;
+        utilisateur.setIdentfiant(log);
         String pas = password.getText();
 
         System.out.println(verifierUtilisateur(log, pas));
@@ -155,12 +155,12 @@ public class PrimaryController {
             ResultSet resultats2 = reqMatricule(this.log);
             if (resultats2.next() == true) {
                 String matricule = resultats2.getNString("vi_matricule");
-                utilisateur.matricule = matricule;
+                utilisateur.setMatricule(matricule);
             }
             ResultSet resultats3 = reqNom(this.log);
             if (resultats3.next() == true) {
                 String nom = resultats3.getNString("vi_nom");
-                utilisateur.nom = nom;
+                utilisateur.setNom(nom);
             }
             return false;
         }

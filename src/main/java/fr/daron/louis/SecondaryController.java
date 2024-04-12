@@ -42,7 +42,7 @@ public class SecondaryController {
 
     private void setMatricule(TextField matricule) {
         matricule.setEditable(true);
-        matricule.setText(utilisateur.matricule);
+        matricule.setText(utilisateur.getMatricule());
     }
 
     @FXML
@@ -56,7 +56,7 @@ public class SecondaryController {
 
     private void setNom(TextField nom) {
         nom.setText("noms");
-        nom.setText(utilisateur.nom);
+        nom.setText(utilisateur.getNom());
     }
 
     @FXML

@@ -9,12 +9,12 @@ import java.sql.Statement;
 //import org.mariadb.*;
 
 public class Sqldb {
-    static String url = credentialsBdd.getIpBdd();
+    private static String url = credentialsBdd.getIpBdd();
     // private String url = "jdbc:mariadb://88.127.124.40:12456/gsb_etudiants";
 
-    static String user = credentialsBdd.getLogBdd();
+    private static String user = credentialsBdd.getLogBdd();
 
-    static String mdp = credentialsBdd.getPwdBdd();
+    private static String mdp = credentialsBdd.getPwdBdd();
 
     Sqldb() {
     }
