@@ -152,6 +152,7 @@ public class historiqueComptable extends Application {
             LocalDate moisPrecedent = dateActuelle.minusMonths(i);
             String nomMois = moisPrecedent.format(formatter);
             MenuItem menuItem = new MenuItem(nomMois);
+            System.out.println("la : "+moisPrecedent);
             items.add(menuItem);
         }
         Collections.reverse(items);

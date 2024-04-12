@@ -7,14 +7,10 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
+
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -100,6 +96,7 @@ public class ThirdController extends Application {
     
     @FXML
     public void initialize() throws SQLException{
+        modifRien();
         test();
         ObservableList<MenuItem> item = menuMois.getItems();
         item.forEach(menuItem ->{
@@ -114,8 +111,6 @@ public class ThirdController extends Application {
     }
 
     void remplirFiche(ResultSet res) throws SQLException{
-        List<Object> elementsInitiaux = new ArrayList<>();
-
         nuitee.setText(res.getString("ff_qte_nuitees"));
         repasMid.setText(res.getString("ff_qte_repas"));
         qteKm.setText(res.getString("ff_qte_km"));
@@ -152,18 +147,18 @@ public class ThirdController extends Application {
             String finMois = dateString(dateString, 31);
             this.moisFin = finMois;
             System.out.println("Option "+item.getText()+" sélectionnée");
-            String selectFevr = "SELECT ff_qte_nuitees, ff_qte_repas, ff_qte_km, prix_km,ff_id,ef_id FROM fiche_frais WHERE ff_mois <= '2024-03-31' AND ff_mois >= '2024-03-01' AND vi_matricule = '"+utilisateur.matricule+"'; ";
+            String selectFevr = "SELECT ff_qte_nuitees, ff_qte_repas, ff_qte_km, prix_km,ff_id,ef_id FROM fiche_frais WHERE ff_mois BETWEEN '"+moisDebut+"' AND '"+moisFin+"' AND vi_matricule = '"+utilisateur.matricule+"'; ";
+            System.out.println(selectFevr);
             try {
                 ResultSet res = Sqldb.executionRequete(selectFevr);
                 if (res.next()){
                     remplirFiche(res);
-                    System.out.println( res.getString("ff_id"));
                     this.idFiche =  res.getString("ff_id");
-                    System.out.println(this.idFiche);
-                    if(res.getString("ef_id") != "1"){
-                        modifNon();
-                    }
+                    System.out.println(selectFevr);
+                    String etat = res.getString("ef_id");
+                    System.out.println(etat);
                 }else{
+                    modifRien();
                     System.out.println("Pas de fiche pour ce mois");
                 }
             }catch (SQLException e){
@@ -174,13 +169,20 @@ public class ThirdController extends Application {
                 String reqEtat = "SELECT ef.ef_libelle FROM fiche_frais AS ff \n" + //
                                 "JOIN etat_fiche AS ef ON ff.ef_id = ef.ef_id \n" + //
                                 "WHERE ff.ff_id = '"+this.idFiche+"';";
-                ResultSet resEtat = Sqldb.executionRequete(reqEtat);
-                System.out.println(reqEtat);
-                if(resEtat.next()){
-                    etatFiche.setText("Etat de la fiche : "+resEtat.getString("ef_libelle"));
-                }else{
-                    System.out.println("Bug");
-                }
+
+                    ResultSet resEtat = Sqldb.executionRequete(reqEtat);
+                    if(resEtat.next()){
+                        if(!resEtat.getString("ef_libelle").equals("créée")){
+                            modifNon();
+                        }else{
+                            modifOk();
+                        }
+                        etatFiche.setText("Etat de la fiche : "+resEtat.getString("ef_libelle"));
+                    }else{
+                        System.out.println("bug");
+                    }
+                
+                
             }catch (SQLException e){
                 e.printStackTrace();
             }
@@ -267,6 +269,28 @@ public class ThirdController extends Application {
         btnModif.setDisable(true);
         btnClot.setDisable(true);
         btnSave.setDisable(true);
+    }
+
+    
+    void modifRien() {
+        List<TextField> liste = new ArrayList<>(List.of(montantKm,nuitee,qteKm,repasMid,totalKm,totalNuitee,totalRepasMid,montHf1,montHf2,libHf1,libHf2));
+        for (TextField element : liste){
+            element.setText("");
+        }
+        dateHf1.setValue(null);
+        dateHf2.setValue(null);
+        etatFiche.setText("Etat de la fiche : n'existe pas ");
+    }
+
+    void modifOk() {
+        List<TextField> liste = new ArrayList<>(List.of(montantKm,nuitee,qteKm,repasMid,totalKm,totalNuitee,totalRepasMid));
+        for (TextField element : liste){
+            element.setEditable(true);
+        }
+        System.out.println("modification ok");
+        btnModif.setDisable(false);
+        btnClot.setDisable(false);
+        btnSave.setDisable(false);
     }
 
     @Override
