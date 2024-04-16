@@ -143,10 +143,6 @@ public class SecondaryController {
         String matriculeString = matricule.getText();
         String px_km = montantUnitaireKm.getText();
 
-        Sqldb sql2 = new Sqldb();
-        Connection c = sql2.connexionDb();
-        Statement stmnt = c.createStatement();
-
         java.util.UUID uuid = UUID.randomUUID();
         String uuidString = uuid.toString();
 
@@ -157,7 +153,7 @@ public class SecondaryController {
             System.out.println(moisHf1String);
             String sql1 = "INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant,ff_id) VALUES (" + moisHf1String
                     + ",'" + afL1 + "'," + afM1 + ",'" + uuidString + "')";
-            stmnt.executeUpdate(sql1);
+            Sqldb.executionUpdate(sql1);
 
         } else {
             System.out.println("yes");
@@ -171,7 +167,7 @@ public class SecondaryController {
             String sql1 = "INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant,ff_id) VALUES (" + moisHf2String
                     + ",'" + afL2 + "'," + afM2 + ",'" + uuidString + "')";
 
-            stmnt.executeUpdate(sql1);
+            Sqldb.executionUpdate(sql1);
         } else {
             System.out.println("yes");
         }
@@ -201,14 +197,14 @@ public class SecondaryController {
         String sql = "INSERT INTO fiche_frais (ff_mois,ff_qte_nuitees,  ff_qte_repas, ff_qte_km,vi_matricule,prix_km,ff_id,id_prix) VALUES "+
         "("+date+", "+nuit+","+repasMid+","+km1+", '"+matriculeString+"',"+px_km+",'"+uuidString+"',"+pxId+")";
 
-        stmnt.executeUpdate(sql);
+        Sqldb.executionUpdate(sql);
 
         String afD1 = "";
         if (afD1 == null & afL1 == null & afM1 == null) {
 
             String sql1 = String.format("INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant) VALUES (%s,%s,%s)",
                     afD1, afL1, afM1);
-            stmnt.executeUpdate(sql1);
+            Sqldb.executionUpdate(sql1);
         } else {
             System.out.println("yes");
         }
@@ -219,7 +215,7 @@ public class SecondaryController {
             String sql1 = String.format(
                     "INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant,ff_id) VALUES (%s,%s,%s,%s)", afD1,
                     afL1, afM1, ffid);
-            stmnt.executeUpdate(sql1);
+            Sqldb.executionUpdate(sql1);
         } else {
             System.out.println("yes");
         }

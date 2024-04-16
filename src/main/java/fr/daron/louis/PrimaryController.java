@@ -86,36 +86,26 @@ public class PrimaryController {
     private ResultSet reqMatricule(String log) throws SQLException {
         ResultSet resultats = null;
         Sqldb sql = new Sqldb();
-        Connection c = sql.connexionDb();
-        Statement stmnt = c.createStatement();
         String reqsql = String.format("SELECT vi_matricule FROM gsb_etudiants.visiteur WHERE cr_identifiant = '%s';",
                 log);
-        resultats = sql.exeRequete(stmnt, reqsql);
+        resultats = Sqldb.executionRequete(reqsql);
         return resultats;
     }
 
     private ResultSet reqNom(String log) throws SQLException {
         ResultSet resultats = null;
         Sqldb sql = new Sqldb();
-        Connection c = sql.connexionDb();
-        Statement stmnt = c.createStatement();
         String reqsql = String.format("SELECT vi_nom FROM gsb_etudiants.visiteur WHERE cr_identifiant = '%s';", log);
-        resultats = sql.exeRequete(stmnt, reqsql);
+        resultats = Sqldb.executionRequete(reqsql);
         return resultats;
     }
 
     private boolean verifierUtilisateur(String utilisateur, String mdp) throws IOException, SQLException {
         ResultSet resultats = null;
-        Sqldb sql2 = new Sqldb();
-
-        Connection c = sql2.connexionDb();
-        Statement stmnt = c.createStatement();
-
         String sql = String.format(
                 "SELECT cr_identifiant,cr_mot_de_passe FROM gsb_etudiants.credentials WHERE cr_identifiant = '%s'  AND cr_mot_de_passe = '%s' ;",
                 utilisateur, mdp);
-        resultats = sql2.exeRequete(stmnt, sql);
-
+        resultats = Sqldb.executionRequete(sql);
         if (resultats.next() == true) {
             return true;
         } else {
@@ -141,13 +131,9 @@ public class PrimaryController {
 
     private boolean comptableOuNon(String user) throws SQLException {
         ResultSet resultats = null;
-        Sqldb sql = new Sqldb();
-        Connection c = sql.connexionDb();
-        Statement stmnt = c.createStatement();
-
         String req = String.format("SELECT cr_identifiant FROM gsb_etudiants.comptable WHERE cr_identifiant = '%s'",
                 user);
-        resultats = sql.exeRequete(stmnt, req);
+        resultats = Sqldb.executionRequete(req);
 
         if (resultats.next() == true) {
             return true;
