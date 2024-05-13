@@ -1,7 +1,7 @@
 package fr.daron.louis;
+
+
 //Importation des librairies nécessaires au bon fonctionnement du code  
-
-
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,6 +24,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class ThirdController extends Application {
+
+    // Importation de tout les champs FXML de l'application
 
     @FXML
     private Button btnClot;
@@ -79,6 +81,8 @@ public class ThirdController extends Application {
     @FXML
     private TextField totalRepasMid;
 
+    // Initialisation d'attributs de la classe ThirdController 
+
     private String moisDebut;
 
     private String moisFin;
@@ -87,31 +91,50 @@ public class ThirdController extends Application {
 
     String mdp;
 
-
     String idFiche;
-
-
-
 
     MenuItem[] tabItems = {};
     
+    /* Méthode Initialize
+        nom : initialize
+        resultat : rien 
+        objet de la méthode : La méthode initialize est une méthode de JavaFX qui se lance automatiquement au changement vers notre page,
+        dans cette méthode on récupère le matricule de l'utilisateur de la classe utilisateur,
+        on appelle la méthode "setNullTout", puis la méthode "remplirMenuMois"
+        ensuite on crée une liste qui contient des "MenuItem" donc ce qui est contenu dans le menu des mois de la méthode : "remplirMenuMois",
+        et si on clique sur un mois du menu cela appelle la méthode "selectMois" en fonction du mois du menu selectionné.
+    */
+
     @FXML
     public void initialize() throws SQLException{
         matricule = utilisateur.getMatricule();
-        modifRien();
-        test();
+        setNullTout();
+        remplirMenuMois();
         ObservableList<MenuItem> item = menuMois.getItems();
         item.forEach(menuItem ->{
             selectMois(menuItem);
         });
         }
 
+
+    /* Méthode accueil
+        Nom : accueil 
+        Résultat : rien
+        Paramètres : ActionEvent (qui est un événement déclenché par un bouton du clavier ou de la souris) nommé event
+        Objet de la méthode : si le bouton auquel est attribué la méthode accueil est cliqué alors l'utilisateur est redirigé vers la page "accueilVisiteurs".
+     */
+
     @FXML
     void accueil(ActionEvent event) throws IOException {
-
         App.setRoot("accueilVisiteurs");
     }
 
+    /* Méthode remplirFiche
+        Nom : remplirFiche 
+        Résultat : rien
+        Paramètres : ResultSet (format de résultat de requete SQL en Java) nommé res
+        Objet de la méthode : sert a remplir les champs FXML de la page en fonction du résultat de la requete entré en paramètre
+     */
     void remplirFiche(ResultSet res) throws SQLException{
         nuitee.setText(res.getString("ff_qte_nuitees"));
         repasMid.setText(res.getString("ff_qte_repas"));
@@ -144,6 +167,7 @@ public class ThirdController extends Application {
     
     }
     
+
     private void selectMois(MenuItem item){
         item.setOnAction(event -> {
             String dateString = item.getText();
@@ -152,7 +176,7 @@ public class ThirdController extends Application {
             String finMois = dateString(dateString, 31);
             this.moisFin = finMois;
             System.out.println("Option "+item.getText()+" sélectionnée");
-            String selectFevr = "SELECT ff_qte_nuitees, ff_qte_repas, ff_qte_km, prix_km,ff_id,ef_id FROM fiche_frais WHERE ff_mois BETWEEN '"+moisDebut+"' AND '"+moisFin+"' AND vi_matricule = '"+matricule+"'; ";
+            String selectFevr = " SELECT ff_qte_nuitees, ff_qte_repas, ff_qte_km, prix_km,ff_id,ef_id FROM fiche_frais WHERE ff_mois BETWEEN '"+moisDebut+"' AND '"+moisFin+"' AND vi_matricule = '"+matricule+"'; ";
             System.out.println(selectFevr);
             try {
                 ResultSet res = Sqldb.executionRequete(selectFevr);
@@ -163,7 +187,7 @@ public class ThirdController extends Application {
                     String etat = res.getString("ef_id");
                     System.out.println(etat);
                 }else{
-                    modifRien();
+                    setNullTout();
                     System.out.println("Pas de fiche pour ce mois");
                 }
             }catch (SQLException e){
@@ -190,7 +214,13 @@ public class ThirdController extends Application {
         });
     }
 
-
+    /* Méthode dateString
+        Nom : dateString 
+        Résultat : String (chaine de caracteres qui contient une date adaptée au format SQL)
+        Paramètres : String date =  qui contient le mois et l'année du mois selectionné a partir de la liste du menu déroulant des mois au format texte.
+                     Integer jour = qui contient le jour que l'on veut attribué au mois du 01 au 31 
+        Objet de la méthode : La méthode permet de transfromer une date au format texte "humain" au format texte SQL 
+     */
     String dateString(String date,Integer jour){
         String zero = "";
         if (jour<10){
@@ -205,10 +235,13 @@ public class ThirdController extends Application {
         return resultat;
     }
 
-
-    void test() throws SQLException{
+    /* Méthode remplirMenuMois
+        Nom : remplirMenuMois
+        Résultat : rien
+        Objet de la méthode : Permet de remplir la liste déroulante des 12 derniers mois à partir du mois courant 
+     */
+    void remplirMenuMois() throws SQLException{
         LocalDate dateActuelle = LocalDate.now();
-
         // Formatteur pour afficher les noms des mois
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
         List<MenuItem> items = new ArrayList<>();
@@ -225,14 +258,20 @@ public class ThirdController extends Application {
         menuMois.getItems().addAll(items);
     }
     
+
+    /* Méthode cloturer
+        Nom : cloturer 
+        Résultat : rien
+        Paramètres : ActionEvent (qui est un événement déclenché par un bouton du clavier ou de la souris) nommé event
+        Objet de la méthode : si le bouton auquel est attribué la méthode accueil est cliqué alors la fiche sera automatiquement cloturée donc avec le statut,
+        ef_id à 2 avec la date de la cloture et appelle la méthode "modifNon" qui rend inéditable tout les champs et boutons
+     */
     @FXML
     void cloturer(ActionEvent event) throws SQLException {  
         LocalDate dateajd =  LocalDate.now();
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String dateformat = dateajd.format(format);
-
         String clot = "UPDATE fiche_frais SET ff_date_cloture = '"+ dateformat +"' AND ef_id = 2 WHERE ff_id = '"+idFiche+"'; ";
-        System.out.println(clot);
         Sqldb.executionUpdate(clot);
         System.out.println("Cloturée ");
         modifNon();
@@ -305,7 +344,7 @@ public class ThirdController extends Application {
     }
 
     
-    void modifRien() {
+    void setNullTout() {
         List<TextField> liste = new ArrayList<>(List.of(montantKm,nuitee,qteKm,repasMid,totalKm,totalNuitee,totalRepasMid,montHf1,montHf2,libHf1,libHf2));
         for (TextField element : liste){
             element.setText("");
