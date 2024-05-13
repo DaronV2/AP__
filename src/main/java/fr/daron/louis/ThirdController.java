@@ -1,7 +1,6 @@
 package fr.daron.louis;
 
 import java.io.IOException;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -10,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-
-
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -126,12 +123,15 @@ public class ThirdController extends Application {
         double pxKm = Double.valueOf(montantKm.getText());
         totalKm.setText(String.valueOf(kmNb*pxKm));
         String reqHf = "SELECT hf_date,hf_libelle,hf_montant FROM gsb_etudiants.hors_forfait WHERE ff_id = '"+this.idFiche+"';";
+        System.out.println("ici :"+idFiche);
         ResultSet resHf = Sqldb.executionRequete(reqHf);
         if (resHf.next()){
+            System.out.println("ok");
             dateHf1.setValue(LocalDate.parse(resHf.getString("hf_date").toString(),DateTimeFormatter.ISO_DATE));
             libHf1.setText(resHf.getString("hf_libelle"));
             montHf1.setText(resHf.getString("hf_montant"));
             if(resHf.next()){
+                System.out.println("ok2");
                 dateHf2.setValue(LocalDate.parse(resHf.getString("hf_date").toString(),DateTimeFormatter.ISO_DATE));
                 libHf2.setText(resHf.getString("hf_libelle"));
                 montHf2.setText(resHf.getString("hf_montant"));
@@ -155,8 +155,8 @@ public class ThirdController extends Application {
             try {
                 ResultSet res = Sqldb.executionRequete(selectFevr);
                 if (res.next()){
-                    remplirFiche(res);
                     this.idFiche =  res.getString("ff_id");
+                    remplirFiche(res);
                     System.out.println(selectFevr);
                     String etat = res.getString("ef_id");
                     System.out.println(etat);
@@ -167,12 +167,10 @@ public class ThirdController extends Application {
             }catch (SQLException e){
                 e.printStackTrace();
             }
-
             try{
                 String reqEtat = "SELECT ef.ef_libelle FROM fiche_frais AS ff \n" + //
                                 "JOIN etat_fiche AS ef ON ff.ef_id = ef.ef_id \n" + //
                                 "WHERE ff.ff_id = '"+this.idFiche+"';";
-
                     ResultSet resEtat = Sqldb.executionRequete(reqEtat);
                     if(resEtat.next()){
                         if(!resEtat.getString("ef_libelle").equals("créée")){
@@ -184,8 +182,6 @@ public class ThirdController extends Application {
                     }else{
                         System.out.println("bug");
                     }
-                
-                
             }catch (SQLException e){
                 e.printStackTrace();
             }
@@ -245,26 +241,62 @@ public class ThirdController extends Application {
         Integer nbNuitee = Integer.valueOf(nuitee.getText());
         Integer nbRepas = Integer.valueOf(repasMid.getText());
         Integer quanteKm = Integer.valueOf(qteKm.getText());
+
+        String hfLib1 = libHf1.getText();
+        Integer hfPx1 = 0;
+        if (!montHf1.getText().equals("")){
+            hfPx1 = Integer.valueOf(montHf1.getText());
+        }
+
         Integer cleEtrangPx = 1;
         String update = "UPDATE fiche_frais SET ff_qte_nuitees = "+nbNuitee+" ,ff_qte_repas = "+nbRepas+" ,ff_qte_km = "+quanteKm+" ,prix_km = "+cleEtrangPx+"\n" + //
                         "WHERE ff_id = '"+this.idFiche+"'; ";
+
+        String getIdHf = "SELECT hf_id FROM hors_forfait WHERE ff_id = '"+this.idFiche+"';";
+        ResultSet resIdHf = Sqldb.executionRequete(getIdHf);
+        List<Integer> liste = new ArrayList<>();
+        while(resIdHf.next()){
+            liste.add(Integer.valueOf(resIdHf.getString("hf_id")));
+            resIdHf.next();
+        }
+        System.out.println(liste);
+
+        for (Integer i = 0; i < liste.size(); i++){
+            String updateff = "UPDATE hors_forfait SET hf_libelle = '"+ hfLib1 +"' , hf_montant = "+ hfPx1 +", hf_date = '"+ dateHf1.getValue()+"' WHERE ff_id = '"+idFiche+"' AND hf_id = "+ liste.get(0)+";";
+            System.out.println(updateff);
+            try{
+                Sqldb.executionUpdate(updateff);
+            } catch(SQLException e){
+                System.out.println(e);
+            }
+        }
+
         System.out.println(update);
         System.out.println(Sqldb.executionUpdate(update));
     }
 
     @FXML
     void modif(ActionEvent event) {
-        List<TextField> liste = new ArrayList<>(List.of(montantKm,nuitee,qteKm,repasMid,totalKm,totalNuitee,totalRepasMid));
+        List<TextField> liste = new ArrayList<>(List.of(montantKm,nuitee,qteKm,repasMid,totalKm,totalNuitee,totalRepasMid,libHf1,libHf2,montHf1,montHf2));
+        List<DatePicker> listeDate = new ArrayList<>(List.of(dateHf1,dateHf2));
         for (TextField element : liste){
             element.setEditable(true);
+        }
+        for (DatePicker elmnt : listeDate){
+            elmnt.setEditable(true);
         }
     }
 
     void modifNon() {
         List<TextField> liste = new ArrayList<>(List.of(montantKm,nuitee,qteKm,repasMid,totalKm,totalNuitee,totalRepasMid));
+        List<DatePicker> listeDate = new ArrayList<>(List.of(dateHf1,dateHf2));
         for (TextField element : liste){
             element.setEditable(false);
         }
+        for (DatePicker elmnt : listeDate){
+            elmnt.setEditable(true);
+        }
+
         btnModif.setDisable(true);
         btnClot.setDisable(true);
         btnSave.setDisable(true);
