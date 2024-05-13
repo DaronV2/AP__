@@ -1,7 +1,9 @@
 package fr.daron.louis;
 
-import java.io.IOException;
 
+//Importation des librairies nécessaires au bon fonctionnement du code  
+
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -10,8 +12,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-
-
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -110,7 +110,7 @@ public class ThirdController extends Application {
     @FXML
     void accueil(ActionEvent event) throws IOException {
 
-        App.setRoot("primary");
+        App.setRoot("accueilVisiteurs");
     }
 
     void remplirFiche(ResultSet res) throws SQLException{

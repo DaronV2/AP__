@@ -1,24 +1,16 @@
 package fr.daron.louis;
 
-import java.io.File;
+//Importation des librairies nécessaires au bon fonctionnement du code 
 import java.io.IOException;
-
 import javafx.application.Application;
-import javafx.application.HostServices;
 import javafx.event.ActionEvent;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javafx.collections.ObservableList;
@@ -29,7 +21,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.ArrayList;
 import javafx.scene.control.MenuItem;
 
@@ -57,6 +48,12 @@ public class historiqueComptable extends Application {
 
     @FXML
     private TextField repas;
+
+    @FXML
+    private Text affichmois;
+
+    @FXML
+    private Text affichuser;
 
     @FXML
     private TextField repasTot;
@@ -104,7 +101,7 @@ public class historiqueComptable extends Application {
 
     @FXML
     void accueil(ActionEvent event) throws IOException {
-        App.setRoot("primary");
+        App.setRoot("accueilComptableS");
     }
 
     @Override
@@ -152,6 +149,7 @@ public class historiqueComptable extends Application {
     @FXML
     public void initialize() throws SQLException {
         test();
+        menuHist.setVisible(false);
         handleAfficherVisiteurs();
 
         String sql = "SELECT `prix_nuit`,prix_repas FROM `prix`";
@@ -230,6 +228,7 @@ public class historiqueComptable extends Application {
                 ResultSet res = Sqldb.executionRequete(selectFevr);
                 if (res.next()) {
                     remplirFiche(res);
+                    affichmois.setText(item.getText());
                 } else {
                     System.out.println("Pas de fiche pour ce mois");
                 }
@@ -249,6 +248,8 @@ public class historiqueComptable extends Application {
                 if (nom.equals(userSelected)){
                     matriculeUserSelected = matr;
                     System.out.println(this.matriculeUserSelected);
+                    menuHist.setVisible(true);
+                    affichuser.setText(nom);
                 } else{
                     System.out.println("testsetstset");
                 }

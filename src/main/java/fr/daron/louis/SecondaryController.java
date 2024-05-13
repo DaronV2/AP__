@@ -1,15 +1,11 @@
 package fr.daron.louis;
 
+//Importation des librairies nécessaires au bon fonctionnement du code 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.UUID;
-
-//import com.mysql.cj.protocol.Resultset;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -244,6 +240,6 @@ public class SecondaryController {
     @FXML
     void switchAccueil(ActionEvent event) throws IOException, SQLException {
 
-        App.setRoot("primary");
+        App.setRoot("accueilVisiteurs");
     }
 }

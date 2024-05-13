@@ -1,11 +1,11 @@
 package fr.daron.louis;
 
+//Importation des librairies nécessaires au bon fonctionnement du code 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 //import org.mariadb.*;
 
 public class Sqldb {
