@@ -25,6 +25,7 @@ public class App extends Application {
         scene = new Scene(loadFXML("primary"), 1280, 720);
         stage.setTitle("Application Galaxy Swiss Bourdin");
         stage.setResizable(true);
+        stage.setFullScreen(true);
         stage.getIcons().add(new Image("file:src/main/resources/images/logo1.png"));
         stage.setScene(scene);
         stage.show();
