@@ -19,18 +19,6 @@ public class Sqldb {
     Sqldb() {
     }
 
-    @SuppressWarnings("exports")
-    static Connection connexionDb() throws SQLException {
-        Connection c = DriverManager.getConnection(url, user, mdp);
-        return c;
-    }
-
-    @SuppressWarnings("exports")
-    static ResultSet exeRequete(Statement stmnt, String requete) throws SQLException {
-        ResultSet res = stmnt.executeQuery(requete);
-        return res;
-    }
-
     static ResultSet executionRequete(String sql) throws SQLException {
         Connection c = DriverManager.getConnection(url, user, mdp);
         PreparedStatement statement = c.prepareStatement(sql);
