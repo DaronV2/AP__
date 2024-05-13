@@ -6,12 +6,14 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.event.ActionEvent;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.sql.Connection;
@@ -21,10 +23,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javafx.collections.ObservableList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.ArrayList;
 import javafx.scene.control.MenuItem;
 
@@ -74,17 +79,32 @@ public class historiqueComptable extends Application {
 
     private String matricule;
 
+    private String matriculeUserSelected;
+
+    private String userSelected;
+
     @FXML
-    void accueil(ActionEvent event) throws IOException {
-        App.setRoot("primary");
+    private Text px_nuit_txt;
+
+    String prixnuit;
+    String prixrepas;
+
+    @FXML
+    private Text px_repas_txt;
+
+    private Map<String,String> userMatric = new HashMap<>();
+
+    public void setUserMatric(Map<String, String> userMatric) {
+        this.userMatric = userMatric;
+    }
+
+    public void insertUserMatric(String nomPrenom, String matricule){
+        userMatric.put(nomPrenom,matricule);
     }
 
     @FXML
-    void pdf(MouseEvent event) throws IOException {
-        System.out.println("marche");
-        File file = new File("C:\\Users\\darke\\OneDrive\\Documents\\cv.pdf");
-        HostServices hostServices = getHostServices();
-        hostServices.showDocument(file.getAbsolutePath());
+    void accueil(ActionEvent event) throws IOException {
+        App.setRoot("primary");
     }
 
     @Override
@@ -133,11 +153,28 @@ public class historiqueComptable extends Application {
     public void initialize() throws SQLException {
         test();
         handleAfficherVisiteurs();
+
+        String sql = "SELECT `prix_nuit`,prix_repas FROM `prix`";
+        ResultSet res = Sqldb.executionRequete(sql);
+
+        if (res.next()){
+            prixnuit = res.getString("prix_nuit");
+            px_nuit_txt.setText(prixnuit);
+
+            prixrepas = res.getString("prix_repas");
+            px_repas_txt.setText(prixrepas);
+        }
+
         ObservableList<MenuItem> item = menuHist.getItems();
         ObservableList<MenuItem> user = menuUser.getItems();
         item.forEach(menuItem -> {
             selectMois(menuItem);
+            
         });
+        user.forEach(menuUs ->{
+            selectUser(menuUs);
+        }
+        );
     }
 
     void test() {
@@ -184,10 +221,10 @@ public class historiqueComptable extends Application {
             this.moisFin = finMois;
             System.out.println("Option " + item.getText() + " sélectionnée");
             String selectFevr = "SELECT ff_qte_nuitees, ff_qte_repas, ff_qte_km, prix_km FROM fiche_frais WHERE ff_mois <= '2024-03-31' AND ff_mois >= '2024-03-01' AND vi_matricule = '"
-                    + utilisateur.getMatricule() + "'; ";
+                    + this.matriculeUserSelected + "'; ";
             String reqEtat = "SELECT ef.ef_libelle FROM fiche_frais AS ff \n" + //
                     "JOIN etat_fiche AS ef ON ff.ef_id = ef.ef_id \n" + //
-                    "WHERE ff.vi_matricule = \"" + matricule + "\" AND ff.ff_mois <= '" + finMois
+                    "WHERE ff.vi_matricule = \"" + this.matriculeUserSelected + "\" AND ff.ff_mois <= '" + finMois
                     + "' AND ff.ff_mois >= '" + debutMois + "';";
             try {
                 ResultSet res = Sqldb.executionRequete(selectFevr);
@@ -202,6 +239,23 @@ public class historiqueComptable extends Application {
         });
     }
 
+    private void selectUser(MenuItem item){
+        item.setOnAction(event -> {
+            System.out.println("Utilisateur selectionné : "+item.getText());
+            userSelected = item.getText();
+            for (Map.Entry<String, String> entry : userMatric.entrySet()){
+                String nom = entry.getKey();
+                String matr = entry.getValue();
+                if (nom.equals(userSelected)){
+                    matriculeUserSelected = matr;
+                    System.out.println(this.matriculeUserSelected);
+                } else{
+                    System.out.println("testsetstset");
+                }
+            }
+        });
+    }
+
     @FXML
     void handleAfficherVisiteurs() throws SQLException {
         // Création de la requête SQL
@@ -212,8 +266,8 @@ public class historiqueComptable extends Application {
             String nom = resultSet.getString("vi_nom");
             String prenom = resultSet.getString("vi_prenom");
             matricule = resultSet.getString("vi_matricule");
-            System.out.println("Nom: " + nom + ", Prénom: " + prenom);
-            System.out.println("matricule : " + matricule);
+            insertUserMatric(nom + " " +prenom, matricule);
+            System.out.println(userMatric);
             MenuItem user = new MenuItem(nom + " " + prenom);
             menuUser.getItems().add(user);
         }

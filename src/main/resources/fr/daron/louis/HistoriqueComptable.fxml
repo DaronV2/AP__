@@ -77,12 +77,12 @@
             </Text>
             <TextField editable="false" layoutX="336.0" layoutY="420.0" />
             <TextField fx:id="nuitee" editable="false" layoutX="255.0" layoutY="149.0" />
-            <Text layoutX="476.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="29.00">
+            <Text fx:id="px_repas_txt" layoutX="476.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="prblm">
                <font>
                   <Font size="16.0" />
                </font>
             </Text>
-            <Text layoutX="476.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="80.00">
+            <Text fx:id="px_nuit_txt" layoutX="476.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="prblm">
                <font>
                   <Font size="16.0" />
                </font>

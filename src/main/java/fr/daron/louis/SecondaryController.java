@@ -72,6 +72,12 @@ public class SecondaryController {
     private TextField totalRepasMidi;
 
     @FXML
+    private Text px_nuit_txt;
+
+    @FXML
+    private Text px_repas_txt;
+
+    @FXML
     private DatePicker barreMois1;
 
     @FXML
@@ -80,20 +86,31 @@ public class SecondaryController {
     @FXML
     private Text resultatRequete1;
 
+    String prixnuit;
+    String prixrepas;
+
     @FXML
     void initialize() throws SQLException {
         setMatricule(matricule);
         setNom(nom);
+
+        String sql = "SELECT `prix_nuit`,prix_repas FROM `prix`";
+        ResultSet res = Sqldb.executionRequete(sql);
+
+        if (res.next()){
+            prixnuit = res.getString("prix_nuit");
+            px_nuit_txt.setText(prixnuit);
+
+            prixrepas = res.getString("prix_repas");
+            px_repas_txt.setText(prixrepas);
+        }
 
         matricule.setEditable(false);
         nom.setEditable(false);
         barreMois.setEditable(false);
         nuitee.textProperty().addListener((observable, oldValue, newValue) -> {
             try {
-                String sql = "SELECT `prix_nuit` FROM `prix`";
-                ResultSet res = Sqldb.executionRequete(sql);
                 if (res.next()) {
-                    String prixnuit = res.getString("prix_nuit");
                     int pxNuit = Integer.valueOf(prixnuit);
                     double value = Double.parseDouble(newValue);
                     double calcul = value * pxNuit;
@@ -108,10 +125,7 @@ public class SecondaryController {
 
         repasMidi.textProperty().addListener((observable, oldValue, newValue) -> {
             try {
-                String sql = "SELECT `prix_repas` FROM `prix`";
-                ResultSet res = Sqldb.executionRequete(sql);
                 if (res.next()) {
-                    String prixrepas = res.getString("prix_repas");
                     int pxRepas = Integer.valueOf(prixrepas);
                     double value = Double.parseDouble(newValue);
                     totalRepasMidi.setText(String.valueOf(value * pxRepas));
