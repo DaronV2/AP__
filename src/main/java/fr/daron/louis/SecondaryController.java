@@ -16,6 +16,8 @@ import javafx.scene.text.Text;
 
 public class SecondaryController {
 
+    // Importation de tout les champs FXML de l'application
+
     @FXML
     private Button accueilBtn;
 
@@ -83,11 +85,20 @@ public class SecondaryController {
     @FXML
     private Text resultatRequete1;
 
+    // Initialisation d'attributs de la classe SecondaryController 
+
     String idFicheSiExist;
 
     String prixnuit;
     String prixrepas;
 
+
+    /* Méthode Initialize
+        nom : initialize
+        resultat : rien 
+        objet de la méthode : La méthode initialize est une méthode de JavaFX qui se lance automatiquement au changement vers notre page,
+
+    */
     @FXML
     void initialize() throws SQLException {
         setMatricule(matricule);
@@ -113,7 +124,6 @@ public class SecondaryController {
             try {
                 int pxNuit = Integer.valueOf(prixnuit);
                 double value = Double.parseDouble(newValue);
-                double calcul = value * pxNuit;
                 totalNuitee.setText(String.valueOf(value * pxNuit));
                 
             } catch (NumberFormatException e) {
@@ -205,17 +215,13 @@ public class SecondaryController {
     @FXML
     void envoyer(ActionEvent event) throws SQLException, InterruptedException {
         String nuit = nuitee.getText();
-        String totalNuit = totalNuitee.getText();
         String repasMid = repasMidi.getText();
-        String totalRepas = totalRepasMidi.getText();
         String km1 = km.getText();
         String afL1 = afLibelle1.getText();
         String afM1 = afMontant1.getText();
         String afL2 = afLibelle2.getText();
         String afM2 = afMontant2.getText();
 
-        LocalDate moisHf1 = barreMois1.getValue();
-        LocalDate moisHf2 = barreMois11.getValue();
         LocalDate moisff = barreMois.getValue();
 
         String matriculeString = matricule.getText();
@@ -263,11 +269,6 @@ public class SecondaryController {
             System.out.println("yes2");
         }
 
-    }
-
-    private String UUID() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'UUID'");
     }
 
     @FXML

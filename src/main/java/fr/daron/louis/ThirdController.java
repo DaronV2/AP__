@@ -397,7 +397,7 @@ public class ThirdController extends Application {
     }
 
     @Override
-    public void start(Stage arg0) throws Exception {
+    public void start(@SuppressWarnings("exports") Stage arg0) throws Exception {
 
         throw new UnsupportedOperationException("Unimplemented method 'start'");
 

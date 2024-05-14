@@ -155,6 +155,11 @@
             <Font size="18.0" />
          </font>
       </Button>
+      <Text fx:id="etatFiche" layoutX="661.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Etat de la fiche : ">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
 
    </children>
 </AnchorPane>

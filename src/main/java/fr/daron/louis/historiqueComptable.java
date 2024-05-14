@@ -59,6 +59,9 @@ public class historiqueComptable extends Application {
     private TextField repasTot;
 
     @FXML
+    private Text etatFiche;
+
+    @FXML
     private Button sauvegarde;
 
     @FXML
@@ -105,7 +108,7 @@ public class historiqueComptable extends Application {
     }
 
     @Override
-    public void start(Stage arg0) throws Exception {
+    public void start(@SuppressWarnings("exports") Stage arg0) throws Exception {
 
         throw new UnsupportedOperationException("Unimplemented method 'start'");
 
@@ -142,7 +145,7 @@ public class historiqueComptable extends Application {
         Integer repasNb = Integer.valueOf(repas.getText());
         repasTot.setText(String.valueOf(repasNb * 29));
         Integer kmNb = Integer.valueOf(kilo.getText());
-        Integer pxKm = Integer.valueOf(kiloMontant.getText());
+        Double pxKm = Double.valueOf(res.getString("prix_km"));
         totalKm.setText(String.valueOf(kmNb * pxKm));
     }
 
@@ -166,7 +169,11 @@ public class historiqueComptable extends Application {
         ObservableList<MenuItem> item = menuHist.getItems();
         ObservableList<MenuItem> user = menuUser.getItems();
         item.forEach(menuItem -> {
-            selectMois(menuItem);
+            try {
+                selectMois(menuItem);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             
         });
         user.forEach(menuUs ->{
@@ -210,7 +217,7 @@ public class historiqueComptable extends Application {
         return resultat;
     }
 
-    private void selectMois(MenuItem item) {
+    private void selectMois(MenuItem item) throws SQLException {
         item.setOnAction(event -> {
             String dateString = item.getText();
             String debutMois = dateString(dateString, 01);
@@ -218,15 +225,30 @@ public class historiqueComptable extends Application {
             String finMois = dateString(dateString, 31);
             this.moisFin = finMois;
             System.out.println("Option " + item.getText() + " sélectionnée");
-            String selectFevr = "SELECT ff_qte_nuitees, ff_qte_repas, ff_qte_km, prix_km FROM fiche_frais WHERE ff_mois <= '2024-03-31' AND ff_mois >= '2024-03-01' AND vi_matricule = '"
+            String selectFevr = "SELECT ff_qte_nuitees, ff_qte_repas, ff_qte_km, prix_km,ff_id FROM fiche_frais WHERE ff_mois <= '"+finMois+"' AND ff_mois >= '"+debutMois+"' AND vi_matricule = '"
                     + this.matriculeUserSelected + "'; ";
             String reqEtat = "SELECT ef.ef_libelle FROM fiche_frais AS ff \n" + //
                     "JOIN etat_fiche AS ef ON ff.ef_id = ef.ef_id \n" + //
                     "WHERE ff.vi_matricule = \"" + this.matriculeUserSelected + "\" AND ff.ff_mois <= '" + finMois
                     + "' AND ff.ff_mois >= '" + debutMois + "';";
+            String resEtat = "";
+            try{
+                ResultSet resultEtat = Sqldb.executionRequete(reqEtat);
+                if (resultEtat.next()){
+                    resEtat = resultEtat.getString("ef_libelle");
+                }
+            } catch (SQLException e){
+                e.printStackTrace();
+            } 
+
+            etatFiche.setText("Etat de la fiche : "+resEtat);
+
             try {
+                System.out.println(selectFevr);
                 ResultSet res = Sqldb.executionRequete(selectFevr);
                 if (res.next()) {
+                    String idFiche = res.getString("ff_id");
+                    System.out.println(idFiche);
                     remplirFiche(res);
                     affichmois.setText(item.getText());
                 } else {

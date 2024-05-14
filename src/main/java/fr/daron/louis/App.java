@@ -20,7 +20,7 @@ public class App extends Application {
     private static Scene scene;
 
     @Override
-    public void start(Stage stage) throws IOException, NoSuchAlgorithmException {
+    public void start(@SuppressWarnings("exports") Stage stage) throws IOException, NoSuchAlgorithmException {
         scene = new Scene(loadFXML("primary"), 1280, 720);
         stage.setTitle("Application Galaxy Swiss Bourdin");
         stage.setResizable(true);
