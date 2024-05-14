@@ -284,9 +284,16 @@ public class ThirdController extends Application {
         Integer quanteKm = Integer.valueOf(qteKm.getText());
 
         String hfLib1 = libHf1.getText();
-        Integer hfPx1 = 0;
+        Double hfPx1 = 0.0;
+        System.out.println(montHf1.getText());
         if (!montHf1.getText().equals("")){
-            hfPx1 = Integer.valueOf(montHf1.getText());
+            hfPx1 = Double.valueOf(montHf1.getText());
+        }
+
+        String hfLib2 = libHf2.getText();
+        Double hfPx2 = 0.0;
+        if (!montHf2.getText().equals("")){
+            hfPx2 = Double.valueOf(montHf2.getText());
         }
 
         Integer cleEtrangPx = 1;
@@ -294,13 +301,36 @@ public class ThirdController extends Application {
                         "WHERE ff_id = '"+this.idFiche+"'; ";
 
         String getIdHf = "SELECT hf_id FROM hors_forfait WHERE ff_id = '"+this.idFiche+"';";
+        System.out.println(getIdHf);
         ResultSet resIdHf = Sqldb.executionRequete(getIdHf);
+
+        if (! resIdHf.next() && hfLib1 != null && hfPx1 != 0 && dateHf1.getValue() != null){
+            String ajoutHf = String.format("INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant,ff_id) VALUES ('%s','%s',%e,'%s')",dateHf1.getValue(),hfLib1,hfPx1,idFiche);
+            System.out.println(ajoutHf);
+            try {
+                Sqldb.executionUpdate(ajoutHf);
+            } catch (SQLException e ){
+                e.printStackTrace();
+            }
+        }
+
         List<Integer> liste = new ArrayList<>();
         while(resIdHf.next()){
             liste.add(Integer.valueOf(resIdHf.getString("hf_id")));
             resIdHf.next();
         }
-        System.out.println(liste);
+
+        System.out.println("hflib = "+hfLib2+ "  hfpx2 = "+hfPx2+"  datehf2 = "+ dateHf2.getValue());
+
+        if (hfLib2 != null && hfPx2 != 0.0 && dateHf2.getValue() != null){
+            String ajoutHf = String.format("INSERT INTO hors_forfait ( hf_date, hf_libelle, hf_montant,ff_id) VALUES ('%s','%s',"+hfPx2+", '%s')",dateHf2.getValue(),hfLib2,idFiche);
+            System.out.println(ajoutHf);
+            try {
+                Sqldb.executionUpdate(ajoutHf);
+            } catch (SQLException e ){
+                e.printStackTrace();
+            }
+        }
 
         for (Integer i = 0; i < liste.size(); i++){
             String updateff = "UPDATE hors_forfait SET hf_libelle = '"+ hfLib1 +"' , hf_montant = "+ hfPx1 +", hf_date = '"+ dateHf1.getValue()+"' WHERE ff_id = '"+idFiche+"' AND hf_id = "+ liste.get(0)+";";
@@ -311,7 +341,6 @@ public class ThirdController extends Application {
                 System.out.println(e);
             }
         }
-
         System.out.println(update);
         System.out.println(Sqldb.executionUpdate(update));
     }
