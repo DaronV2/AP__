@@ -23,6 +23,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+// Page historique visiteurs
+
 public class ThirdController extends Application {
 
     // Importation de tout les champs FXML de l'application
@@ -167,7 +169,13 @@ public class ThirdController extends Application {
     
     }
     
-
+    /* Méthode selectMois
+        Nom : selectMois    
+        Résultat : rien
+        Paramètres : MenuItem (un des éléments d'un menuButton) nommé item
+        Objet de la méthode : Si in MenuItem est cliqué alors cette fonction s'exécute, elle appelle la fonction setNullTout,
+        fais une requete SELECT qui prend tt les champs necessaires à la fiche et les remplis 
+     */
     private void selectMois(MenuItem item){
         item.setOnAction(event -> {
             setNullTout();
@@ -279,6 +287,13 @@ public class ThirdController extends Application {
         modifNon();
     }
 
+    /* Méthode sauvegarder
+        Nom : Sauvegarder
+        Résultat : rien
+        Paramètres : ActionEvent (qui est un événement déclenché par un bouton du clavier ou de la souris) nommé event
+        Objet de la méthode : Permet de sauvegarder toutes les modifications effectuées sur la fiche 
+     */
+
     @FXML
     void sauvegarder(ActionEvent event) throws SQLException {
         Integer nbNuitee = Integer.valueOf(nuitee.getText());
@@ -347,18 +362,12 @@ public class ThirdController extends Application {
         System.out.println(Sqldb.executionUpdate(update));
     }
 
-    @FXML
-    void modif(ActionEvent event) {
-        List<TextField> liste = new ArrayList<>(List.of(montantKm,nuitee,qteKm,repasMid,totalKm,totalNuitee,totalRepasMid,libHf1,libHf2,montHf1,montHf2));
-        List<DatePicker> listeDate = new ArrayList<>(List.of(dateHf1,dateHf2));
-        for (TextField element : liste){
-            element.setEditable(true);
-        }
-        for (DatePicker elmnt : listeDate){
-            elmnt.setEditable(true);
-        }
-    }
-
+    /* Méthode modifNon
+        Nom : modifNon
+        Résultat : rien
+        Paramètres : ActionEvent (qui est un événement déclenché par un bouton du clavier ou de la souris) nommé event
+        Objet de la méthode : Sert à rendre tout les champs FXML non-modifiables
+     */
     void modifNon() {
         List<TextField> liste = new ArrayList<>(List.of(montantKm,nuitee,qteKm,repasMid,totalKm,totalNuitee,totalRepasMid));
         List<DatePicker> listeDate = new ArrayList<>(List.of(dateHf1,dateHf2));
@@ -374,7 +383,12 @@ public class ThirdController extends Application {
         btnSave.setDisable(true);
     }
 
-    
+    /* Méthode setNullTout
+        Nom : setNullTout
+        Résultat : rien
+        Paramètres : aucun
+        Objet de la méthode : Sert à rendre tout les champs FXML vides en cas de changement de fiche
+     */
     void setNullTout() {
         List<TextField> liste = new ArrayList<>(List.of(montantKm,nuitee,qteKm,repasMid,totalKm,totalNuitee,totalRepasMid,montHf1,montHf2,libHf1,libHf2));
         for (TextField element : liste){
@@ -385,6 +399,12 @@ public class ThirdController extends Application {
         etatFiche.setText("Etat de la fiche : n'existe pas ");
     }
 
+    /* Méthode modifOk
+        Nom : modifOk
+        Résultat : rien
+        Paramètres : ActionEvent (qui est un événement déclenché par un bouton du clavier ou de la souris) nommé event
+        Objet de la méthode : Sert à rendre tout les champs FXML modifiables
+     */
     void modifOk() {
         List<TextField> liste = new ArrayList<>(List.of(montantKm,nuitee,qteKm,repasMid,totalKm,totalNuitee,totalRepasMid));
         for (TextField element : liste){

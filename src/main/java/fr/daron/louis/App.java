@@ -19,6 +19,12 @@ public class App extends Application {
 
     private static Scene scene;
 
+    
+    /** 
+     * @param stage
+     * @throws IOException
+     * @throws NoSuchAlgorithmException
+     */
     @Override
     public void start(@SuppressWarnings("exports") Stage stage) throws IOException, NoSuchAlgorithmException {
         scene = new Scene(loadFXML("primary"), 1280, 720);

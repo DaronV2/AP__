@@ -94,10 +94,19 @@ public class historiqueComptable extends Application {
 
     private Map<String,String> userMatric = new HashMap<>();
 
+    
+    /** 
+     * @param userMatric contient le nom, prénom et matricule de l'utilisateur selectionné
+     */
     public void setUserMatric(Map<String, String> userMatric) {
         this.userMatric = userMatric;
     }
 
+    
+    /** 
+     * @param nomPrenom nom et prenom de l'utilisateur selectionné
+     * @param matricule matricule de l'utilisateur selectionné
+     */
     public void insertUserMatric(String nomPrenom, String matricule){
         userMatric.put(nomPrenom,matricule);
     }
@@ -151,7 +160,7 @@ public class historiqueComptable extends Application {
 
     @FXML
     public void initialize() throws SQLException {
-        test();
+        ajoutMoisMenu();
         menuHist.setVisible(false);
         handleAfficherVisiteurs();
 
@@ -182,7 +191,8 @@ public class historiqueComptable extends Application {
         );
     }
 
-    void test() {
+
+    void ajoutMoisMenu() {
         LocalDate dateActuelle = LocalDate.now();
 
         // Formatteur pour afficher les noms des mois
