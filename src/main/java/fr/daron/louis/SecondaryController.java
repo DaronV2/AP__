@@ -14,6 +14,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
+// Page de remplissage de fiche de remboursement
 public class SecondaryController {
 
     // Importation de tout les champs FXML de l'application
@@ -97,7 +98,6 @@ public class SecondaryController {
         nom : initialize
         resultat : rien 
         objet de la méthode : La méthode initialize est une méthode de JavaFX qui se lance automatiquement au changement vers notre page,
-
     */
     @FXML
     void initialize() throws SQLException {
@@ -143,6 +143,13 @@ public class SecondaryController {
         });
     }
 
+
+    /* Méthode ficheExistante
+        Nom : ficheExistante
+        Résultat : booléen (true or false)
+        Paramètres : aucun
+        Objet de la méthode : permet de savoir si une fiche est déja en cours en fonction de l'utilisateur connecté et le mois couran, renvoie vrai si il y a une fiche sinon renvoie faux
+     */
     boolean ficheExistante() throws SQLException{
         LocalDate premierJourDuMois = LocalDate.now().withDayOfMonth(1);
         LocalDate dernierJourDuMois = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
@@ -170,6 +177,13 @@ public class SecondaryController {
         return false;
     }
 
+
+    /* Méthode remplirFiche
+        Nom : remplirFiche
+        Résultat : rien
+        Paramètres : ResultSet (format de résultat de requete SQL en Java) nommé res
+        Objet de la méthode : permet de remplir la fiche si elle existe dèja grace au paramètre de la méthode 
+     */
     void remplirfiche(ResultSet res) throws SQLException{
         String moisff = res.getString("ff_mois");
         LocalDate moisffParse = LocalDate.parse(moisff);
@@ -212,6 +226,13 @@ public class SecondaryController {
         }
     }
 
+
+    /* Méthode envoyer
+        Nom : envoyer
+        Résultat : rien
+        Paramètres : ActionEvent (qui est un événement déclenché par un bouton du clavier ou de la souris) nommé event
+        Objet de la méthode : Permet d'envoyer les données de la fiche à la base de données 
+     */
     @FXML
     void envoyer(ActionEvent event) throws SQLException, InterruptedException {
         String nuit = nuitee.getText();

@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 
 public class AccueilVisiteurs {
 
+    // Importation de tout les champs FXML de l'application
     @FXML
     private Button btnAccueil;
 

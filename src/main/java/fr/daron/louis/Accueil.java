@@ -8,7 +8,7 @@ import javafx.scene.control.ListView;
 
 public class Accueil {
 
-    // Importation des 
+    // Importation de tout les champs FXML de l'application
     @FXML
     private Button ajterListView;
 

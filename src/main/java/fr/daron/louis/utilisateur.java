@@ -3,6 +3,8 @@ package fr.daron.louis;
 
 public class utilisateur {
     
+    // Initialisation des attributs de la classe utilisateur
+
     private static String matricule;
 
     public static void setMatricule(String matricule) {
@@ -32,6 +34,8 @@ public class utilisateur {
     public static String getIdentfiant() {
         return identfiant;
     }
+
+    // Constructeur permettant la création de l'objet de la classe
 
     utilisateur(){
     }

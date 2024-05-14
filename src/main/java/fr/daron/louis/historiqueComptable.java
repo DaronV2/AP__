@@ -124,6 +124,12 @@ public class historiqueComptable extends Application {
     }
     // faire liste avec tous les ID
 
+    /* Méthode modifier
+        Nom : modifier
+        Résultat : aucun
+        Paramètres : aucun
+        Objet de la méthode : permet de rendre éditables tout les champs FXML 
+     */
     @FXML
     private void modifier() {
         nuitee.setEditable(true);
@@ -134,6 +140,12 @@ public class historiqueComptable extends Application {
         kiloMontant.setEditable(true);
     }
 
+    /* Méthode sauvegarde
+        Nom : sauvegarde
+        Résultat : aucun
+        Paramètres : aucun
+        Objet de la méthode : permet de rendre non éditables tout les champs FXML
+     */
     @FXML
     private void sauvegarde() {
         nuitee.setEditable(false);
@@ -144,6 +156,12 @@ public class historiqueComptable extends Application {
         kiloMontant.setEditable(false);
     }
 
+    /* Méthode remplirFiche
+        Nom : remplirFiche
+        Résultat : rien
+        Paramètres : ResultSet (format de résultat de requete SQL en Java) nommé res
+        Objet de la méthode : permet de remplir la fiche si elle existe dèja grace au paramètre de la méthode 
+     */
     void remplirFiche(ResultSet res) throws SQLException {
         nuitee.setText(res.getString("ff_qte_nuitees"));
         repas.setText(res.getString("ff_qte_repas"));
@@ -158,6 +176,12 @@ public class historiqueComptable extends Application {
         totalKm.setText(String.valueOf(kmNb * pxKm));
     }
 
+     /* Méthode Initialize
+        nom : initialize
+        resultat : rien 
+        objet de la méthode : La méthode initialize est une méthode de JavaFX qui se lance automatiquement au changement vers notre page,
+        elle appelle les méthodes ajoutMoisMenu, handleAfficherVisiteurs et affiche les prix du mois 
+    */
     @FXML
     public void initialize() throws SQLException {
         ajoutMoisMenu();
@@ -191,7 +215,12 @@ public class historiqueComptable extends Application {
         );
     }
 
-
+    /* Méthode ajoutMoisMenu
+        Nom : ajoutMoisMenu
+        Résultat : aucun
+        Paramètres : aucun
+        Objet de la méthode : permet de remplir le menuButton "menuHist" avec les 12 derniers mois 
+     */
     void ajoutMoisMenu() {
         LocalDate dateActuelle = LocalDate.now();
 
@@ -211,7 +240,13 @@ public class historiqueComptable extends Application {
         menuHist.getItems().addAll(items);
     }
 
-    // pour faire marcher dateString
+    /* Méthode dateString
+        Nom : dateString
+        Résultat : String "resultat", qui contient la date au format SQL
+        Paramètres : String date, qui contient le mois et l'année au format texte
+                     Integer jour, qui contient le jour dans le mois
+        Objet de la méthode : Permet de convertir une date du format texte, écrit au format SQL
+     */
     String dateString(String date, Integer jour) {
         String zero = "";
         if (jour < 10) {
@@ -226,7 +261,13 @@ public class historiqueComptable extends Application {
         System.out.println(resultat);
         return resultat;
     }
-
+    /* Méthode selectMois
+        Nom : selectMois    
+        Résultat : rien
+        Paramètres : MenuItem (un des éléments d'un menuButton) nommé item
+        Objet de la méthode : Si in MenuItem est cliqué alors cette fonction s'exécute, elle appelle la fonction setNullTout,
+        fais une requete SELECT qui prend tt les champs necessaires à la fiche et les remplis 
+     */
     private void selectMois(MenuItem item) throws SQLException {
         item.setOnAction(event -> {
             String dateString = item.getText();
@@ -270,6 +311,12 @@ public class historiqueComptable extends Application {
         });
     }
 
+    /* Méthode selectUser
+        Nom : selectUser    
+        Résultat : rien
+        Paramètres : MenuItem (un des éléments d'un menuButton) nommé item
+        Objet de la méthode : Si in MenuItem est cliqué alors cette fonction s'exécute, elle permet d'associer le nom d'un utilisateur sélectionné a son matricule, pouvoir afficher ses fiches et permet l'affichage du menuButton "menuHist"
+     */
     private void selectUser(MenuItem item){
         item.setOnAction(event -> {
             System.out.println("Utilisateur selectionné : "+item.getText());
@@ -289,6 +336,12 @@ public class historiqueComptable extends Application {
         });
     }
 
+    /* Méthode handleAfficherVisiteurs
+        Nom : handleAfficherVisiteurs
+        Résultat : rien
+        Paramètres : aucun
+        Objet de la méthode : Sert à donner a la liste associative "userMatric", les nom et prénom des utilisateurs et leurs matricule
+    */
     @FXML
     void handleAfficherVisiteurs() throws SQLException {
         // Création de la requête SQL
