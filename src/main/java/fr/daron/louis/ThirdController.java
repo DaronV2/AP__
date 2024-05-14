@@ -170,6 +170,7 @@ public class ThirdController extends Application {
 
     private void selectMois(MenuItem item){
         item.setOnAction(event -> {
+            setNullTout();
             String dateString = item.getText();
             String debutMois = dateString(dateString,01);
             this.moisDebut = debutMois;
@@ -271,7 +272,8 @@ public class ThirdController extends Application {
         LocalDate dateajd =  LocalDate.now();
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String dateformat = dateajd.format(format);
-        String clot = "UPDATE fiche_frais SET ff_date_cloture = '"+ dateformat +"' AND ef_id = 2 WHERE ff_id = '"+idFiche+"'; ";
+        String clot = "UPDATE fiche_frais SET ff_date_cloture = '"+ dateformat +"' , ef_id = 2 WHERE ff_id = '"+idFiche+"'; ";
+        System.out.println(clot);
         Sqldb.executionUpdate(clot);
         System.out.println("Cloturée ");
         modifNon();
@@ -376,7 +378,7 @@ public class ThirdController extends Application {
     void setNullTout() {
         List<TextField> liste = new ArrayList<>(List.of(montantKm,nuitee,qteKm,repasMid,totalKm,totalNuitee,totalRepasMid,montHf1,montHf2,libHf1,libHf2));
         for (TextField element : liste){
-            element.setText("");
+            element.setText(" ");
         }
         dateHf1.setValue(null);
         dateHf2.setValue(null);
